@@ -18,14 +18,14 @@ video/
 
 ## Generated live master
 
-The primary Drive deliverable is `exports/compound-zero-live-demo-drive-1440p.mp4`. It is assembled from real browser-driven screen recordings: replay controls, the causal-evidence view, response studio, bounded-intelligence approvals, model evidence and the safety case. The persistent top strip discloses simulated data, prototype status and the lack of field validation; captions are burned into the lower cinema bar.
+The primary Drive deliverable is `exports/compound-zero-live-demo-drive-1440p.mp4`. It is assembled from real browser-driven screen recordings: replay controls, the causal-evidence view, response studio, bounded-intelligence approvals, model evidence and the safety case. The persistent top strip discloses simulated data, prototype status and the lack of field validation. The submission master has no burned-in captions; matching SRT and WebVTT files remain available as optional accessibility tracks.
 
 ```powershell
 python .\video\scripts\generate_live_audio.py --force
 python .\video\scripts\assemble_live_video.py --force
 ```
 
-Narration is generated as one audio asset per complete sentence with a minimum 380 ms pause. The script measures each spoken cue and moves later cues forward rather than clipping a phrase to a rigid timestamp. The result also writes matching SRT and WebVTT files.
+Narration is generated as one audio asset per complete sentence. Leading and trailing TTS padding is removed, then editorially chosen pauses vary from 180 to 874 ms according to meaning and scene rhythm. Automated silence detection must report no one-second-or-longer gap during the narrated programme. The result also writes matching SRT and WebVTT files. Add `--burn-captions` to the assembly command only when a specifically captioned derivative is required.
 
 ## Capture specification
 
@@ -42,7 +42,7 @@ Narration is generated as one audio asset per complete sentence with a minimum 3
 - Working master: ProRes 422, DNxHR HQ, or visually lossless H.264/H.265.
 - Color: Rec.709 / gamma 2.4. Do not crush the app's dark gray detail.
 - Narration: target −16 LUFS integrated and −1 dBTP. Duck music 8–12 dB under speech; verify on laptop speakers and inexpensive earbuds.
-- Burn in open captions for the core thesis and metrics. Also export a WebVTT or SRT transcript for the Drive package if the upload channel permits companion files.
+- Keep the primary picture clean and provide WebVTT/SRT accessibility tracks alongside it. Burn captions only for a separately labelled captioned derivative.
 
 ## Submission export under 50 MB
 

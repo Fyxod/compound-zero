@@ -108,7 +108,7 @@ def render_scene(scene: dict[str, object], capture: dict[str, object], force: bo
     return target
 
 
-def assemble(force: bool) -> None:
+def assemble(force: bool, burn_captions: bool) -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     capture = dict(manifest["capture"])
     scenes = list(manifest["scenes"])
@@ -186,14 +186,15 @@ def assemble(force: bool) -> None:
                 f"drawtext=fontfile='{font_regular}':text='COMPOUND ZERO':"
                 "fontcolor=0x76E7C5:fontsize=30:x=(w-tw)/2:y=684:enable='between(t,214,220)'"
             ),
-            (
-                f"subtitles='{ffmpeg_path(CAPTIONS)}':"
-                "force_style='FontName=Arial,FontSize=10,PrimaryColour=&H00FFFFFF,"
-                "OutlineColour=&H70000000,BorderStyle=3,BackColour=&H88000000,"
-                "Outline=1,Shadow=0,Alignment=2,MarginL=20,MarginR=20,MarginV=8'"
-            ),
         ]
     )
+    if burn_captions:
+        filters.append(
+            f"subtitles='{ffmpeg_path(CAPTIONS)}':"
+            "force_style='FontName=Arial,FontSize=10,PrimaryColour=&H00FFFFFF,"
+            "OutlineColour=&H70000000,BorderStyle=3,BackColour=&H88000000,"
+            "Outline=1,Shadow=0,Alignment=2,MarginL=20,MarginR=20,MarginV=8'"
+        )
 
     run(
         [
@@ -252,8 +253,13 @@ def assemble(force: bool) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--force", action="store_true")
+    parser.add_argument(
+        "--burn-captions",
+        action="store_true",
+        help="Burn the optional SRT into the picture; disabled for the submission master.",
+    )
     args = parser.parse_args()
-    assemble(args.force)
+    assemble(args.force, args.burn_captions)
 
 
 if __name__ == "__main__":

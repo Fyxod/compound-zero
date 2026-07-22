@@ -5,35 +5,20 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import re
 import subprocess
 from pathlib import Path
 
 import edge_tts
 from pydub import AudioSegment
 from pydub.effects import normalize
+from pydub.silence import detect_nonsilent
 
 
 ROOT = Path(__file__).resolve().parents[2]
 VIDEO = ROOT / "video"
 MANIFEST = VIDEO / "live_production.json"
 SAMPLE_RATE = 48_000
-
-
-def duration_seconds(path: Path) -> float:
-    value = subprocess.check_output(
-        [
-            "ffprobe",
-            "-v",
-            "error",
-            "-show_entries",
-            "format=duration",
-            "-of",
-            "default=noprint_wrappers=1:nokey=1",
-            str(path),
-        ],
-        text=True,
-    )
-    return float(value.strip())
 
 
 def stamp(seconds: float, *, vtt: bool = False) -> str:
@@ -56,6 +41,21 @@ async def synthesize(text: str, path: Path, voice: str, rate: str) -> None:
     await communicator.save(str(path))
 
 
+def split_sentences(text: str) -> list[str]:
+    """Split prose where the narrator should take an editorially controlled pause."""
+    return [part.strip() for part in re.split(r"(?<=[.!?])\s+", text) if part.strip()]
+
+
+def trim_tts_edges(clip: AudioSegment) -> AudioSegment:
+    """Remove Edge TTS lead/trail padding without touching silence inside a sentence."""
+    ranges = detect_nonsilent(clip, min_silence_len=80, silence_thresh=-44)
+    if not ranges:
+        return clip
+    start = max(0, ranges[0][0] - 55)
+    end = min(len(clip), ranges[-1][1] + 75)
+    return clip[start:end]
+
+
 async def build(force: bool) -> None:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     duration = float(manifest["duration_seconds"])
@@ -71,21 +71,49 @@ async def build(force: bool) -> None:
     entries = list(manifest["narration"])
 
     previous_end = -1.0
+    realised_pauses: list[float] = []
     for index, cue in enumerate(entries):
         requested_start = float(cue["start"])
         text = str(cue["text"])
-        mp3 = work / f"cue-{index + 1:02d}.mp3"
-        if force or not mp3.exists():
-            await synthesize(text, mp3, voice, rate)
-        clip = AudioSegment.from_file(mp3).set_frame_rate(SAMPLE_RATE).set_channels(2)
-        clip = normalize(clip, headroom=1.4).fade_in(45).fade_out(90)
-        measured = duration_seconds(mp3)
-        # Preserve every sentence at its natural duration.  The requested starts
-        # establish the editorial rhythm, but later cues move forward when the
-        # previous phrase needs more room.  This prevents clipped words and the
-        # unnatural mid-thought breaks that a rigid cue grid creates.
-        start = max(requested_start, previous_end + 0.38)
-        end = start + measured
+        sentences = split_sentences(text)
+        sentence_pauses = [float(value) for value in cue.get("sentence_pauses", [])]
+        if len(sentence_pauses) != max(0, len(sentences) - 1):
+            raise ValueError(
+                f"Cue {index + 1} needs {len(sentences) - 1} sentence pauses, "
+                f"got {len(sentence_pauses)}"
+            )
+
+        parts: list[AudioSegment] = []
+        for sentence_index, sentence in enumerate(sentences):
+            mp3 = work / f"cue-{index + 1:02d}-sentence-{sentence_index + 1:02d}.mp3"
+            if force or not mp3.exists():
+                await synthesize(sentence, mp3, voice, rate)
+            sentence_clip = (
+                AudioSegment.from_file(mp3)
+                .set_frame_rate(SAMPLE_RATE)
+                .set_channels(2)
+            )
+            sentence_clip = trim_tts_edges(sentence_clip)
+            sentence_clip = normalize(sentence_clip, headroom=1.4).fade_in(35).fade_out(55)
+            parts.append(sentence_clip)
+
+        clip = AudioSegment.empty()
+        for sentence_index, sentence_clip in enumerate(parts):
+            clip += sentence_clip
+            if sentence_index < len(sentence_pauses):
+                pause = sentence_pauses[sentence_index]
+                clip += AudioSegment.silent(
+                    duration=round(pause * 1000), frame_rate=SAMPLE_RATE
+                ).set_channels(2)
+
+        gap_before = float(cue.get("gap_before", 0.42))
+        if previous_end < 0:
+            start = requested_start
+        elif bool(cue.get("anchor", False)):
+            start = max(requested_start, previous_end + gap_before)
+        else:
+            start = previous_end + gap_before
+        end = start + len(clip) / 1000.0
         if end > duration - 0.20:
             raise RuntimeError(
                 f"Cue {index + 1} exceeds the {duration:.1f}s programme: "
@@ -93,6 +121,9 @@ async def build(force: bool) -> None:
             )
         narration = narration.overlay(clip, position=round(start * 1000))
         cues.append((start, end, text))
+        if previous_end >= 0:
+            realised_pauses.append(start - previous_end)
+        realised_pauses.extend(sentence_pauses)
         previous_end = end
 
     narration_path = work / "live-narration.wav"
@@ -151,7 +182,10 @@ async def build(force: bool) -> None:
         "duration_seconds": duration,
         "mix": str(final_mix),
         "explicit_sentence_level_timing": True,
-        "minimum_inter_sentence_pause_seconds": 0.38,
+        "pause_policy": "semantic variable cadence",
+        "minimum_pause_seconds": round(min(realised_pauses), 3),
+        "maximum_pause_seconds": round(max(realised_pauses), 3),
+        "distinct_pause_count": len({round(value, 3) for value in realised_pauses}),
         "last_narration_end_seconds": round(previous_end, 3),
     }
     (work / "live-audio-report.json").write_text(
