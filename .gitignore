@@ -22,3 +22,4 @@ video/edit/
 video/exports/*.mp4
 video/exports/*.mov
 video/exports/*.mkv
+*.pptx.inspect.ndjson
