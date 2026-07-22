@@ -68,7 +68,7 @@ function makeSensors(
     ? clamp(modelPoint.sensors.co_ratio * 35 * modelReduction, 0, 42)
     : clamp(7 + escalation * 0.55 - decay * 0.6, 0, 42);
   const oxygen = modelPoint
-    ? clamp(20.9 - (modelPoint.sensors.oxygen_deficit_ratio * 1.4) / modelReduction, 18.7, 21)
+    ? clamp(20.9 - (modelPoint.sensors.oxygen_deficit_ratio * 1.4) * modelReduction, 18.7, 21)
     : clamp(20.9 - escalation * 0.035 + decay * 0.03, 18.7, 21);
   const pressure = modelPoint
     ? clamp(modelPoint.sensors.pressure_ratio * 3.8 * modelReduction, 1.8, 4.2)
@@ -259,7 +259,7 @@ function makeFactors(
       id: "workers-exposed",
       category: "people",
       label: "Personnel exposure",
-      detail: "Four contractor badges entered the 90% confidence contour",
+      detail: "Four pseudonymous contractor badges entered the illustrative exposure field",
       contribution: 13,
       observedAt: time,
     });
@@ -314,7 +314,7 @@ function makeInterventions(controls: Set<InterventionId>): Intervention[] {
   ];
   return items.map((item) => ({
     ...item,
-    status: controls.has(item.id) ? "complete" : "available",
+    status: controls.has(item.id) ? "approved-dry-run" : "available",
   }));
 }
 
@@ -365,10 +365,10 @@ function makeAudit(
     const intervention = makeInterventions(new Set()).find((item) => item.id === control)!;
     drafts.push({
       id: `control-${control}`,
-      time: formatSimulationTime(Math.max(tick, 19)),
+      time: formatSimulationTime(tick),
       actor: "OPERATOR",
-      action: intervention.label,
-      detail: `Human-approved control executed. Estimated risk reduction ${intervention.riskReduction} points.`,
+      action: `${intervention.label} dry run`,
+      detail: `Human-approved dry run recorded. Non-causal heuristic score adjustment ${intervention.riskReduction} points; no field action executed.`,
       tone: "success",
     });
   }
@@ -422,12 +422,14 @@ export function buildSnapshot(
   const sensors = makeSensors(tick, controls, modelPoint);
   const baselineAlarm =
     modelPoint?.single_sensor_alarm ?? sensors.some((sensor) => sensor.status === "critical");
-  const predictionActive = modelPoint?.prediction_active ?? score >= 52;
+  const predictionActive = controls.size
+    ? score >= modelDecisionThreshold * 100
+    : modelPoint?.prediction_active ?? score >= 52;
   const eventMinute =
     modelPoint && modelPoint.event_minute >= 0
       ? modelPoint.event_minute
       : PRIMARY_SCENARIO.baselineTriggerMinute;
-  const leadTimeMinutes = predictionActive
+  const leadTimeMinutes = predictionActive && controls.size === 0
     ? Math.max(0, eventMinute - tick)
     : null;
 
@@ -452,7 +454,7 @@ export function buildSnapshot(
     interventions: makeInterventions(controls),
     audit: makeAudit(tick, controls, predictionActive, Boolean(modelPoint)),
     eventMinute,
-    harmfulState: modelPoint?.harmful_state ?? baselineAlarm,
+    harmfulState: controls.size ? null : modelPoint?.harmful_state ?? baselineAlarm,
     modelProbability: controls.size ? null : modelPoint?.risk_probability ?? null,
     decisionThreshold: modelDecisionThreshold,
     modelVersion,

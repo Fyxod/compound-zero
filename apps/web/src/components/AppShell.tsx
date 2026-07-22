@@ -26,7 +26,7 @@ const NAV_ITEMS: Array<{
   eyebrow: string;
   icon: typeof LayoutDashboard;
 }> = [
-  { id: "command", label: "Live twin", eyebrow: "Operate", icon: LayoutDashboard },
+  { id: "command", label: "Replay twin", eyebrow: "Operate", icon: LayoutDashboard },
   { id: "evidence", label: "Why now?", eyebrow: "Explain", icon: GitBranch },
   { id: "intelligence", label: "Intelligence", eyebrow: "Correlate", icon: Radar },
   { id: "validation", label: "Model evidence", eyebrow: "Prove", icon: TestTubeDiagonal },
@@ -97,7 +97,7 @@ export function AppShell({
           <div className="edge-status__caption">{engine.detail}</div>
         </div>
 
-        <button type="button" className="operator-card">
+        <button type="button" className="operator-card" disabled title="Simulated operator profile">
           <div className="operator-card__avatar">AS</div>
           <div className="operator-card__copy">
             <strong>Arjun Sen</strong>
@@ -113,7 +113,7 @@ export function AppShell({
             <button className="icon-button mobile-menu" type="button" aria-label="Open menu" aria-expanded={mobileNavOpen} onClick={() => setMobileNavOpen(true)}>
               <Menu size={18} />
             </button>
-            <button type="button" className="plant-selector">
+            <button type="button" className="plant-selector" disabled title="Single simulated site">
               <span className="plant-selector__glyph"><Activity size={17} /></span>
               <span className="plant-selector__copy">
                 <span>Kalinga Works</span>
@@ -128,12 +128,12 @@ export function AppShell({
             </div>
           </div>
           <div className="topbar__right">
-            <button className="search-box" type="button">
+            <button className="search-box" type="button" disabled title="Search adapter not connected in this prototype">
               <Search size={16} />
               <span>Search asset, permit or person</span>
               <kbd>⌘ K</kbd>
             </button>
-            <button className="icon-button has-badge" type="button" aria-label="Notifications">
+            <button className="icon-button has-badge" type="button" aria-label="Notifications unavailable in simulated replay" disabled>
               <Bell size={18} />
               <span className="notification-badge">1</span>
             </button>

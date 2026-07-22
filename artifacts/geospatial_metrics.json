@@ -1,0 +1,107 @@
+{
+  "benchmark_name": "GeoEvidenceBench",
+  "benchmark_version": "1.0.0",
+  "cases": {
+    "background_grid": 49,
+    "hazard_ring": 288,
+    "negative": 196,
+    "positive": 141,
+    "total": 337
+  },
+  "classification_counts": {
+    "CLEAR": 107,
+    "EXPOSED": 45,
+    "POSSIBLE": 185
+  },
+  "comparison": {
+    "false_negative_rate_absolute_reduction": 0.184397,
+    "false_positive_rate_absolute_increase": 0.285715,
+    "interpretation": "The bounded method routes uncertain boundary cases to human review: it removes misses in this authored stress set while increasing review load.",
+    "recall_absolute_gain": 0.184397
+  },
+  "configuration": {
+    "angles_per_hazard": 12,
+    "case_manifest_sha256": "5b62545ad5d751471a1ea5a3296d57a89383959cc757d7652bc3138b28579bba",
+    "radial_offsets_m": [
+      -3.0,
+      -1.0,
+      -0.25,
+      0.25,
+      1.0,
+      3.0
+    ],
+    "seed": 20260722
+  },
+  "data_classification": "SIMULATED",
+  "description": "Deterministic simulated evaluation of polygon membership, nearest authored hazard distance, and bounded localization uncertainty for conservative exposure review.",
+  "evidence_quality": {
+    "certain_exposure_precision": 1.0,
+    "declared_uncertainty_contains_true_position_rate": 1.0,
+    "nearest_hazard_distance_mae_m": 0.907017,
+    "nearest_hazard_distance_p95_absolute_error_m": 2.255049,
+    "possible_review_rate": 0.548961,
+    "true_distance_within_reported_bounds_rate": 1.0
+  },
+  "limitations": [
+    "All zones, hazard points, positions, errors, and labels are SIMULATED and fictional.",
+    "Review radii are authored analytic thresholds, not gas dispersion, plume, fire, or blast models.",
+    "The uncertainty radius is assumed to bound localization error; field systems require calibration and coverage testing.",
+    "Results measure this deterministic geometry contract only and are not evidence of real-plant safety performance."
+  ],
+  "methods": {
+    "point_estimate_baseline": {
+      "accuracy": 0.824926,
+      "confusion_matrix": {
+        "fn": 26,
+        "fp": 33,
+        "tn": 163,
+        "tp": 115
+      },
+      "false_negative_rate": 0.184397,
+      "false_positive_rate": 0.168367,
+      "precision": 0.777027,
+      "recall": 0.815603,
+      "specificity": 0.831633
+    },
+    "uncertainty_aware_review": {
+      "accuracy": 0.735905,
+      "confusion_matrix": {
+        "fn": 0,
+        "fp": 89,
+        "tn": 107,
+        "tp": 141
+      },
+      "false_negative_rate": 0.0,
+      "false_positive_rate": 0.454082,
+      "precision": 0.613043,
+      "recall": 1.0,
+      "specificity": 0.545918
+    }
+  },
+  "metric_scope": "Boundary-heavy authored software-conformance fixtures; case prevalence is not representative of a plant and metrics are not field geospatial accuracy.",
+  "schema_version": "compound-zero.geospatial-benchmark.v1",
+  "scope": {
+    "coordinate_system": "FICTIONAL_SITE_LOCAL_CARTESIAN_METRES",
+    "hazard_count": 4,
+    "hazard_ids": [
+      "HZ-C7-PROCESS",
+      "HZ-C7-EGRESS",
+      "HZ-C4-HOTWORK",
+      "HZ-M1-LIFT"
+    ],
+    "layout_id": "fictional-kalinga-west-block-v1",
+    "layout_manifest_sha256": "c71d2818036b7df3179a8841c3cc87068e3321da1703c7778442dbc2d311b715",
+    "method": "POLYGON_AND_DISTANCE_BOUNDS",
+    "plume_physics_used": false,
+    "probabilistic_confidence_claimed": false,
+    "surveyed_coordinates_used": false,
+    "uncertainty_semantics": "DECLARED_ISOTROPIC_ERROR_BOUND_METRES",
+    "zone_count": 4,
+    "zone_ids": [
+      "ZONE-C7",
+      "ZONE-C4",
+      "ZONE-M1",
+      "ZONE-MUSTER-A"
+    ]
+  }
+}

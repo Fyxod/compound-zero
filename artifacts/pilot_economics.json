@@ -1,0 +1,249 @@
+{
+  "artifact": "compound_zero_pilot_economics",
+  "artifact_version": "1.0.0",
+  "boundaries": {
+    "cash_savings_guaranteed": false,
+    "double_counting_control": "Initial alert triage, subsequent false-alarm deep review, permit administration, and closed-investigation work are modelled as distinct workflows.",
+    "downtime_scope": "Administrative or nuisance holds only; excludes injury, fatality, property, environmental, regulatory, and catastrophic-loss valuation.",
+    "field_performance_claimed": false,
+    "finance_scope": "Simple undiscounted arithmetic; excludes tax, inflation, financing, depreciation, residual value, and risk adjustment.",
+    "human_harm_valuation_included": false,
+    "prevented_incidents_claimed": false
+  },
+  "data_classification": "ILLUSTRATIVE_SIMULATED",
+  "input_manifest_sha256": "4102fc3233dd2dc6adb2c871c4ba7d2b39fa1728feec79f6429724b394c333f3",
+  "inputs": {
+    "currency": "INR",
+    "horizon_years": 3,
+    "scenarios": [
+      {
+        "active_permits_reconciled_per_shift": 3.0,
+        "alert_triage_minutes_after": 10.0,
+        "alert_triage_minutes_before": 12.0,
+        "annual_operating_cost_inr": 300000.0,
+        "annual_operating_days": 250,
+        "description": "Conservative small-site pilot with limited adoption and modest workflow deltas.",
+        "false_alarm_deep_review_minutes": 12.0,
+        "false_alarm_deep_review_reduction_fraction": 0.15,
+        "false_alarm_deep_reviews_per_shift": 0.8,
+        "investigation_cycle_hours_after": 9.0,
+        "investigation_cycle_hours_before": 10.0,
+        "investigation_team_size": 2.0,
+        "investigations_per_year": 6.0,
+        "key": "low",
+        "loaded_labor_cost_inr_per_person_hour": 650.0,
+        "nuisance_downtime_exposure_inr_per_hour": 25000.0,
+        "nuisance_hold_hours_each": 0.25,
+        "nuisance_holds_avoided_per_year": 1.0,
+        "one_time_implementation_cost_inr": 800000.0,
+        "permit_reconciliation_minutes_after": 10.0,
+        "permit_reconciliation_minutes_before": 12.0,
+        "safety_alerts_per_shift": 2.0,
+        "shifts_per_day": 2,
+        "workflow_adoption_fraction": 0.5
+      },
+      {
+        "active_permits_reconciled_per_shift": 6.0,
+        "alert_triage_minutes_after": 9.0,
+        "alert_triage_minutes_before": 16.0,
+        "annual_operating_cost_inr": 450000.0,
+        "annual_operating_days": 300,
+        "description": "Illustrative three-shift site with partial workflow adoption and moderate deltas.",
+        "false_alarm_deep_review_minutes": 15.0,
+        "false_alarm_deep_review_reduction_fraction": 0.4,
+        "false_alarm_deep_reviews_per_shift": 2.0,
+        "investigation_cycle_hours_after": 8.0,
+        "investigation_cycle_hours_before": 13.0,
+        "investigation_team_size": 3.0,
+        "investigations_per_year": 12.0,
+        "key": "base",
+        "loaded_labor_cost_inr_per_person_hour": 850.0,
+        "nuisance_downtime_exposure_inr_per_hour": 50000.0,
+        "nuisance_hold_hours_each": 0.5,
+        "nuisance_holds_avoided_per_year": 4.0,
+        "one_time_implementation_cost_inr": 1100000.0,
+        "permit_reconciliation_minutes_after": 9.0,
+        "permit_reconciliation_minutes_before": 16.0,
+        "safety_alerts_per_shift": 4.0,
+        "shifts_per_day": 3,
+        "workflow_adoption_fraction": 0.75
+      },
+      {
+        "active_permits_reconciled_per_shift": 10.0,
+        "alert_triage_minutes_after": 8.0,
+        "alert_triage_minutes_before": 18.0,
+        "annual_operating_cost_inr": 700000.0,
+        "annual_operating_days": 330,
+        "description": "Upside large-site case with broad adoption; it is a sensitivity bound, not a forecast.",
+        "false_alarm_deep_review_minutes": 18.0,
+        "false_alarm_deep_review_reduction_fraction": 0.55,
+        "false_alarm_deep_reviews_per_shift": 3.0,
+        "investigation_cycle_hours_after": 8.0,
+        "investigation_cycle_hours_before": 16.0,
+        "investigation_team_size": 4.0,
+        "investigations_per_year": 18.0,
+        "key": "high",
+        "loaded_labor_cost_inr_per_person_hour": 1100.0,
+        "nuisance_downtime_exposure_inr_per_hour": 100000.0,
+        "nuisance_hold_hours_each": 0.75,
+        "nuisance_holds_avoided_per_year": 8.0,
+        "one_time_implementation_cost_inr": 1800000.0,
+        "permit_reconciliation_minutes_after": 8.0,
+        "permit_reconciliation_minutes_before": 18.0,
+        "safety_alerts_per_shift": 6.0,
+        "shifts_per_day": 3,
+        "workflow_adoption_fraction": 0.85
+      }
+    ]
+  },
+  "purpose": "Editable sensitivity analysis for pilot planning; not a factual ROI claim or field result.",
+  "results": [
+    {
+      "annual_site_scale": {
+        "active_permits_reconciled": 1500.0,
+        "false_alarm_deep_reviews": 400.0,
+        "investigations": 6.0,
+        "operating_days": 250,
+        "safety_alerts_reviewed": 1000.0,
+        "shifts": 500
+      },
+      "annual_workflow_deltas": {
+        "alert_triage_person_hours_released": 33.33,
+        "false_alarm_deep_reviews_avoided": 60.0,
+        "false_alarm_review_person_hours_released": 12.0,
+        "investigation_calendar_hours_reduced": 6.0,
+        "investigation_person_hours_released": 12.0,
+        "nuisance_hold_hours_avoided": 0.25,
+        "permit_reconciliation_person_hours_released": 50.0
+      },
+      "annualized_quantified_benefit": {
+        "currency": "INR",
+        "interpretation": "Illustrative capacity and nuisance-downtime exposure; not guaranteed cash savings.",
+        "realized_components_inr": {
+          "alert_triage_capacity_inr": 10833.33,
+          "false_alarm_deep_review_capacity_inr": 3900.0,
+          "investigation_capacity_inr": 3900.0,
+          "nuisance_downtime_exposure_inr": 3125.0,
+          "permit_reconciliation_capacity_inr": 16250.0
+        },
+        "realized_total_inr": 38008.33,
+        "unadjusted_total_inr": 76016.67,
+        "workflow_adoption_fraction": 0.5
+      },
+      "costs_and_indicators": {
+        "annual_net_after_operating_cost_inr": -261991.67,
+        "annual_operating_cost_inr": 300000.0,
+        "currency": "INR",
+        "evaluation_horizon_years": 3,
+        "horizon_net_inr": -1585975.0,
+        "horizon_quantified_benefit_inr": 114025.0,
+        "horizon_total_cost_inr": 1700000.0,
+        "one_time_implementation_cost_inr": 800000.0,
+        "payback_interpretation": "Not reached because annual quantified benefit does not exceed annual operating cost.",
+        "simple_payback_months": null,
+        "undiscounted_benefit_cost_ratio": 0.07
+      },
+      "data_classification": "ILLUSTRATIVE_SIMULATED",
+      "description": "Conservative small-site pilot with limited adoption and modest workflow deltas.",
+      "scenario": "low"
+    },
+    {
+      "annual_site_scale": {
+        "active_permits_reconciled": 5400.0,
+        "false_alarm_deep_reviews": 1800.0,
+        "investigations": 12.0,
+        "operating_days": 300,
+        "safety_alerts_reviewed": 3600.0,
+        "shifts": 900
+      },
+      "annual_workflow_deltas": {
+        "alert_triage_person_hours_released": 420.0,
+        "false_alarm_deep_reviews_avoided": 720.0,
+        "false_alarm_review_person_hours_released": 180.0,
+        "investigation_calendar_hours_reduced": 60.0,
+        "investigation_person_hours_released": 180.0,
+        "nuisance_hold_hours_avoided": 2.0,
+        "permit_reconciliation_person_hours_released": 630.0
+      },
+      "annualized_quantified_benefit": {
+        "currency": "INR",
+        "interpretation": "Illustrative capacity and nuisance-downtime exposure; not guaranteed cash savings.",
+        "realized_components_inr": {
+          "alert_triage_capacity_inr": 267750.0,
+          "false_alarm_deep_review_capacity_inr": 114750.0,
+          "investigation_capacity_inr": 114750.0,
+          "nuisance_downtime_exposure_inr": 75000.0,
+          "permit_reconciliation_capacity_inr": 401625.0
+        },
+        "realized_total_inr": 973875.0,
+        "unadjusted_total_inr": 1298500.0,
+        "workflow_adoption_fraction": 0.75
+      },
+      "costs_and_indicators": {
+        "annual_net_after_operating_cost_inr": 523875.0,
+        "annual_operating_cost_inr": 450000.0,
+        "currency": "INR",
+        "evaluation_horizon_years": 3,
+        "horizon_net_inr": 471625.0,
+        "horizon_quantified_benefit_inr": 2921625.0,
+        "horizon_total_cost_inr": 2450000.0,
+        "one_time_implementation_cost_inr": 1100000.0,
+        "payback_interpretation": "Simple, undiscounted payback on one-time cost after annual operating cost.",
+        "simple_payback_months": 25.2,
+        "undiscounted_benefit_cost_ratio": 1.19
+      },
+      "data_classification": "ILLUSTRATIVE_SIMULATED",
+      "description": "Illustrative three-shift site with partial workflow adoption and moderate deltas.",
+      "scenario": "base"
+    },
+    {
+      "annual_site_scale": {
+        "active_permits_reconciled": 9900.0,
+        "false_alarm_deep_reviews": 2970.0,
+        "investigations": 18.0,
+        "operating_days": 330,
+        "safety_alerts_reviewed": 5940.0,
+        "shifts": 990
+      },
+      "annual_workflow_deltas": {
+        "alert_triage_person_hours_released": 990.0,
+        "false_alarm_deep_reviews_avoided": 1633.5,
+        "false_alarm_review_person_hours_released": 490.05,
+        "investigation_calendar_hours_reduced": 144.0,
+        "investigation_person_hours_released": 576.0,
+        "nuisance_hold_hours_avoided": 6.0,
+        "permit_reconciliation_person_hours_released": 1650.0
+      },
+      "annualized_quantified_benefit": {
+        "currency": "INR",
+        "interpretation": "Illustrative capacity and nuisance-downtime exposure; not guaranteed cash savings.",
+        "realized_components_inr": {
+          "alert_triage_capacity_inr": 925650.0,
+          "false_alarm_deep_review_capacity_inr": 458196.75,
+          "investigation_capacity_inr": 538560.0,
+          "nuisance_downtime_exposure_inr": 510000.0,
+          "permit_reconciliation_capacity_inr": 1542750.0
+        },
+        "realized_total_inr": 3975156.75,
+        "unadjusted_total_inr": 4676655.0,
+        "workflow_adoption_fraction": 0.85
+      },
+      "costs_and_indicators": {
+        "annual_net_after_operating_cost_inr": 3275156.75,
+        "annual_operating_cost_inr": 700000.0,
+        "currency": "INR",
+        "evaluation_horizon_years": 3,
+        "horizon_net_inr": 8025470.25,
+        "horizon_quantified_benefit_inr": 11925470.25,
+        "horizon_total_cost_inr": 3900000.0,
+        "one_time_implementation_cost_inr": 1800000.0,
+        "payback_interpretation": "Simple, undiscounted payback on one-time cost after annual operating cost.",
+        "simple_payback_months": 6.6,
+        "undiscounted_benefit_cost_ratio": 3.06
+      },
+      "data_classification": "ILLUSTRATIVE_SIMULATED",
+      "description": "Upside large-site case with broad adoption; it is a sensitivity bound, not a forecast.",
+      "scenario": "high"
+    }
+  ]
+}

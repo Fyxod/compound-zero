@@ -47,7 +47,7 @@ export function EvidenceView({ simulation }: { simulation: SimulationController 
         <div>
           <div className="view-heading__kicker"><GitBranch size={14} /> SAFETY CASE CZ-2026-071</div>
           <h1>Why now?</h1>
-          <p>Every score resolves to timestamped evidence. No opaque narrative and no LLM in the decision path.</p>
+          <p>This replay links each score to a timestamped simulated evidence snapshot. No LLM enters the numeric decision path.</p>
         </div>
         <div className="evidence-heading-score">
           <div><span>FUSED RISK</span><strong>{snapshot.score}</strong></div>
@@ -67,11 +67,11 @@ export function EvidenceView({ simulation }: { simulation: SimulationController 
             </div>
             <div className="graph-health"><Network size={15} /> {EVIDENCE_NODES.length} nodes · {EVIDENCE_EDGES.length} typed edges</div>
           </header>
-          <EvidenceGraph />
+          <EvidenceGraph snapshot={snapshot} />
           <footer className="graph-panel__footer">
             <div><span>Inference rule</span><strong>Ignition source ∩ flammable trend ∩ exposed people</strong></div>
             <div><span>Graph snapshot</span><strong>{snapshot.timestamp} · timestamped receipt</strong></div>
-            <button type="button" className="text-button">Open graph inspector <ArrowRight size={14} /></button>
+            <button type="button" className="text-button" disabled title="Dedicated graph inspector is not implemented">Graph inspector unavailable <ArrowRight size={14} /></button>
           </footer>
         </section>
 
@@ -133,14 +133,14 @@ export function EvidenceView({ simulation }: { simulation: SimulationController 
 
         <section className="panel provenance-panel">
           <header className="panel-header">
-            <div><span className="eyebrow">DATA PROVENANCE</span><h2>Inputs that can stand up to review</h2></div>
+            <div><span className="eyebrow">SIMULATED PROVENANCE FIXTURE</span><h2>Inputs represented in this replay</h2></div>
           </header>
           <div className="provenance-list">
             {[
-              { icon: Activity, source: "SCADA historian", record: "5 synchronized channels", quality: "0.8s fresh", hash: "A4D9:77E1" },
-              { icon: FileCheck2, source: "Permit to work", record: "PTW-2841 + PTW-2837", quality: "signed", hash: "6E21:0C94" },
-              { icon: MapPinned, source: "UWB badge gateway", record: "4 consented worker badges", quality: "±1.2 m", hash: "EF71:43B8" },
-              { icon: Database, source: "CMMS adapter", record: "WO-44812 / EF-04", quality: "current", hash: "4B02:11DA" },
+              { icon: Activity, source: "SCADA-like fixture", record: "5 synchronized channels", quality: "simulated", hash: "A4D9:77E1" },
+              { icon: FileCheck2, source: "Permit fixture", record: "PTW-2841 + PTW-2837", quality: "simulated", hash: "6E21:0C94" },
+              { icon: MapPinned, source: "Location fixture", record: "4 pseudonymous worker badges", quality: "simulated", hash: "EF71:43B8" },
+              { icon: Database, source: "CMMS fixture", record: "WO-44812 / EF-04", quality: "simulated", hash: "4B02:11DA" },
             ].map((item) => {
               const Icon = item.icon;
               return (

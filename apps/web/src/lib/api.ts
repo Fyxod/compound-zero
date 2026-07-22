@@ -59,7 +59,7 @@ function processPayload() {
 }
 
 export async function fetchOperationalIntelligence(signal?: AbortSignal): Promise<OperationalIntelligence> {
-  const now = new Date();
+  const now = new Date(Math.floor(Date.now() / 60_000) * 60_000);
   const evaluationTime = now.toISOString();
   const observationTime = new Date(now.getTime() - 20_000).toISOString();
   const validFrom = new Date(now.getTime() - 60 * 60_000).toISOString();
@@ -93,6 +93,15 @@ export async function fetchOperationalIntelligence(signal?: AbortSignal): Promis
           min_hazard_distance_m: 6.5,
           confidence: 0.94,
         },
+        {
+          observation_id: "obs-c7-egress",
+          observed_at: observationTime,
+          camera_ref: "CAM-C7-EGRESS",
+          zone_id: "ZONE-C7",
+          event_type: "blocked_egress",
+          entity_count: 1,
+          confidence: 0.91,
+        },
       ],
     }),
   });
@@ -114,13 +123,13 @@ export async function fetchOperationalIntelligence(signal?: AbortSignal): Promis
     body: JSON.stringify({
       data_classification: "SIMULATED",
       permit: {
-        permit_id: "PTW-HOT-2041",
+        permit_id: "PTW-2841",
         work_type: "hot_work",
         zone_id: "ZONE-C7",
         status: "ACTIVE",
         valid_from: validFrom,
         valid_until: validUntil,
-        overlapping_permit_ids: ["PTW-MECH-991"],
+        overlapping_permit_ids: ["PTW-2837"],
         isolation_confirmed: false,
       },
       context: {
@@ -133,14 +142,18 @@ export async function fetchOperationalIntelligence(signal?: AbortSignal): Promis
       },
       evidence: [
         {
-          evidence_id: "ev-permit-2041",
+          evidence_id: "ev-permit-2841",
           evidence_type: "permit",
+          permit_id: "PTW-2841",
+          zone_id: "ZONE-C7",
           source_system: "SIMULATED PTW",
           observed_at: evaluationTime,
         },
         {
-          evidence_id: "ev-vision-egress",
+          evidence_id: "ev-vision-blocked-egress",
           evidence_type: "vision_metadata",
+          permit_id: "PTW-2841",
+          zone_id: "ZONE-C7",
           source_system: "SIMULATED CCTV METADATA",
           observed_at: observationTime,
         },
@@ -148,25 +161,25 @@ export async function fetchOperationalIntelligence(signal?: AbortSignal): Promis
     }),
   });
 
-  const planRequest = requestJson<ResponsePlan>("/v1/response/plans", {
+  const [vision, patterns, audit] = await Promise.all([
+    visionRequest,
+    patternsRequest,
+    auditRequest,
+  ]);
+
+  const responsePlan = await requestJson<ResponsePlan>("/v1/response/plans", {
     method: "POST",
     signal,
     body: JSON.stringify({
       data_classification: "SIMULATED",
-      risk_case_id: `CASE-C7-${now.getTime()}`,
+      idempotency_key: `cz-2026-071-${now.getTime()}`,
+      risk_case_id: "CZ-2026-071",
       requested_at: evaluationTime,
       severity: "critical",
       actions: ["NOTIFY_SAFETY_TEAM", "CONTROLLED_EVACUATION", "PROCESS_SHUTDOWN"],
-      rationale: "Compound evidence is critical; present a bounded plan to authorised site roles for manual execution only.",
+      rationale: `Case CZ-2026-071 joins ${vision.vision_context.observations_used} anonymous vision events, ${patterns.results.length} cited patterns and audit ${audit.audit_id}; present a bounded plan for manual execution only.`,
     }),
   });
-
-  const [vision, patterns, audit, responsePlan] = await Promise.all([
-    visionRequest,
-    patternsRequest,
-    auditRequest,
-    planRequest,
-  ]);
   return { vision, patterns, audit, responsePlan };
 }
 

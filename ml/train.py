@@ -18,6 +18,14 @@ def _write_json(path: Path, payload: dict[str, object]) -> None:
     path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def train(
     *,
     data_dir: Path,
@@ -40,6 +48,7 @@ def train(
     metrics_path = artifact_dir / "metrics.json"
     model_card_path = artifact_dir / "model_card.json"
     joblib.dump(bundle, model_path, compress=3)
+    model_artifact_sha256 = _sha256_file(model_path)
     _write_json(metrics_path, metrics)
     _write_json(
         model_card_path,
@@ -54,6 +63,9 @@ def train(
             "data_classification": "SIMULATED",
             "decision_engine": bundle["decision_engine"],
             "dataset_sha256": dataset_hash,
+            "model_artifact_filename": model_path.name,
+            "model_artifact_sha256": model_artifact_sha256,
+            "model_artifact_bytes": model_path.stat().st_size,
             "features": bundle["full_features"],
             "decision_threshold": round(float(bundle["full_threshold"]), 6),
             "limitations": metrics["limitations"],
@@ -102,4 +114,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

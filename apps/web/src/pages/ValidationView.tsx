@@ -25,7 +25,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { BENCHMARKS, VALIDATION_META } from "../data/validation";
+import { useState } from "react";
+import { BENCHMARKS, ROBUSTNESS_META, VALIDATION_META } from "../data/validation";
 
 const COLORS = ["#566761", "#c7a65b", "#78e9c2"];
 
@@ -34,16 +35,20 @@ function percent(value: number) {
 }
 
 export function ValidationView() {
+  const [metric, setMetric] = useState<"recall" | "auprc" | "leadMinutes">("recall");
   const best = BENCHMARKS.find((row) => row.recommended)!;
   const baseline = BENCHMARKS[0];
-  const fnrReduction = Math.round(
-    ((baseline.falseNegativeRate - best.falseNegativeRate) / baseline.falseNegativeRate) * 100,
+  const fnrReductionPoints = Math.round(
+    (baseline.falseNegativeRate - best.falseNegativeRate) * 100,
   );
   const processBaseline = BENCHMARKS.find((row) => row.short === "PROCESS")!;
   const falseAlarmReduction = Math.round(
     ((processBaseline.falseAlarmsPer24h - best.falseAlarmsPer24h) /
       processBaseline.falseAlarmsPer24h) * 100,
   );
+  const metricLabel = metric === "recall" ? "Event recall" : metric === "auprc" ? "AUPRC" : "Median lead (min)";
+  const metricMax = metric === "leadMinutes" ? 14 : 1;
+  const metricFormatter = (value: number) => metric === "leadMinutes" ? `${value} min` : metric === "auprc" ? value.toFixed(3) : `${Math.round(value * 100)}%`;
 
   return (
     <div className="view validation-view">
@@ -68,7 +73,7 @@ export function ValidationView() {
       <div className="validation-kpis">
         <article>
           <span className="validation-kpi__icon"><ArrowDown size={18} /></span>
-          <div><span>EVENT FNR REDUCTION</span><strong>{fnrReduction}%</strong><small>65 held-out simulated event groups</small></div>
+          <div><span>EVENT FNR REDUCTION</span><strong>{fnrReductionPoints}<em> pp</em></strong><small>80% → 0% · 65 simulated groups</small></div>
         </article>
         <article>
           <span className="validation-kpi__icon"><TimerReset size={18} /></span>
@@ -76,7 +81,7 @@ export function ValidationView() {
         </article>
         <article>
           <span className="validation-kpi__icon"><Gauge size={18} /></span>
-          <div><span>AUPRC</span><strong>{best.auprc.toFixed(2)}</strong><small>class-imbalance aware</small></div>
+          <div><span>AUPRC</span><strong>{best.auprc.toFixed(3)}</strong><small>class-imbalance aware</small></div>
         </article>
         <article>
           <span className="validation-kpi__icon"><Braces size={18} /></span>
@@ -84,20 +89,63 @@ export function ValidationView() {
         </article>
       </div>
 
+      <section className="panel robustness-panel">
+        <header className="panel-header">
+          <div>
+            <span className="eyebrow">ROBUSTNESS · SIMULATED SCENARIOBENCH</span>
+            <h2>A perfect base holdout is not a deployment pass</h2>
+          </div>
+          <span className="field-gate"><LockKeyhole size={14} /> FIELD VALIDATION REQUIRED</span>
+        </header>
+        <div className="robustness-grid">
+          <article>
+            <span>WHOLE-SEED HOLDOUT</span>
+            <strong>{percent(ROBUSTNESS_META.baseHoldout.eventRecall)}</strong>
+            <small>{ROBUSTNESS_META.baseHoldout.detectedEvents}/{ROBUSTNESS_META.baseHoldout.eventGroups} events · {ROBUSTNESS_META.baseHoldout.medianLeadMinutes} min median lead</small>
+          </article>
+          <article className="is-watch">
+            <span>SCENARIO-TYPE LOSO</span>
+            <strong>{percent(ROBUSTNESS_META.scenarioTypeHoldout.eventRecall)}</strong>
+            <small>{ROBUSTNESS_META.scenarioTypeHoldout.detectedEvents}/{ROBUSTNESS_META.scenarioTypeHoldout.eventGroups} pooled events · {ROBUSTNESS_META.scenarioTypeHoldout.folds} folds</small>
+          </article>
+          <article className="is-critical">
+            <span>KNOWN DIAGNOSTIC MISS</span>
+            <strong>{percent(ROBUSTNESS_META.scenarioTypeHoldout.failedScenarioRecall)}</strong>
+            <small><code>{ROBUSTNESS_META.scenarioTypeHoldout.failedScenarioType}</code> held out · 0/64</small>
+          </article>
+          <article className="is-watch">
+            <span>MISSING-STREAM FLOOR</span>
+            <strong>{percent(ROBUSTNESS_META.missingStreams.worstEventRecall)}</strong>
+            <small>process or barrier + shift stream absent · 52/65</small>
+          </article>
+        </div>
+        <div className="robustness-caution">
+          <AlertOctagon size={17} />
+          <div>
+            <strong>Noise preserved event recall but multiplied review load.</strong>
+            <span>At authored Gaussian σ={ROBUSTNESS_META.sensorNoise.sigma.toFixed(2)}, false-alarm episodes rose {ROBUSTNESS_META.sensorNoise.baselineFalseAlarmsPer24h.toFixed(2)} → {ROBUSTNESS_META.sensorNoise.stressedFalseAlarmsPer24h.toFixed(2)} per simulated 24 h. {ROBUSTNESS_META.fieldGate}</span>
+          </div>
+        </div>
+      </section>
+
       <div className="validation-grid">
         <section className="panel benchmark-panel">
           <header className="panel-header">
             <div><span className="eyebrow">ABLATION STUDY</span><h2>Context closes the safety blind spot</h2></div>
-            <div className="metric-toggle"><button type="button" className="is-active">Recall</button><button type="button">AUPRC</button><button type="button">Lead time</button></div>
+            <div className="metric-toggle">
+              <button type="button" className={metric === "recall" ? "is-active" : undefined} onClick={() => setMetric("recall")}>Recall</button>
+              <button type="button" className={metric === "auprc" ? "is-active" : undefined} onClick={() => setMetric("auprc")}>AUPRC</button>
+              <button type="button" className={metric === "leadMinutes" ? "is-active" : undefined} onClick={() => setMetric("leadMinutes")}>Lead time</button>
+            </div>
           </header>
           <div className="benchmark-chart">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={BENCHMARKS} layout="vertical" margin={{ top: 4, left: 10, right: 24, bottom: 4 }}>
                 <CartesianGrid stroke="#b8c8c2" strokeOpacity={0.07} horizontal={false} />
-                <XAxis type="number" domain={[0, 1]} axisLine={false} tickLine={false} tickFormatter={(value) => `${value * 100}%`} tick={{ fill: "#71817c", fontSize: 10 }} />
+                <XAxis type="number" domain={[0, metricMax]} axisLine={false} tickLine={false} tickFormatter={(value) => metricFormatter(Number(value))} tick={{ fill: "#71817c", fontSize: 10 }} />
                 <YAxis type="category" dataKey="short" width={88} axisLine={false} tickLine={false} tick={{ fill: "#a8b6b1", fontSize: 10, fontFamily: "JetBrains Mono Variable" }} />
-                <Tooltip formatter={(value) => [percent(Number(value)), "Recall"]} contentStyle={{ background: "#111817", border: "1px solid rgba(170,190,182,.15)", borderRadius: 10 }} />
-                <Bar dataKey="recall" radius={[0, 5, 5, 0]} barSize={22}>
+                <Tooltip formatter={(value) => [metricFormatter(Number(value)), metricLabel]} contentStyle={{ background: "#111817", border: "1px solid rgba(170,190,182,.15)", borderRadius: 10 }} />
+                <Bar dataKey={metric} radius={[0, 5, 5, 0]} barSize={22}>
                   {BENCHMARKS.map((row, index) => <Cell key={row.short} fill={COLORS[index]} />)}
                 </Bar>
               </BarChart>
@@ -123,7 +171,7 @@ export function ValidationView() {
                     <td><span className="model-status-dot" /> <div><strong>{row.short}</strong><small>{row.model}</small></div></td>
                     <td>{percent(row.recall)}</td>
                     <td>{percent(row.falseNegativeRate)}</td>
-                    <td>{row.auprc.toFixed(2)}</td>
+                    <td>{row.auprc.toFixed(3)}</td>
                     <td>{row.leadMinutes}m</td>
                     <td>{row.falseAlarmsPer24h.toFixed(2)}</td>
                   </tr>
@@ -131,7 +179,7 @@ export function ValidationView() {
               </tbody>
             </table>
           </div>
-          <div className="scorecard-panel__foot"><CheckCircle2 size={14} /> Full fusion is the only variant meeting the prototype gate.</div>
+          <div className="scorecard-panel__foot"><CheckCircle2 size={14} /> Of 65 event groups, 13 had a device alarm by onset and fusion warned earlier in all 13; 52 had no device alarm by onset and fusion detected all 52.</div>
         </section>
 
         <section className="panel evaluation-design">
@@ -141,7 +189,7 @@ export function ValidationView() {
               { icon: DatabaseZap, label: "Generate", detail: "Versioned process + work context", tag: `${VALIDATION_META.samples.toLocaleString()} rows` },
               { icon: Split, label: "Group split", detail: "Disjoint seeds; zero overlap", tag: `${VALIDATION_META.groups} replays` },
               { icon: Boxes, label: "Calibrate", detail: "Probability on calibration only", tag: "sigmoid" },
-              { icon: LockKeyhole, label: "Freeze", detail: "Hash model and metrics", tag: "SHA-256" },
+              { icon: LockKeyhole, label: "Freeze", detail: "Verify dataset + model artifact", tag: "SHA-256" },
             ].map((item, index) => {
               const Icon = item.icon;
               return (
@@ -156,7 +204,7 @@ export function ValidationView() {
           </div>
           <div className="dataset-disclosure">
             <AlertOctagon size={17} />
-            <div><strong>{VALIDATION_META.disclosure}</strong><span>These metrics demonstrate the pipeline and interaction-learning hypothesis. They are not evidence of performance at a real plant.</span></div>
+            <div><strong>{VALIDATION_META.disclosure}</strong><span>Base and stress metrics demonstrate the pipeline and expose known failure modes. They are not evidence of performance at a real plant.</span></div>
           </div>
         </section>
 

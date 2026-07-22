@@ -32,14 +32,14 @@ export function CommandCenter({
       <div className="view-heading">
         <div>
           <div className="view-heading__kicker">
-            <span className="status-led is-online" /> OPERATING PICTURE · {snapshot.timestamp} IST
+            <span className="status-led is-online" /> SIMULATED OPERATING PICTURE · {snapshot.timestamp} IST
           </div>
           <h1>See the accident <em>before</em> the alarm.</h1>
           <p>{PRIMARY_SCENARIO.summary}</p>
         </div>
         <div className="view-heading__assurance">
           <ShieldCheck size={16} />
-          <div><strong>Decision-safe by design</strong><span>Human approval · local inference · complete audit</span></div>
+          <div><strong>Decision-safe by design</strong><span>Human approval · local inference · reviewable demo receipts</span></div>
         </div>
       </div>
 
@@ -65,9 +65,9 @@ export function CommandCenter({
             <span className="priority-banner__icon"><BellRing size={18} /></span>
             <div>
               <span className="eyebrow">PREDICTIVE SAFETY CASE CZ-2026-071</span>
-              <strong>Calibrated risk crossed the intervention threshold while every device alarm remains clear.</strong>
+              <strong>{snapshot.counterfactualApplied ? "Dry-run recorded; residual heuristic score remains above the review threshold. No field control was executed." : "Calibrated risk crossed the intervention threshold while every device alarm remains clear."}</strong>
             </div>
-            <span className="priority-banner__lead"><AlarmClock size={15} /> {snapshot.leadTimeMinutes} min lead</span>
+            <span className="priority-banner__lead"><AlarmClock size={15} /> {snapshot.counterfactualApplied ? "NON-CAUSAL DRY RUN" : `${snapshot.leadTimeMinutes} min lead`}</span>
             <button type="button" onClick={onOpenEvidence}>Explain this alert</button>
           </motion.div>
         )}
@@ -115,7 +115,7 @@ export function CommandCenter({
 
       <div className="command-grid">
         <PlantMap snapshot={snapshot} />
-        <RiskCasePanel snapshot={snapshot} onExecute={simulation.execute} onOpenEvidence={onOpenEvidence} />
+        <RiskCasePanel snapshot={snapshot} onRecordDryRun={simulation.recordDryRun} onOpenEvidence={onOpenEvidence} />
         <RiskHistoryChart history={simulation.history} />
         <TelemetryPanel sensors={snapshot.sensors} />
         <PermitMatrix permits={snapshot.permits} severity={snapshot.severity} />

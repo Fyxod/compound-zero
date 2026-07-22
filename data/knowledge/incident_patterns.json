@@ -1,9 +1,9 @@
 {
   "corpus_name": "Compound Zero Incident Pattern Reference Corpus",
-  "corpus_version": "1.0.0",
+  "corpus_version": "1.2.0",
   "data_classification": "REFERENCE",
   "created_on": "2026-07-22",
-  "scope_note": "Small, source-attributed prototype corpus. Pattern summaries and review prompts are project-authored; they are not quotations, legal advice, site procedures, or a substitute for licensed standards.",
+  "scope_note": "Small, source-attributed prototype corpus. Pattern summaries and review prompts are project-authored; they are not quotations, legal advice, site procedures, or a substitute for licensed standards. The OSH&WC Code is in force from 21 November 2025; section 143 repeals the Factories Act, 1948 subject to savings. The final OSH&WC (Central) Rules, 2026 came into force on publication on 8 May 2026. Rule pointers are scoped risk/reference mappings, not a claim that a cited rule creates a specific statutory permit-to-work or hot-work requirement.",
   "licensing_note": "Only public reference metadata and project-authored summaries are stored. The paid normative text of OISD standards is not bundled.",
   "patterns": [
     {
@@ -34,13 +34,22 @@
           "note": "Full normative standard text is not included; OISD distributes current standards through authorised paid access."
         },
         {
-          "source_id": "FACTORIES-ACT-1948-S37",
-          "publisher": "India Code, Government of India",
-          "title": "The Factories Act, 1948 - Section 37: Explosive or inflammable dust, gas, etc.",
-          "url": "https://www.indiacode.nic.in/handle/123456789/13657",
-          "locator": "Section 37",
+          "source_id": "OSHWC-CODE-2020-SCHEDULE-II",
+          "publisher": "Ministry of Labour and Employment, Government of India",
+          "title": "Occupational Safety, Health and Working Conditions Code, 2020 - Second Schedule safety matters",
+          "url": "https://labour.gov.in/sites/default/files/osh_gazette.pdf",
+          "locator": "Section 18(2)(f), Second Schedule items 16, 18 and 23",
           "access_scope": "PUBLIC_LEGISLATION",
-          "note": "Reference pointer only; applicability and current legal obligations require qualified review."
+          "note": "Current-law reference pointer only; the listed matters support standards/rules and do not by themselves establish this prototype's compliance."
+        },
+        {
+          "source_id": "OSHWC-CENTRAL-RULES-2026-R23-R24-I-II",
+          "publisher": "Ministry of Labour and Employment, Government of India",
+          "title": "Occupational Safety, Health and Working Conditions (Central) Rules, 2026 - factory ventilation and exhaust context",
+          "url": "https://www.labour.gov.in/static/uploads/2026/05/ee246f790cad0b8e99c3828f34fa09a6.pdf",
+          "locator": "Rules 23(ii) and 24(i)-(ii): ventilation to clear fumes and dilute inflammable or noxious gases; separation and treatment of relevant exhaust streams",
+          "access_scope": "PUBLIC_LEGISLATION",
+          "note": "Final rules published as G.S.R. 345(E) on 8 May 2026. This is a ventilation/fume risk mapping only, not a claim that these rules prescribe a specific statutory permit-to-work or hot-work control."
         }
       ]
     },
@@ -64,13 +73,22 @@
       ],
       "sources": [
         {
-          "source_id": "FACTORIES-ACT-1948-S36",
-          "publisher": "India Code, Government of India",
-          "title": "The Factories Act, 1948 - Section 36: Precautions against dangerous fumes, gases, etc.",
-          "url": "https://www.indiacode.nic.in/show-data?actid=AC_CEN_6_6_000010_194863_1517807319577&orderno=38",
-          "locator": "Section 36",
+          "source_id": "OSHWC-CODE-2020-SCHEDULE-II",
+          "publisher": "Ministry of Labour and Employment, Government of India",
+          "title": "Occupational Safety, Health and Working Conditions Code, 2020 - Second Schedule safety matters",
+          "url": "https://labour.gov.in/sites/default/files/osh_gazette.pdf",
+          "locator": "Section 18(2)(f), Second Schedule items 16 and 18",
           "access_scope": "PUBLIC_LEGISLATION",
-          "note": "Reference pointer only; applicability and current legal obligations require qualified review."
+          "note": "Current-law reference pointer only; site-specific rules, saved instruments and approved procedures require qualified review."
+        },
+        {
+          "source_id": "OSHWC-CENTRAL-RULES-2026-R23-R24-III",
+          "publisher": "Ministry of Labour and Employment, Government of India",
+          "title": "Occupational Safety, Health and Working Conditions (Central) Rules, 2026 - factory atmosphere and confined-space context",
+          "url": "https://www.labour.gov.in/static/uploads/2026/05/ee246f790cad0b8e99c3828f34fa09a6.pdf",
+          "locator": "Rules 23(ii) and 24(iii): ventilation to clear fumes/dilute gases and practicable measures before entry where noxious gas, fume, vapour or dust may be present",
+          "access_scope": "PUBLIC_LEGISLATION",
+          "note": "Final rules published as G.S.R. 345(E) on 8 May 2026. This is a scoped atmosphere/entry risk mapping; it is not a legal determination or a complete confined-space procedure."
         },
         {
           "source_id": "OISD-STD-105-METADATA",
@@ -139,13 +157,22 @@
       ],
       "sources": [
         {
-          "source_id": "FACTORIES-ACT-1948-S38",
-          "publisher": "India Code, Government of India",
-          "title": "The Factories Act, 1948 - Section 38: Precautions in case of fire",
-          "url": "https://www.indiacode.nic.in/handle/123456789/13657",
-          "locator": "Section 38",
+          "source_id": "OSHWC-CODE-2020-S84-S89",
+          "publisher": "Ministry of Labour and Employment, Government of India",
+          "title": "Occupational Safety, Health and Working Conditions Code, 2020 - hazardous-process emergency and imminent-danger provisions",
+          "url": "https://labour.gov.in/sites/default/files/osh_gazette.pdf",
+          "locator": "Sections 84(4) and 89",
           "access_scope": "PUBLIC_LEGISLATION",
-          "note": "Reference pointer only; the prototype does not determine legal compliance."
+          "note": "Current-law reference pointer only; the prototype does not determine legal compliance or select an operational response."
+        },
+        {
+          "source_id": "OSHWC-CENTRAL-RULES-2026-R46",
+          "publisher": "Ministry of Labour and Employment, Government of India",
+          "title": "Occupational Safety, Health and Working Conditions (Central) Rules, 2026 - ordinary and emergency illumination",
+          "url": "https://www.labour.gov.in/static/uploads/2026/05/ee246f790cad0b8e99c3828f34fa09a6.pdf",
+          "locator": "Rule 46(i)-(iii): lighting for places where employees work or pass, including emergencies, and independent emergency lighting where failure creates risk",
+          "access_scope": "PUBLIC_LEGISLATION",
+          "note": "Final rules published as G.S.R. 345(E) on 8 May 2026. This is an emergency-route visibility risk mapping, not a claim that rule 46 is an egress-obstruction rule."
         }
       ]
     },

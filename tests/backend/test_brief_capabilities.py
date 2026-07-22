@@ -142,7 +142,14 @@ def test_local_pattern_retrieval_is_ranked_cited_and_non_generative(
     assert body["results"][0]["matched_terms"]
     sources = body["results"][0]["sources"]
     assert any(source["source_id"] == "OISD-STD-105-METADATA" for source in sources)
-    assert any(source["source_id"] == "FACTORIES-ACT-1948-S37" for source in sources)
+    assert any(source["source_id"] == "OSHWC-CODE-2020-SCHEDULE-II" for source in sources)
+    rules_source = next(
+        source
+        for source in sources
+        if source["source_id"] == "OSHWC-CENTRAL-RULES-2026-R23-R24-I-II"
+    )
+    assert "Rules 23(ii) and 24(i)-(ii)" in rules_source["locator"]
+    assert "not a claim" in rules_source["note"]
     assert any(source["access_scope"] == "PUBLIC_METADATA_ONLY" for source in sources)
     assert "not bundled" in body["licensing_note"].lower()
 
@@ -189,12 +196,16 @@ def _critical_hot_work_audit_payload() -> dict[str, object]:
             {
                 "evidence_id": "ev-permit-2041",
                 "evidence_type": "permit",
+                "permit_id": "PTW-HOT-2041",
+                "zone_id": "ZONE-C7",
                 "source_system": "SIMULATED PTW",
                 "observed_at": "2026-07-22T10:00:00Z",
             },
             {
                 "evidence_id": "ev-vision-egress",
                 "evidence_type": "vision_metadata",
+                "permit_id": "PTW-HOT-2041",
+                "zone_id": "ZONE-C7",
                 "source_system": "SIMULATED CCTV METADATA",
                 "observed_at": "2026-07-22T10:00:40Z",
             },
@@ -219,7 +230,20 @@ def test_permit_audit_is_deterministic_evidence_linked_and_bounded(
     assert "hot-work-barrier-gas-overlap" in finding_ids
     assert "gas-test-evidence-missing" in finding_ids
     assert "blocked-egress-observation" in finding_ids
+    findings_by_id = {finding["finding_id"]: finding for finding in body["findings"]}
+    hot_work_reference_ids = {
+        reference["source_id"]
+        for reference in findings_by_id["hot-work-barrier-gas-overlap"]["references"]
+    }
+    assert "OSHWC-CENTRAL-RULES-2026-R23-R24-I-II" in hot_work_reference_ids
+    blocked_egress_reference_ids = {
+        reference["source_id"]
+        for reference in findings_by_id["blocked-egress-observation"]["references"]
+    }
+    assert "OSHWC-CENTRAL-RULES-2026-R46" in blocked_egress_reference_ids
     assert "not a legal determination" in body["compliance_boundary"]
+    assert "subject to savings" in body["compliance_boundary"]
+    assert "not a claim of a specific statutory PTW or hot-work rule" in body["compliance_boundary"]
     assert "PROPOSE_WORKER_WITHDRAWAL_TO_INCIDENT_COMMANDER" in body["proposed_response_actions"]
     assert all(finding["references"] for finding in body["findings"])
 
@@ -243,12 +267,17 @@ def test_complete_general_permit_has_no_findings(trained_case: dict[str, Any]) -
                 {
                     "evidence_id": "ev-permit-1",
                     "evidence_type": "permit",
+                    "permit_id": "PTW-GEN-1",
+                    "zone_id": "ZONE-A1",
                     "source_system": "SIMULATED PTW",
                     "observed_at": "2026-07-22T09:00:00Z",
                 },
                 {
                     "evidence_id": "ev-approval-1",
                     "evidence_type": "approval",
+                    "permit_id": "PTW-GEN-1",
+                    "zone_id": "ZONE-A1",
+                    "role": "AREA_AUTHORITY",
                     "source_system": "SIMULATED PTW",
                     "observed_at": "2026-07-22T09:00:00Z",
                 },

@@ -97,13 +97,13 @@ export function IntelligenceView() {
         </div>
         <div className="intelligence-heading__status">
           <span className={`status-led ${data ? "is-online" : "is-watch"}`} />
-          <div><span>{data ? "4/4 SERVICES VERIFIED" : "CONNECTING"}</span><strong>{data ? "Live API evidence" : "Building safety case"}</strong></div>
+          <div><span>{data ? "4/4 DEMO SERVICES RESPONDED" : "CONNECTING"}</span><strong>{data ? "Unified simulated API case" : "Building safety case"}</strong></div>
           <button type="button" className="icon-button" aria-label="Refresh intelligence" onClick={() => void load()} disabled={loading}><RefreshCw size={15} /></button>
         </div>
       </div>
 
       {error && (
-        <div className="intelligence-error"><AlertTriangle size={15} /><span>{error}. The live replay remains available; retry this workspace when the API is online.</span></div>
+        <div className="intelligence-error"><AlertTriangle size={15} /><span>{error}. The deterministic replay remains available; retry this workspace when the API is online.</span></div>
       )}
       {loading && !data ? <LoadingState /> : data && (
         <div className="intelligence-grid">
@@ -183,7 +183,7 @@ export function IntelligenceView() {
 
           <section className="panel permit-audit-panel">
             <header className="panel-header">
-              <div><span className="eyebrow">DIGITAL PERMIT AUDIT</span><h2>PTW-HOT-2041</h2></div>
+              <div><span className="eyebrow">DIGITAL PERMIT AUDIT</span><h2>PTW-2841 · Case CZ-2026-071</h2></div>
               <span className="critical-tag">human review</span>
             </header>
             <div className="audit-result">
@@ -243,7 +243,7 @@ function ResponsePanel({
           return (
             <div className={`approval-stop ${approved ? "is-approved" : active ? "is-active" : ""}`} key={role}>
               <span className="approval-stop__marker">{approved ? <Check size={14} /> : index + 1}</span>
-              <div><strong>{ROLE_LABELS[role]}</strong><span>{approved ? "Signed simulated record" : active ? "Review required" : "Waiting in sequence"}</span></div>
+              <div><strong>{ROLE_LABELS[role]}</strong><span>{approved ? "Recorded simulated approval" : active ? "Review required" : "Waiting in sequence"}</span></div>
               {active && !authorized ? (
                 <button type="button" onClick={() => onApprove(role)} disabled={Boolean(approving)}>
                   {approving === role ? <LoaderCircle size={13} /> : <UserCheck size={13} />} Approve

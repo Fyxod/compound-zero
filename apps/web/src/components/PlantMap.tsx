@@ -20,6 +20,7 @@ function pipePath(fromX: number, fromY: number, toX: number, toY: number) {
 
 export function PlantMap({ snapshot }: { snapshot: SimulationSnapshot }) {
   const [selectedZone, setSelectedZone] = useState("gas-gallery");
+  const [showRiskField, setShowRiskField] = useState(true);
   const selectedRisk = snapshot.zoneRisks.find((risk) => risk.zoneId === selectedZone);
   const zoneLookup = useMemo(
     () => new Map(snapshot.zoneRisks.map((risk) => [risk.zoneId, risk])),
@@ -32,8 +33,8 @@ export function PlantMap({ snapshot }: { snapshot: SimulationSnapshot }) {
     <section className="panel plant-panel">
       <header className="panel-header plant-panel__header">
         <div>
-          <span className="eyebrow">LIVE SPATIAL TWIN</span>
-          <h2>Risk field / West process block</h2>
+          <span className="eyebrow">SIMULATED SPATIAL LAYOUT</span>
+          <h2>Illustrative risk field / West process block</h2>
         </div>
         <div className="plant-panel__tools">
           <div className="map-legend">
@@ -41,10 +42,10 @@ export function PlantMap({ snapshot }: { snapshot: SimulationSnapshot }) {
             <span><i className="legend-dot is-elevated" /> Compound risk</span>
             <span><i className="legend-worker" /> Worker</span>
           </div>
-          <button className="icon-button subtle" type="button" aria-label="Map layers">
+          <button className="icon-button subtle" type="button" aria-label="Toggle illustrative risk field" aria-pressed={showRiskField} onClick={() => setShowRiskField((value) => !value)}>
             <Layers3 size={16} />
           </button>
-          <button className="icon-button subtle" type="button" aria-label="Recenter map">
+          <button className="icon-button subtle" type="button" aria-label="Recenter on West Gas Gallery" onClick={() => setSelectedZone("gas-gallery")}>
             <Crosshair size={16} />
           </button>
         </div>
@@ -90,7 +91,7 @@ export function PlantMap({ snapshot }: { snapshot: SimulationSnapshot }) {
             <circle cx="340" cy="340" r="4" />
           </g>
 
-          <motion.ellipse
+          {showRiskField && <motion.ellipse
             cx={HOTSPOT.x + 48}
             cy={HOTSPOT.y + 10}
             rx={70 + snapshot.score * 1.15}
@@ -102,8 +103,8 @@ export function PlantMap({ snapshot }: { snapshot: SimulationSnapshot }) {
             }}
             transition={{ duration: 0.55 }}
             style={{ transformOrigin: `${HOTSPOT.x + 48}px ${HOTSPOT.y + 10}px` }}
-          />
-          {snapshot.score >= 52 && (
+          />}
+          {showRiskField && snapshot.score >= 52 && (
             <motion.ellipse
               cx={HOTSPOT.x + 36}
               cy={HOTSPOT.y + 8}
@@ -180,7 +181,7 @@ export function PlantMap({ snapshot }: { snapshot: SimulationSnapshot }) {
 
           <g className="wind-indicator" transform="translate(724 63)">
             <Wind size={16} />
-            <text x="24" y="7">WNW · 2.4 m/s</text>
+            <text x="24" y="7">SIM WIND · WNW · 2.4 m/s</text>
             <path d="M 24 20 H 94" />
             <path d="M 84 14 L 95 20 84 26" />
           </g>
@@ -222,7 +223,7 @@ export function PlantMap({ snapshot }: { snapshot: SimulationSnapshot }) {
         </svg>
 
         <div className="map-coordinates">
-          <Navigation size={13} /> 22.5726° N · 88.3639° E
+          <Navigation size={13} /> LOCAL DEMO GRID · PLAN COORDINATES
         </div>
         <div className="map-selection-card">
           <div className="map-selection-card__pin"><MapPin size={15} /></div>

@@ -96,7 +96,7 @@ export interface Intervention {
   riskReduction: number;
   etaMinutes: number;
   reversible: boolean;
-  status: "available" | "executing" | "complete";
+  status: "available" | "approved-dry-run";
 }
 
 export interface AuditEvent {
@@ -126,7 +126,7 @@ export interface SimulationSnapshot {
   interventions: Intervention[];
   audit: AuditEvent[];
   eventMinute: number | null;
-  harmfulState: boolean;
+  harmfulState: boolean | null;
   modelProbability: number | null;
   decisionThreshold: number;
   modelVersion: string;

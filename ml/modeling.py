@@ -165,7 +165,10 @@ def event_metrics(frame: pd.DataFrame, prediction: np.ndarray) -> dict[str, Any]
     event_leads: list[float] = []
     event_count = 0
     detected_count = 0
-    before_device_count = 0
+    device_alarm_by_event_count = 0
+    no_device_alarm_by_event_count = 0
+    detected_before_device_count = 0
+    detected_without_device_count = 0
     false_alarm_episodes = 0
     non_event_minutes = 0
     non_event_groups_with_alarm = 0
@@ -177,14 +180,22 @@ def event_metrics(frame: pd.DataFrame, prediction: np.ndarray) -> dict[str, Any]
         if event_minute >= 0:
             event_count += 1
             eligible = group[(group[TARGET] == 1) & (group["minute"] <= event_minute)]
+            device_alerts = group[
+                (group["minute"] <= event_minute) & (group["single_sensor_alarm"] == 1)
+            ]
+            if device_alerts.empty:
+                no_device_alarm_by_event_count += 1
+            else:
+                device_alarm_by_event_count += 1
             alerts = eligible[eligible["prediction"] == 1]
             if not alerts.empty:
                 detected_count += 1
                 first_alert = int(alerts["minute"].iloc[0])
                 event_leads.append(float(event_minute - first_alert))
-                device_alerts = eligible[eligible["single_sensor_alarm"] == 1]
-                if device_alerts.empty or first_alert < int(device_alerts["minute"].iloc[0]):
-                    before_device_count += 1
+                if device_alerts.empty:
+                    detected_without_device_count += 1
+                elif first_alert < int(device_alerts["minute"].iloc[0]):
+                    detected_before_device_count += 1
         else:
             group_predictions = group["prediction"].to_numpy(dtype=bool)
             episodes = _alarm_episode_count(group_predictions)
@@ -201,9 +212,17 @@ def event_metrics(frame: pd.DataFrame, prediction: np.ndarray) -> dict[str, Any]
         "event_false_negative_rate": round(float(1.0 - event_recall), 6),
         "median_warning_lead_minutes": None if not len(leads) else round(float(np.median(leads)), 3),
         "p10_warning_lead_minutes": None if not len(leads) else round(float(np.percentile(leads, 10)), 3),
-        "detected_before_device_alarm_rate": 0.0
-        if not detected_count
-        else round(float(before_device_count / detected_count), 6),
+        "device_alarm_comparison_window": "Any device alarm at or before harmful-state onset.",
+        "device_alarm_by_event_groups": device_alarm_by_event_count,
+        "no_device_alarm_by_event_groups": no_device_alarm_by_event_count,
+        "detected_before_device_alarm_groups": detected_before_device_count,
+        "detected_before_device_alarm_rate_given_device_alarm": 0.0
+        if not device_alarm_by_event_count
+        else round(float(detected_before_device_count / device_alarm_by_event_count), 6),
+        "detected_without_device_alarm_by_event_groups": detected_without_device_count,
+        "detected_without_device_alarm_by_event_rate": 0.0
+        if not no_device_alarm_by_event_count
+        else round(float(detected_without_device_count / no_device_alarm_by_event_count), 6),
         "non_event_groups_with_alarm": non_event_groups_with_alarm,
         "false_alarm_episodes_per_24h": 0.0
         if not non_event_minutes

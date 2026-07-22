@@ -19,11 +19,11 @@ import { SeverityPill } from "./SeverityPill";
 
 export function RiskCasePanel({
   snapshot,
-  onExecute,
+  onRecordDryRun,
   onOpenEvidence,
 }: {
   snapshot: SimulationSnapshot;
-  onExecute: (id: InterventionId) => void;
+  onRecordDryRun: (id: InterventionId) => void;
   onOpenEvidence: () => void;
 }) {
   const [studioOpen, setStudioOpen] = useState(false);
@@ -171,7 +171,7 @@ export function RiskCasePanel({
                 <div>
                   <span className="eyebrow">HUMAN-GATED CONTROL</span>
                   <h2>Response studio</h2>
-                  <p>Compare risk reduction before authorizing an action.</p>
+                  <p>Compare a non-causal heuristic score adjustment before recording a dry run.</p>
                 </div>
                 <button className="icon-button subtle" type="button" onClick={() => setStudioOpen(false)}>×</button>
               </header>
@@ -179,7 +179,7 @@ export function RiskCasePanel({
               <div className="risk-before-after">
                 <div><span>Current</span><strong>{snapshot.score}</strong><small>{snapshot.severity}</small></div>
                 <ArrowRight size={22} />
-                <div className="is-projected"><span>Projected</span><strong>{projectedScore(snapshot, selected)}</strong><small>after control</small></div>
+                <div className="is-projected"><span>Dry-run heuristic</span><strong>{projectedScore(snapshot, selected)}</strong><small>not a causal model result</small></div>
               </div>
 
               <div className="response-options">
@@ -190,12 +190,12 @@ export function RiskCasePanel({
                     className={clsx(
                       "response-option",
                       selected === intervention.id && "is-selected",
-                      intervention.status === "complete" && "is-complete",
+                      intervention.status === "approved-dry-run" && "is-complete",
                     )}
                     onClick={() => setSelected(intervention.id)}
                   >
                     <span className="response-option__radio">
-                      {intervention.status === "complete" ? <Check size={13} /> : null}
+                      {intervention.status === "approved-dry-run" ? <Check size={13} /> : null}
                     </span>
                     <span className="response-option__copy">
                       <strong>{intervention.label}</strong>
@@ -217,13 +217,13 @@ export function RiskCasePanel({
               <button
                 type="button"
                 className="button button--primary response-studio__execute"
-                disabled={selectedIntervention.status === "complete"}
+                disabled={selectedIntervention.status === "approved-dry-run"}
                 onClick={() => {
-                  onExecute(selected);
+                  onRecordDryRun(selected);
                   window.setTimeout(() => setStudioOpen(false), 350);
                 }}
               >
-                {selectedIntervention.status === "complete" ? "Control already completed" : "Approve dry-run control"}
+                {selectedIntervention.status === "approved-dry-run" ? "Dry-run already recorded" : "Record approved dry run"}
                 <ArrowRight size={16} />
               </button>
             </motion.aside>

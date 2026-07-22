@@ -93,7 +93,7 @@ export const PRIMARY_SCENARIO: ScenarioDefinition = {
   location: "Kalinga Works · Coke Battery 4",
   summary:
     "A maintenance isolation degrades extraction while a valid hot-work permit and four contractors move into the adjacent gas gallery.",
-  durationMinutes: 48,
+  durationMinutes: 47,
   fusedTriggerMinute: 18,
   baselineTriggerMinute: 42,
   outcomeWithoutIntervention:
@@ -103,7 +103,7 @@ export const PRIMARY_SCENARIO: ScenarioDefinition = {
 export const EVIDENCE_NODES: EvidenceNode[] = [
   {
     id: "gas-trend",
-    label: "LEL rising\n+0.42%/min",
+    label: "LEL trend\nreplay-derived",
     type: "signal",
     x: 105,
     y: 53,
@@ -119,7 +119,7 @@ export const EVIDENCE_NODES: EvidenceNode[] = [
   },
   {
     id: "vision-zone",
-    label: "Vision event\n4 persons in zone",
+    label: "Location count\npseudonymous badges",
     type: "signal",
     x: 105,
     y: 237,
@@ -143,7 +143,7 @@ export const EVIDENCE_NODES: EvidenceNode[] = [
   },
   {
     id: "workers",
-    label: "4 workers\ninside contour",
+    label: "Workers\nin exposure field",
     type: "context",
     x: 330,
     y: 182,

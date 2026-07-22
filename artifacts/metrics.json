@@ -78,13 +78,19 @@
   "methods": {
     "full_fusion": {
       "event": {
-        "detected_before_device_alarm_rate": 1.0,
+        "detected_before_device_alarm_groups": 13,
+        "detected_before_device_alarm_rate_given_device_alarm": 1.0,
         "detected_event_groups": 65,
+        "detected_without_device_alarm_by_event_groups": 52,
+        "detected_without_device_alarm_by_event_rate": 1.0,
+        "device_alarm_by_event_groups": 13,
+        "device_alarm_comparison_window": "Any device alarm at or before harmful-state onset.",
         "event_false_negative_rate": 0.0,
         "event_groups": 65,
         "event_recall": 1.0,
         "false_alarm_episodes_per_24h": 1.153846,
         "median_warning_lead_minutes": 12.0,
+        "no_device_alarm_by_event_groups": 52,
         "non_event_groups_with_alarm": 1,
         "p10_warning_lead_minutes": 12.0
       },
@@ -109,13 +115,19 @@
     },
     "process_only": {
       "event": {
-        "detected_before_device_alarm_rate": 1.0,
+        "detected_before_device_alarm_groups": 13,
+        "detected_before_device_alarm_rate_given_device_alarm": 1.0,
         "detected_event_groups": 65,
+        "detected_without_device_alarm_by_event_groups": 52,
+        "detected_without_device_alarm_by_event_rate": 1.0,
+        "device_alarm_by_event_groups": 13,
+        "device_alarm_comparison_window": "Any device alarm at or before harmful-state onset.",
         "event_false_negative_rate": 0.0,
         "event_groups": 65,
         "event_recall": 1.0,
         "false_alarm_episodes_per_24h": 8.653846,
         "median_warning_lead_minutes": 12.0,
+        "no_device_alarm_by_event_groups": 52,
         "non_event_groups_with_alarm": 13,
         "p10_warning_lead_minutes": 11.0
       },
@@ -140,13 +152,19 @@
     },
     "single_sensor": {
       "event": {
-        "detected_before_device_alarm_rate": 0.0,
+        "detected_before_device_alarm_groups": 0,
+        "detected_before_device_alarm_rate_given_device_alarm": 0.0,
         "detected_event_groups": 13,
+        "detected_without_device_alarm_by_event_groups": 0,
+        "detected_without_device_alarm_by_event_rate": 0.0,
+        "device_alarm_by_event_groups": 13,
+        "device_alarm_comparison_window": "Any device alarm at or before harmful-state onset.",
         "event_false_negative_rate": 0.8,
         "event_groups": 65,
         "event_recall": 0.2,
         "false_alarm_episodes_per_24h": 7.5,
         "median_warning_lead_minutes": 5.0,
+        "no_device_alarm_by_event_groups": 52,
         "non_event_groups_with_alarm": 13,
         "p10_warning_lead_minutes": 4.0
       },

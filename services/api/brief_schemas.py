@@ -152,7 +152,6 @@ class PermitRecord(BaseModel):
     overlapping_permit_ids: list[str] = Field(default_factory=list, max_length=30)
     isolation_confirmed: bool = False
     gas_test_evidence_ref: str | None = Field(default=None, max_length=128)
-    gas_test_age_minutes: int | None = Field(default=None, ge=0, le=100_000)
     attendant_evidence_ref: str | None = Field(default=None, max_length=128)
     area_authority_approval_ref: str | None = Field(default=None, max_length=128)
 
@@ -170,7 +169,23 @@ class AuditEvidenceItem(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     evidence_id: str = Field(min_length=3, max_length=96, pattern=r"^[A-Za-z0-9._:-]+$")
-    evidence_type: Literal["permit", "gas_test", "asset_state", "sensor", "vision_metadata", "approval"]
+    evidence_type: Literal[
+        "permit",
+        "gas_test",
+        "asset_state",
+        "sensor",
+        "vision_metadata",
+        "approval",
+        "attendant",
+    ]
+    permit_id: str = Field(min_length=3, max_length=96, pattern=r"^[A-Za-z0-9._:-]+$")
+    zone_id: str = Field(min_length=2, max_length=64, pattern=r"^[A-Za-z0-9._:-]+$")
+    role: Literal[
+        "AREA_AUTHORITY",
+        "COMPETENT_PERSON",
+        "CONFINED_SPACE_ATTENDANT",
+        "SAFETY_OFFICER",
+    ] | None = None
     source_system: str = Field(min_length=2, max_length=80)
     observed_at: datetime
     sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
@@ -201,6 +216,14 @@ class PermitAuditRequest(BaseModel):
     context: PermitAuditContext
     evidence: Annotated[list[AuditEvidenceItem], Field(max_length=100)] = Field(default_factory=list)
 
+    @field_validator("evidence")
+    @classmethod
+    def unique_evidence_ids(cls, value: list[AuditEvidenceItem]) -> list[AuditEvidenceItem]:
+        evidence_ids = [item.evidence_id for item in value]
+        if len(evidence_ids) != len(set(evidence_ids)):
+            raise ValueError("evidence_id values must be unique within an audit request")
+        return value
+
 
 class AuditReference(BaseModel):
     source_id: str
@@ -228,6 +251,8 @@ class PermitAuditResponse(BaseModel):
     permit_id: str
     evidence_manifest_sha256: str
     evidence_complete: bool
+    resolved_evidence_refs: dict[str, str | None]
+    derived_gas_test_age_minutes: float | None
     findings: list[AuditFinding]
     proposed_response_actions: list[str]
     compliance_boundary: str
@@ -249,6 +274,12 @@ class ResponsePlanRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     data_classification: Classification = "SIMULATED"
+    idempotency_key: str | None = Field(
+        default=None,
+        min_length=8,
+        max_length=128,
+        pattern=r"^[A-Za-z0-9._:-]+$",
+    )
     risk_case_id: str = Field(min_length=3, max_length=96, pattern=r"^[A-Za-z0-9._:-]+$")
     requested_at: datetime
     severity: Literal["watch", "elevated", "critical"]
@@ -289,6 +320,8 @@ class ApprovalRecord(BaseModel):
 class ResponsePlan(BaseModel):
     data_classification: Classification
     plan_id: str
+    idempotency_key: str | None
+    retention_ttl_seconds: float
     risk_case_id: str
     requested_at: datetime
     severity: str

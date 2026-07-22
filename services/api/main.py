@@ -32,7 +32,11 @@ from .brief_schemas import (
 from .knowledge import IncidentPatternIndex
 from .model_store import ModelStore, severity_for, structured_factors
 from .permit_audit import audit_permit
-from .response_store import ResponsePlanStore
+from .response_store import (
+    IdempotencyConflictError,
+    ResponsePlanCapacityError,
+    ResponsePlanStore,
+)
 from .schemas import RiskScoreRequest, RiskScoreResponse
 from .vision_context import derive_vision_context
 
@@ -77,6 +81,7 @@ def health() -> dict[str, object]:
         "status": "ok" if store.ready else "degraded",
         "ready": store.ready,
         "model_version": None if not store.bundle else store.bundle["model_version"],
+        "model_artifact_sha256": store.model_artifact_sha256,
         "data_classification": DATA_CLASSIFICATION,
         "decision_engine": "deterministic feature pipeline plus calibrated scikit-learn model",
         "llm_in_risk_path": False,
@@ -103,6 +108,7 @@ def model_metadata() -> dict[str, object]:
         "features": store.bundle["full_features"],
         "decision_threshold": round(float(store.bundle["full_threshold"]), 6),
         "dataset_sha256": store.bundle.get("dataset_sha256"),
+        "model_artifact_sha256": store.model_artifact_sha256,
         "llm_in_risk_path": False,
     }
 
@@ -162,7 +168,12 @@ def audit_permit_evidence(request: PermitAuditRequest) -> PermitAuditResponse:
 
 @app.post("/v1/response/plans", response_model=ResponsePlan, status_code=201)
 def create_response_plan(request: ResponsePlanRequest) -> ResponsePlan:
-    return response_plans.create(request)
+    try:
+        return response_plans.create(request)
+    except IdempotencyConflictError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    except ResponsePlanCapacityError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
 
 
 @app.get("/v1/response/plans/{plan_id}", response_model=ResponsePlan)

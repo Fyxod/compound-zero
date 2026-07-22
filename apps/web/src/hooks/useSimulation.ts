@@ -22,7 +22,7 @@ export interface SimulationController {
   reset: () => void;
   setSpeed: (speed: 1 | 2 | 4) => void;
   scrub: (tick: number) => void;
-  execute: (id: InterventionId) => void;
+  recordDryRun: (id: InterventionId) => void;
 }
 
 export function useSimulation(): SimulationController {
@@ -98,7 +98,7 @@ export function useSimulation(): SimulationController {
     setRunning(false);
     setTick(Math.round(value));
   }, []);
-  const execute = useCallback((id: InterventionId) => {
+  const recordDryRun = useCallback((id: InterventionId) => {
     setCompletedControls((current) => new Set([...current, id]));
   }, []);
 
@@ -122,6 +122,6 @@ export function useSimulation(): SimulationController {
     reset,
     setSpeed,
     scrub,
-    execute,
+    recordDryRun,
   };
 }

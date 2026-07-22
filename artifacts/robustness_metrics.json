@@ -1,0 +1,2413 @@
+{
+  "base_test_group_bootstrap": {
+    "confidence_level": 0.95,
+    "event_false_negative_rate": {
+      "estimate": 0.0,
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "event_recall": {
+      "estimate": 1.0,
+      "lower": 1.0,
+      "upper": 1.0
+    },
+    "interpretation_boundary": "Sampling uncertainty across simulated event replays only; this does not include model-refit uncertainty or real-world/site uncertainty. Degenerate intervals are possible.",
+    "iterations": 2000,
+    "median_warning_lead_minutes": {
+      "estimate": 12.0,
+      "lower": 12.0,
+      "upper": 12.0,
+      "valid_resamples": 2000
+    },
+    "method": "percentile bootstrap; event replay is the resampling unit",
+    "random_state": 20303941
+  },
+  "benchmark": "Compound Zero robustness evidence",
+  "claim_boundary": "Controlled evaluation on authored simulated data only; not field validation, a safety certification, or evidence of site-transfer performance.",
+  "configuration": {
+    "base_test_policy": "whole-seed holdout from grouped_seed_split",
+    "bootstrap_iterations": 2000,
+    "ece_bins": 10,
+    "random_state": 20260722,
+    "threadpool_limit": 1
+  },
+  "data_classification": "SIMULATED",
+  "decision_engine": "scikit-learn calibrated gradient boosting; no LLM in risk decisions",
+  "inputs": {
+    "dataset_sha256": "96166a2762577a2fa8440e2a6f0f819c342aef9e9cf790e3ed2bef3eb6f4e314",
+    "model_artifact_sha256": "ad8499f7afc5d6344d1f9a1b6e4fee200f44dc8cf8e77e652d5b204b1f047e84",
+    "model_version": "compound-zero-scenariobench-v1",
+    "rows": 27648,
+    "scenario_groups": 576,
+    "scenario_types": [
+      "normal_shift",
+      "isolated_sensor_spike",
+      "process_drift",
+      "subthreshold_process_drift",
+      "permit_only",
+      "compound_hot_work",
+      "compound_confined_space",
+      "compound_handover",
+      "barrier_loss_workers"
+    ]
+  },
+  "leave_one_scenario_type_out": {
+    "each_row_evaluated_by_model_unseen_to_its_scenario_type": true,
+    "event_fold_recall_summary": {
+      "by_scenario_type": {
+        "barrier_loss_workers": 1.0,
+        "compound_confined_space": 1.0,
+        "compound_handover": 1.0,
+        "compound_hot_work": 1.0,
+        "process_drift": 0.0
+      },
+      "event_bearing_fold_count": 5,
+      "macro_mean": 0.8,
+      "minimum": 0.0
+    },
+    "fold_count": 9,
+    "folds": {
+      "barrier_loss_workers": {
+        "calibration_rows": 4992,
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 64,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 0,
+              "device_eventually_alarm_groups": 0,
+              "device_never_alarm_groups": 64,
+              "model_detected_before_eventual_device_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_rate": null,
+              "model_detected_when_device_never_alarms_groups": 64,
+              "model_detected_when_device_never_alarms_rate": 1.0
+            },
+            "event_false_negative_rate": 0.0,
+            "event_groups": 64,
+            "event_recall": 1.0,
+            "false_alarm_episodes_per_24h": null,
+            "median_warning_lead_minutes": 12.0,
+            "non_event_groups_with_alarm": 0,
+            "p10_warning_lead_minutes": 12.0
+          },
+          "row": {
+            "average_precision": 0.904471,
+            "brier_score": 0.291995,
+            "confusion_matrix": {
+              "fn": 0,
+              "fp": 1001,
+              "tn": 736,
+              "tp": 1335
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.006122,
+                  "bin_index": 0,
+                  "count": 733,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.006122,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                },
+                {
+                  "absolute_gap": 0.150839,
+                  "bin_index": 1,
+                  "count": 22,
+                  "lower_inclusive": 0.1,
+                  "mean_probability": 0.150839,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.2
+                },
+                {
+                  "absolute_gap": 0.249561,
+                  "bin_index": 2,
+                  "count": 18,
+                  "lower_inclusive": 0.2,
+                  "mean_probability": 0.249561,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.3
+                },
+                {
+                  "absolute_gap": 0.335626,
+                  "bin_index": 3,
+                  "count": 10,
+                  "lower_inclusive": 0.3,
+                  "mean_probability": 0.335626,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.4
+                },
+                {
+                  "absolute_gap": 0.451447,
+                  "bin_index": 4,
+                  "count": 17,
+                  "lower_inclusive": 0.4,
+                  "mean_probability": 0.451447,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.5
+                },
+                {
+                  "absolute_gap": 0.548509,
+                  "bin_index": 5,
+                  "count": 17,
+                  "lower_inclusive": 0.5,
+                  "mean_probability": 0.548509,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.6
+                },
+                {
+                  "absolute_gap": 0.646546,
+                  "bin_index": 6,
+                  "count": 22,
+                  "lower_inclusive": 0.6,
+                  "mean_probability": 0.646546,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.7
+                },
+                {
+                  "absolute_gap": 0.746471,
+                  "bin_index": 7,
+                  "count": 20,
+                  "lower_inclusive": 0.7,
+                  "mean_probability": 0.746471,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.8
+                },
+                {
+                  "absolute_gap": 0.852432,
+                  "bin_index": 8,
+                  "count": 22,
+                  "lower_inclusive": 0.8,
+                  "mean_probability": 0.852432,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.9
+                },
+                {
+                  "absolute_gap": 0.38853,
+                  "bin_index": 9,
+                  "count": 2191,
+                  "lower_inclusive": 0.9,
+                  "mean_probability": 0.997841,
+                  "observed_positive_rate": 0.609311,
+                  "upper_inclusive_only_for_last_bin": 1.0
+                }
+              ],
+              "value": 0.30333
+            },
+            "f2": 0.869594,
+            "false_negative_rate": 0.0,
+            "false_positive_rate": 0.576281,
+            "precision": 0.57149,
+            "recall": 1.0,
+            "roc_auc": 0.954576,
+            "threshold": 0.12
+          },
+          "rows": 3072,
+          "scenario_groups": 64
+        },
+        "held_out_absent_from_training": true,
+        "held_out_scenario_type": "barrier_loss_workers",
+        "threshold_selected_on_excluded-type-free_calibration": 0.12,
+        "training_rows": 19584,
+        "training_scenario_types": [
+          "compound_confined_space",
+          "compound_handover",
+          "compound_hot_work",
+          "isolated_sensor_spike",
+          "normal_shift",
+          "permit_only",
+          "process_drift",
+          "subthreshold_process_drift"
+        ]
+      },
+      "compound_confined_space": {
+        "calibration_rows": 4992,
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 64,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 0,
+              "device_eventually_alarm_groups": 0,
+              "device_never_alarm_groups": 64,
+              "model_detected_before_eventual_device_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_rate": null,
+              "model_detected_when_device_never_alarms_groups": 64,
+              "model_detected_when_device_never_alarms_rate": 1.0
+            },
+            "event_false_negative_rate": 0.0,
+            "event_groups": 64,
+            "event_recall": 1.0,
+            "false_alarm_episodes_per_24h": null,
+            "median_warning_lead_minutes": 11.0,
+            "non_event_groups_with_alarm": 0,
+            "p10_warning_lead_minutes": 9.3
+          },
+          "row": {
+            "average_precision": 0.996918,
+            "brier_score": 0.124141,
+            "confusion_matrix": {
+              "fn": 295,
+              "fp": 15,
+              "tn": 744,
+              "tp": 2018
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.247628,
+                  "bin_index": 0,
+                  "count": 987,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.015797,
+                  "observed_positive_rate": 0.263425,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                },
+                {
+                  "absolute_gap": 0.622936,
+                  "bin_index": 1,
+                  "count": 79,
+                  "lower_inclusive": 0.1,
+                  "mean_probability": 0.149216,
+                  "observed_positive_rate": 0.772152,
+                  "upper_inclusive_only_for_last_bin": 0.2
+                },
+                {
+                  "absolute_gap": 0.657622,
+                  "bin_index": 2,
+                  "count": 98,
+                  "lower_inclusive": 0.2,
+                  "mean_probability": 0.250541,
+                  "observed_positive_rate": 0.908163,
+                  "upper_inclusive_only_for_last_bin": 0.3
+                },
+                {
+                  "absolute_gap": 0.628699,
+                  "bin_index": 3,
+                  "count": 79,
+                  "lower_inclusive": 0.3,
+                  "mean_probability": 0.345984,
+                  "observed_positive_rate": 0.974684,
+                  "upper_inclusive_only_for_last_bin": 0.4
+                },
+                {
+                  "absolute_gap": 0.485912,
+                  "bin_index": 4,
+                  "count": 40,
+                  "lower_inclusive": 0.4,
+                  "mean_probability": 0.439088,
+                  "observed_positive_rate": 0.925,
+                  "upper_inclusive_only_for_last_bin": 0.5
+                },
+                {
+                  "absolute_gap": 0.438547,
+                  "bin_index": 5,
+                  "count": 21,
+                  "lower_inclusive": 0.5,
+                  "mean_probability": 0.561453,
+                  "observed_positive_rate": 1.0,
+                  "upper_inclusive_only_for_last_bin": 0.6
+                },
+                {
+                  "absolute_gap": 0.345698,
+                  "bin_index": 6,
+                  "count": 16,
+                  "lower_inclusive": 0.6,
+                  "mean_probability": 0.654302,
+                  "observed_positive_rate": 1.0,
+                  "upper_inclusive_only_for_last_bin": 0.7
+                },
+                {
+                  "absolute_gap": 0.23578,
+                  "bin_index": 7,
+                  "count": 5,
+                  "lower_inclusive": 0.7,
+                  "mean_probability": 0.76422,
+                  "observed_positive_rate": 1.0,
+                  "upper_inclusive_only_for_last_bin": 0.8
+                },
+                {
+                  "absolute_gap": 0.166545,
+                  "bin_index": 8,
+                  "count": 2,
+                  "lower_inclusive": 0.8,
+                  "mean_probability": 0.833455,
+                  "observed_positive_rate": 1.0,
+                  "upper_inclusive_only_for_last_bin": 0.9
+                },
+                {
+                  "absolute_gap": 0.006259,
+                  "bin_index": 9,
+                  "count": 1745,
+                  "lower_inclusive": 0.9,
+                  "mean_probability": 0.993741,
+                  "observed_positive_rate": 1.0,
+                  "upper_inclusive_only_for_last_bin": 1.0
+                }
+              ],
+              "value": 0.147899
+            },
+            "f2": 0.894107,
+            "false_negative_rate": 0.12754,
+            "false_positive_rate": 0.019763,
+            "precision": 0.992622,
+            "recall": 0.87246,
+            "roc_auc": 0.991017,
+            "threshold": 0.165
+          },
+          "rows": 3072,
+          "scenario_groups": 64
+        },
+        "held_out_absent_from_training": true,
+        "held_out_scenario_type": "compound_confined_space",
+        "threshold_selected_on_excluded-type-free_calibration": 0.165,
+        "training_rows": 19584,
+        "training_scenario_types": [
+          "barrier_loss_workers",
+          "compound_handover",
+          "compound_hot_work",
+          "isolated_sensor_spike",
+          "normal_shift",
+          "permit_only",
+          "process_drift",
+          "subthreshold_process_drift"
+        ]
+      },
+      "compound_handover": {
+        "calibration_rows": 4992,
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 64,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 0,
+              "device_eventually_alarm_groups": 0,
+              "device_never_alarm_groups": 64,
+              "model_detected_before_eventual_device_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_rate": null,
+              "model_detected_when_device_never_alarms_groups": 64,
+              "model_detected_when_device_never_alarms_rate": 1.0
+            },
+            "event_false_negative_rate": 0.0,
+            "event_groups": 64,
+            "event_recall": 1.0,
+            "false_alarm_episodes_per_24h": null,
+            "median_warning_lead_minutes": 12.0,
+            "non_event_groups_with_alarm": 0,
+            "p10_warning_lead_minutes": 11.0
+          },
+          "row": {
+            "average_precision": 0.999714,
+            "brier_score": 0.02901,
+            "confusion_matrix": {
+              "fn": 19,
+              "fp": 21,
+              "tn": 736,
+              "tp": 2296
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.01075,
+                  "bin_index": 0,
+                  "count": 727,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.007131,
+                  "observed_positive_rate": 0.017882,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                },
+                {
+                  "absolute_gap": 0.227973,
+                  "bin_index": 1,
+                  "count": 48,
+                  "lower_inclusive": 0.1,
+                  "mean_probability": 0.147027,
+                  "observed_positive_rate": 0.375,
+                  "upper_inclusive_only_for_last_bin": 0.2
+                },
+                {
+                  "absolute_gap": 0.560942,
+                  "bin_index": 2,
+                  "count": 47,
+                  "lower_inclusive": 0.2,
+                  "mean_probability": 0.247568,
+                  "observed_positive_rate": 0.808511,
+                  "upper_inclusive_only_for_last_bin": 0.3
+                },
+                {
+                  "absolute_gap": 0.58776,
+                  "bin_index": 3,
+                  "count": 28,
+                  "lower_inclusive": 0.3,
+                  "mean_probability": 0.340811,
+                  "observed_positive_rate": 0.928571,
+                  "upper_inclusive_only_for_last_bin": 0.4
+                },
+                {
+                  "absolute_gap": 0.502834,
+                  "bin_index": 4,
+                  "count": 43,
+                  "lower_inclusive": 0.4,
+                  "mean_probability": 0.450655,
+                  "observed_positive_rate": 0.953488,
+                  "upper_inclusive_only_for_last_bin": 0.5
+                },
+                {
+                  "absolute_gap": 0.447908,
+                  "bin_index": 5,
+                  "count": 48,
+                  "lower_inclusive": 0.5,
+                  "mean_probability": 0.552092,
+                  "observed_positive_rate": 1.0,
+                  "upper_inclusive_only_for_last_bin": 0.6
+                },
+                {
+                  "absolute_gap": 0.341743,
+                  "bin_index": 6,
+                  "count": 35,
+                  "lower_inclusive": 0.6,
+                  "mean_probability": 0.658257,
+                  "observed_positive_rate": 1.0,
+                  "upper_inclusive_only_for_last_bin": 0.7
+                },
+                {
+                  "absolute_gap": 0.24706,
+                  "bin_index": 7,
+                  "count": 53,
+                  "lower_inclusive": 0.7,
+                  "mean_probability": 0.75294,
+                  "observed_positive_rate": 1.0,
+                  "upper_inclusive_only_for_last_bin": 0.8
+                },
+                {
+                  "absolute_gap": 0.170129,
+                  "bin_index": 8,
+                  "count": 32,
+                  "lower_inclusive": 0.8,
+                  "mean_probability": 0.829871,
+                  "observed_positive_rate": 1.0,
+                  "upper_inclusive_only_for_last_bin": 0.9
+                },
+                {
+                  "absolute_gap": 0.001761,
+                  "bin_index": 9,
+                  "count": 2011,
+                  "lower_inclusive": 0.9,
+                  "mean_probability": 0.998239,
+                  "observed_positive_rate": 1.0,
+                  "upper_inclusive_only_for_last_bin": 1.0
+                }
+              ],
+              "value": 0.045164
+            },
+            "f2": 0.991621,
+            "false_negative_rate": 0.008207,
+            "false_positive_rate": 0.027741,
+            "precision": 0.990937,
+            "recall": 0.991793,
+            "roc_auc": 0.999118,
+            "threshold": 0.15
+          },
+          "rows": 3072,
+          "scenario_groups": 64
+        },
+        "held_out_absent_from_training": true,
+        "held_out_scenario_type": "compound_handover",
+        "threshold_selected_on_excluded-type-free_calibration": 0.15,
+        "training_rows": 19584,
+        "training_scenario_types": [
+          "barrier_loss_workers",
+          "compound_confined_space",
+          "compound_hot_work",
+          "isolated_sensor_spike",
+          "normal_shift",
+          "permit_only",
+          "process_drift",
+          "subthreshold_process_drift"
+        ]
+      },
+      "compound_hot_work": {
+        "calibration_rows": 4992,
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 64,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 0,
+              "device_eventually_alarm_groups": 0,
+              "device_never_alarm_groups": 64,
+              "model_detected_before_eventual_device_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_rate": null,
+              "model_detected_when_device_never_alarms_groups": 64,
+              "model_detected_when_device_never_alarms_rate": 1.0
+            },
+            "event_false_negative_rate": 0.0,
+            "event_groups": 64,
+            "event_recall": 1.0,
+            "false_alarm_episodes_per_24h": null,
+            "median_warning_lead_minutes": 12.0,
+            "non_event_groups_with_alarm": 0,
+            "p10_warning_lead_minutes": 12.0
+          },
+          "row": {
+            "average_precision": 0.998666,
+            "brier_score": 0.031084,
+            "confusion_matrix": {
+              "fn": 7,
+              "fp": 86,
+              "tn": 677,
+              "tp": 2302
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.001699,
+                  "bin_index": 0,
+                  "count": 674,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.00572,
+                  "observed_positive_rate": 0.007418,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                },
+                {
+                  "absolute_gap": 0.170104,
+                  "bin_index": 1,
+                  "count": 44,
+                  "lower_inclusive": 0.1,
+                  "mean_probability": 0.148078,
+                  "observed_positive_rate": 0.318182,
+                  "upper_inclusive_only_for_last_bin": 0.2
+                },
+                {
+                  "absolute_gap": 0.381493,
+                  "bin_index": 2,
+                  "count": 52,
+                  "lower_inclusive": 0.2,
+                  "mean_probability": 0.253123,
+                  "observed_positive_rate": 0.634615,
+                  "upper_inclusive_only_for_last_bin": 0.3
+                },
+                {
+                  "absolute_gap": 0.340201,
+                  "bin_index": 3,
+                  "count": 55,
+                  "lower_inclusive": 0.3,
+                  "mean_probability": 0.350708,
+                  "observed_positive_rate": 0.690909,
+                  "upper_inclusive_only_for_last_bin": 0.4
+                },
+                {
+                  "absolute_gap": 0.357301,
+                  "bin_index": 4,
+                  "count": 56,
+                  "lower_inclusive": 0.4,
+                  "mean_probability": 0.44627,
+                  "observed_positive_rate": 0.803571,
+                  "upper_inclusive_only_for_last_bin": 0.5
+                },
+                {
+                  "absolute_gap": 0.324256,
+                  "bin_index": 5,
+                  "count": 48,
+                  "lower_inclusive": 0.5,
+                  "mean_probability": 0.550744,
+                  "observed_positive_rate": 0.875,
+                  "upper_inclusive_only_for_last_bin": 0.6
+                },
+                {
+                  "absolute_gap": 0.252706,
+                  "bin_index": 6,
+                  "count": 60,
+                  "lower_inclusive": 0.6,
+                  "mean_probability": 0.647294,
+                  "observed_positive_rate": 0.9,
+                  "upper_inclusive_only_for_last_bin": 0.7
+                },
+                {
+                  "absolute_gap": 0.180964,
+                  "bin_index": 7,
+                  "count": 45,
+                  "lower_inclusive": 0.7,
+                  "mean_probability": 0.752369,
+                  "observed_positive_rate": 0.933333,
+                  "upper_inclusive_only_for_last_bin": 0.8
+                },
+                {
+                  "absolute_gap": 0.100559,
+                  "bin_index": 8,
+                  "count": 36,
+                  "lower_inclusive": 0.8,
+                  "mean_probability": 0.843885,
+                  "observed_positive_rate": 0.944444,
+                  "upper_inclusive_only_for_last_bin": 0.9
+                },
+                {
+                  "absolute_gap": 0.005607,
+                  "bin_index": 9,
+                  "count": 2002,
+                  "lower_inclusive": 0.9,
+                  "mean_probability": 0.994393,
+                  "observed_positive_rate": 1.0,
+                  "upper_inclusive_only_for_last_bin": 1.0
+                }
+              ],
+              "value": 0.039356
+            },
+            "f2": 0.990193,
+            "false_negative_rate": 0.003032,
+            "false_positive_rate": 0.112713,
+            "precision": 0.963987,
+            "recall": 0.996968,
+            "roc_auc": 0.996004,
+            "threshold": 0.12
+          },
+          "rows": 3072,
+          "scenario_groups": 64
+        },
+        "held_out_absent_from_training": true,
+        "held_out_scenario_type": "compound_hot_work",
+        "threshold_selected_on_excluded-type-free_calibration": 0.12,
+        "training_rows": 19584,
+        "training_scenario_types": [
+          "barrier_loss_workers",
+          "compound_confined_space",
+          "compound_handover",
+          "isolated_sensor_spike",
+          "normal_shift",
+          "permit_only",
+          "process_drift",
+          "subthreshold_process_drift"
+        ]
+      },
+      "isolated_sensor_spike": {
+        "calibration_rows": 4992,
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 0,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 0,
+              "device_eventually_alarm_groups": 0,
+              "device_never_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_rate": null,
+              "model_detected_when_device_never_alarms_groups": 0,
+              "model_detected_when_device_never_alarms_rate": null
+            },
+            "event_false_negative_rate": null,
+            "event_groups": 0,
+            "event_recall": null,
+            "false_alarm_episodes_per_24h": 4.6875,
+            "median_warning_lead_minutes": null,
+            "non_event_groups_with_alarm": 10,
+            "p10_warning_lead_minutes": null
+          },
+          "row": {
+            "average_precision": null,
+            "brier_score": 0.000382,
+            "confusion_matrix": {
+              "fn": 0,
+              "fp": 11,
+              "tn": 3061,
+              "tp": 0
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.002132,
+                  "bin_index": 0,
+                  "count": 3031,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.002132,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                },
+                {
+                  "absolute_gap": 0.136429,
+                  "bin_index": 1,
+                  "count": 38,
+                  "lower_inclusive": 0.1,
+                  "mean_probability": 0.136429,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.2
+                },
+                {
+                  "absolute_gap": 0.210307,
+                  "bin_index": 2,
+                  "count": 3,
+                  "lower_inclusive": 0.2,
+                  "mean_probability": 0.210307,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.3
+                }
+              ],
+              "value": 0.003996
+            },
+            "f2": null,
+            "false_negative_rate": null,
+            "false_positive_rate": 0.003581,
+            "precision": 0.0,
+            "recall": null,
+            "roc_auc": null,
+            "threshold": 0.155
+          },
+          "rows": 3072,
+          "scenario_groups": 64
+        },
+        "held_out_absent_from_training": true,
+        "held_out_scenario_type": "isolated_sensor_spike",
+        "threshold_selected_on_excluded-type-free_calibration": 0.155,
+        "training_rows": 19584,
+        "training_scenario_types": [
+          "barrier_loss_workers",
+          "compound_confined_space",
+          "compound_handover",
+          "compound_hot_work",
+          "normal_shift",
+          "permit_only",
+          "process_drift",
+          "subthreshold_process_drift"
+        ]
+      },
+      "normal_shift": {
+        "calibration_rows": 4992,
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 0,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 0,
+              "device_eventually_alarm_groups": 0,
+              "device_never_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_rate": null,
+              "model_detected_when_device_never_alarms_groups": 0,
+              "model_detected_when_device_never_alarms_rate": null
+            },
+            "event_false_negative_rate": null,
+            "event_groups": 0,
+            "event_recall": null,
+            "false_alarm_episodes_per_24h": 0.0,
+            "median_warning_lead_minutes": null,
+            "non_event_groups_with_alarm": 0,
+            "p10_warning_lead_minutes": null
+          },
+          "row": {
+            "average_precision": null,
+            "brier_score": 0.0,
+            "confusion_matrix": {
+              "fn": 0,
+              "fp": 0,
+              "tn": 3072,
+              "tp": 0
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.00035,
+                  "bin_index": 0,
+                  "count": 3072,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.00035,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                }
+              ],
+              "value": 0.00035
+            },
+            "f2": null,
+            "false_negative_rate": null,
+            "false_positive_rate": 0.0,
+            "precision": 0.0,
+            "recall": null,
+            "roc_auc": null,
+            "threshold": 0.195
+          },
+          "rows": 3072,
+          "scenario_groups": 64
+        },
+        "held_out_absent_from_training": true,
+        "held_out_scenario_type": "normal_shift",
+        "threshold_selected_on_excluded-type-free_calibration": 0.195,
+        "training_rows": 19584,
+        "training_scenario_types": [
+          "barrier_loss_workers",
+          "compound_confined_space",
+          "compound_handover",
+          "compound_hot_work",
+          "isolated_sensor_spike",
+          "permit_only",
+          "process_drift",
+          "subthreshold_process_drift"
+        ]
+      },
+      "permit_only": {
+        "calibration_rows": 4992,
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 0,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 0,
+              "device_eventually_alarm_groups": 0,
+              "device_never_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_rate": null,
+              "model_detected_when_device_never_alarms_groups": 0,
+              "model_detected_when_device_never_alarms_rate": null
+            },
+            "event_false_negative_rate": null,
+            "event_groups": 0,
+            "event_recall": null,
+            "false_alarm_episodes_per_24h": 0.0,
+            "median_warning_lead_minutes": null,
+            "non_event_groups_with_alarm": 0,
+            "p10_warning_lead_minutes": null
+          },
+          "row": {
+            "average_precision": null,
+            "brier_score": 0.0,
+            "confusion_matrix": {
+              "fn": 0,
+              "fp": 0,
+              "tn": 3072,
+              "tp": 0
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.000435,
+                  "bin_index": 0,
+                  "count": 3072,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.000435,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                }
+              ],
+              "value": 0.000435
+            },
+            "f2": null,
+            "false_negative_rate": null,
+            "false_positive_rate": 0.0,
+            "precision": 0.0,
+            "recall": null,
+            "roc_auc": null,
+            "threshold": 0.09
+          },
+          "rows": 3072,
+          "scenario_groups": 64
+        },
+        "held_out_absent_from_training": true,
+        "held_out_scenario_type": "permit_only",
+        "threshold_selected_on_excluded-type-free_calibration": 0.09,
+        "training_rows": 19584,
+        "training_scenario_types": [
+          "barrier_loss_workers",
+          "compound_confined_space",
+          "compound_handover",
+          "compound_hot_work",
+          "isolated_sensor_spike",
+          "normal_shift",
+          "process_drift",
+          "subthreshold_process_drift"
+        ]
+      },
+      "process_drift": {
+        "calibration_rows": 4992,
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 0,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 64,
+              "device_eventually_alarm_groups": 64,
+              "device_never_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_rate": 0.0,
+              "model_detected_when_device_never_alarms_groups": 0,
+              "model_detected_when_device_never_alarms_rate": null
+            },
+            "event_false_negative_rate": 1.0,
+            "event_groups": 64,
+            "event_recall": 0.0,
+            "false_alarm_episodes_per_24h": null,
+            "median_warning_lead_minutes": null,
+            "non_event_groups_with_alarm": 0,
+            "p10_warning_lead_minutes": null
+          },
+          "row": {
+            "average_precision": 0.708766,
+            "brier_score": 0.627695,
+            "confusion_matrix": {
+              "fn": 1931,
+              "fp": 0,
+              "tn": 1141,
+              "tp": 0
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.627907,
+                  "bin_index": 0,
+                  "count": 3072,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.000674,
+                  "observed_positive_rate": 0.628581,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                }
+              ],
+              "value": 0.627907
+            },
+            "f2": 0.0,
+            "false_negative_rate": 1.0,
+            "false_positive_rate": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "roc_auc": 0.668391,
+            "threshold": 0.1
+          },
+          "rows": 3072,
+          "scenario_groups": 64
+        },
+        "held_out_absent_from_training": true,
+        "held_out_scenario_type": "process_drift",
+        "threshold_selected_on_excluded-type-free_calibration": 0.1,
+        "training_rows": 19584,
+        "training_scenario_types": [
+          "barrier_loss_workers",
+          "compound_confined_space",
+          "compound_handover",
+          "compound_hot_work",
+          "isolated_sensor_spike",
+          "normal_shift",
+          "permit_only",
+          "subthreshold_process_drift"
+        ]
+      },
+      "subthreshold_process_drift": {
+        "calibration_rows": 4992,
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 0,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 0,
+              "device_eventually_alarm_groups": 0,
+              "device_never_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_rate": null,
+              "model_detected_when_device_never_alarms_groups": 0,
+              "model_detected_when_device_never_alarms_rate": null
+            },
+            "event_false_negative_rate": null,
+            "event_groups": 0,
+            "event_recall": null,
+            "false_alarm_episodes_per_24h": 30.0,
+            "median_warning_lead_minutes": null,
+            "non_event_groups_with_alarm": 64,
+            "p10_warning_lead_minutes": null
+          },
+          "row": {
+            "average_precision": null,
+            "brier_score": 0.496563,
+            "confusion_matrix": {
+              "fn": 0,
+              "fp": 1594,
+              "tn": 1478,
+              "tp": 0
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.006379,
+                  "bin_index": 0,
+                  "count": 1464,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.006379,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                },
+                {
+                  "absolute_gap": 0.152357,
+                  "bin_index": 1,
+                  "count": 19,
+                  "lower_inclusive": 0.1,
+                  "mean_probability": 0.152357,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.2
+                },
+                {
+                  "absolute_gap": 0.236619,
+                  "bin_index": 2,
+                  "count": 20,
+                  "lower_inclusive": 0.2,
+                  "mean_probability": 0.236619,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.3
+                },
+                {
+                  "absolute_gap": 0.341989,
+                  "bin_index": 3,
+                  "count": 13,
+                  "lower_inclusive": 0.3,
+                  "mean_probability": 0.341989,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.4
+                },
+                {
+                  "absolute_gap": 0.453866,
+                  "bin_index": 4,
+                  "count": 13,
+                  "lower_inclusive": 0.4,
+                  "mean_probability": 0.453866,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.5
+                },
+                {
+                  "absolute_gap": 0.56052,
+                  "bin_index": 5,
+                  "count": 5,
+                  "lower_inclusive": 0.5,
+                  "mean_probability": 0.56052,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.6
+                },
+                {
+                  "absolute_gap": 0.64638,
+                  "bin_index": 6,
+                  "count": 9,
+                  "lower_inclusive": 0.6,
+                  "mean_probability": 0.64638,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.7
+                },
+                {
+                  "absolute_gap": 0.745042,
+                  "bin_index": 7,
+                  "count": 12,
+                  "lower_inclusive": 0.7,
+                  "mean_probability": 0.745042,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.8
+                },
+                {
+                  "absolute_gap": 0.856648,
+                  "bin_index": 8,
+                  "count": 10,
+                  "lower_inclusive": 0.8,
+                  "mean_probability": 0.856648,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.9
+                },
+                {
+                  "absolute_gap": 0.997659,
+                  "bin_index": 9,
+                  "count": 1507,
+                  "lower_inclusive": 0.9,
+                  "mean_probability": 0.997659,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 1.0
+                }
+              ],
+              "value": 0.506807
+            },
+            "f2": null,
+            "false_negative_rate": null,
+            "false_positive_rate": 0.51888,
+            "precision": 0.0,
+            "recall": null,
+            "roc_auc": null,
+            "threshold": 0.18
+          },
+          "rows": 3072,
+          "scenario_groups": 64
+        },
+        "held_out_absent_from_training": true,
+        "held_out_scenario_type": "subthreshold_process_drift",
+        "threshold_selected_on_excluded-type-free_calibration": 0.18,
+        "training_rows": 19584,
+        "training_scenario_types": [
+          "barrier_loss_workers",
+          "compound_confined_space",
+          "compound_handover",
+          "compound_hot_work",
+          "isolated_sensor_spike",
+          "normal_shift",
+          "permit_only",
+          "process_drift"
+        ]
+      }
+    },
+    "held_out_scenario_types": [
+      "normal_shift",
+      "isolated_sensor_spike",
+      "process_drift",
+      "subthreshold_process_drift",
+      "permit_only",
+      "compound_hot_work",
+      "compound_confined_space",
+      "compound_handover",
+      "barrier_loss_workers"
+    ],
+    "pooled_loso": {
+      "event": {
+        "detected_event_groups": 256,
+        "device_strata": {
+          "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+          "device_alarm_by_event_groups": 64,
+          "device_eventually_alarm_groups": 64,
+          "device_never_alarm_groups": 256,
+          "model_detected_before_eventual_device_alarm_groups": 0,
+          "model_detected_before_eventual_device_alarm_rate": 0.0,
+          "model_detected_when_device_never_alarms_groups": 256,
+          "model_detected_when_device_never_alarms_rate": 1.0
+        },
+        "event_false_negative_rate": 0.2,
+        "event_groups": 320,
+        "event_recall": 0.8,
+        "false_alarm_episodes_per_24h": 8.671875,
+        "median_warning_lead_minutes": 12.0,
+        "non_event_groups_with_alarm": 74,
+        "p10_warning_lead_minutes": 11.0
+      },
+      "row": {
+        "average_precision": 0.635304,
+        "brier_score": 0.177874,
+        "confusion_matrix": {
+          "fn": 2252,
+          "fp": 2728,
+          "tn": 14717,
+          "tp": 7951
+        },
+        "expected_calibration_error": {
+          "binning": "equal-width over [0, 1]; right edge included only in final bin",
+          "bins": 10,
+          "non_empty_bin_summaries": [
+            {
+              "absolute_gap": 0.128303,
+              "bin_index": 0,
+              "count": 16832,
+              "lower_inclusive": 0.0,
+              "mean_probability": 0.002935,
+              "observed_positive_rate": 0.131238,
+              "upper_inclusive_only_for_last_bin": 0.1
+            },
+            {
+              "absolute_gap": 0.224967,
+              "bin_index": 1,
+              "count": 250,
+              "lower_inclusive": 0.1,
+              "mean_probability": 0.147033,
+              "observed_positive_rate": 0.372,
+              "upper_inclusive_only_for_last_bin": 0.2
+            },
+            {
+              "absolute_gap": 0.423502,
+              "bin_index": 2,
+              "count": 238,
+              "lower_inclusive": 0.2,
+              "mean_probability": 0.248767,
+              "observed_positive_rate": 0.672269,
+              "upper_inclusive_only_for_last_bin": 0.3
+            },
+            {
+              "absolute_gap": 0.416397,
+              "bin_index": 3,
+              "count": 185,
+              "lower_inclusive": 0.3,
+              "mean_probability": 0.345765,
+              "observed_positive_rate": 0.762162,
+              "upper_inclusive_only_for_last_bin": 0.4
+            },
+            {
+              "absolute_gap": 0.28102,
+              "bin_index": 4,
+              "count": 169,
+              "lower_inclusive": 0.4,
+              "mean_probability": 0.446791,
+              "observed_positive_rate": 0.727811,
+              "upper_inclusive_only_for_last_bin": 0.5
+            },
+            {
+              "absolute_gap": 0.245655,
+              "bin_index": 5,
+              "count": 139,
+              "lower_inclusive": 0.5,
+              "mean_probability": 0.552906,
+              "observed_positive_rate": 0.798561,
+              "upper_inclusive_only_for_last_bin": 0.6
+            },
+            {
+              "absolute_gap": 0.088825,
+              "bin_index": 6,
+              "count": 142,
+              "lower_inclusive": 0.6,
+              "mean_probability": 0.650612,
+              "observed_positive_rate": 0.739437,
+              "upper_inclusive_only_for_last_bin": 0.7
+            },
+            {
+              "absolute_gap": 0.010766,
+              "bin_index": 7,
+              "count": 135,
+              "lower_inclusive": 0.7,
+              "mean_probability": 0.751507,
+              "observed_positive_rate": 0.740741,
+              "upper_inclusive_only_for_last_bin": 0.8
+            },
+            {
+              "absolute_gap": 0.175712,
+              "bin_index": 8,
+              "count": 102,
+              "lower_inclusive": 0.8,
+              "mean_probability": 0.842379,
+              "observed_positive_rate": 0.666667,
+              "upper_inclusive_only_for_last_bin": 0.9
+            },
+            {
+              "absolute_gap": 0.246304,
+              "bin_index": 9,
+              "count": 9456,
+              "lower_inclusive": 0.9,
+              "mean_probability": 0.99641,
+              "observed_positive_rate": 0.750106,
+              "upper_inclusive_only_for_last_bin": 1.0
+            }
+          ],
+          "value": 0.174926
+        },
+        "f2": 0.772077,
+        "false_negative_rate": 0.220719,
+        "false_positive_rate": 0.156377,
+        "precision": 0.744545,
+        "recall": 0.779281,
+        "roc_auc": 0.854202,
+        "threshold": null
+      },
+      "rows": 27648,
+      "scenario_groups": 576
+    },
+    "protocol": "For each fold, every replay of one scenario type is excluded from model fitting and threshold calibration, then used only for evaluation."
+  },
+  "limitations": [
+    "All data, events, corruptions, and missing-stream patterns are simulated and authored.",
+    "LOSO is bounded to scenario types from one generator and is not evidence of real-world distribution shift performance.",
+    "Sensor noise is Gaussian threshold-ratio noise and does not reproduce any specific instrument error model.",
+    "Missing inputs are imputed for sensitivity measurement; a production system must define abstention and human escalation behavior.",
+    "Bootstrap intervals resample simulated replay groups and exclude model-refit and field/site uncertainty.",
+    "Local site calibration, shadow-mode trials, independent safety review, and field validation remain required."
+  ],
+  "reproduction": {
+    "command": "python -m ml.robustness_bench",
+    "determinism": "No wall-clock values are emitted; all pseudo-random operations use recorded seeds; JSON keys are sorted; numeric threadpools are limited to one."
+  },
+  "stress_suite": {
+    "cases": {
+      "baseline": {
+        "data_classification": "SIMULATED",
+        "description": "No perturbation.",
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 65,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 13,
+              "device_eventually_alarm_groups": 13,
+              "device_never_alarm_groups": 52,
+              "model_detected_before_eventual_device_alarm_groups": 13,
+              "model_detected_before_eventual_device_alarm_rate": 1.0,
+              "model_detected_when_device_never_alarms_groups": 52,
+              "model_detected_when_device_never_alarms_rate": 1.0
+            },
+            "event_false_negative_rate": 0.0,
+            "event_groups": 65,
+            "event_recall": 1.0,
+            "false_alarm_episodes_per_24h": 1.153846,
+            "median_warning_lead_minutes": 12.0,
+            "non_event_groups_with_alarm": 1,
+            "p10_warning_lead_minutes": 12.0
+          },
+          "row": {
+            "average_precision": 0.99701,
+            "brier_score": 0.014616,
+            "confusion_matrix": {
+              "fn": 4,
+              "fp": 165,
+              "tn": 3410,
+              "tp": 2037
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.003029,
+                  "bin_index": 0,
+                  "count": 3388,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.003324,
+                  "observed_positive_rate": 0.000295,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                },
+                {
+                  "absolute_gap": 0.023909,
+                  "bin_index": 1,
+                  "count": 42,
+                  "lower_inclusive": 0.1,
+                  "mean_probability": 0.142956,
+                  "observed_positive_rate": 0.119048,
+                  "upper_inclusive_only_for_last_bin": 0.2
+                },
+                {
+                  "absolute_gap": 0.106806,
+                  "bin_index": 2,
+                  "count": 30,
+                  "lower_inclusive": 0.2,
+                  "mean_probability": 0.24014,
+                  "observed_positive_rate": 0.133333,
+                  "upper_inclusive_only_for_last_bin": 0.3
+                },
+                {
+                  "absolute_gap": 0.021185,
+                  "bin_index": 3,
+                  "count": 29,
+                  "lower_inclusive": 0.3,
+                  "mean_probability": 0.358126,
+                  "observed_positive_rate": 0.37931,
+                  "upper_inclusive_only_for_last_bin": 0.4
+                },
+                {
+                  "absolute_gap": 0.033225,
+                  "bin_index": 4,
+                  "count": 39,
+                  "lower_inclusive": 0.4,
+                  "mean_probability": 0.443482,
+                  "observed_positive_rate": 0.410256,
+                  "upper_inclusive_only_for_last_bin": 0.5
+                },
+                {
+                  "absolute_gap": 0.15375,
+                  "bin_index": 5,
+                  "count": 40,
+                  "lower_inclusive": 0.5,
+                  "mean_probability": 0.55375,
+                  "observed_positive_rate": 0.4,
+                  "upper_inclusive_only_for_last_bin": 0.6
+                },
+                {
+                  "absolute_gap": 0.014533,
+                  "bin_index": 6,
+                  "count": 40,
+                  "lower_inclusive": 0.6,
+                  "mean_probability": 0.660467,
+                  "observed_positive_rate": 0.675,
+                  "upper_inclusive_only_for_last_bin": 0.7
+                },
+                {
+                  "absolute_gap": 0.150997,
+                  "bin_index": 7,
+                  "count": 58,
+                  "lower_inclusive": 0.7,
+                  "mean_probability": 0.754446,
+                  "observed_positive_rate": 0.603448,
+                  "upper_inclusive_only_for_last_bin": 0.8
+                },
+                {
+                  "absolute_gap": 0.005868,
+                  "bin_index": 8,
+                  "count": 70,
+                  "lower_inclusive": 0.8,
+                  "mean_probability": 0.851275,
+                  "observed_positive_rate": 0.857143,
+                  "upper_inclusive_only_for_last_bin": 0.9
+                },
+                {
+                  "absolute_gap": 0.001753,
+                  "bin_index": 9,
+                  "count": 1880,
+                  "lower_inclusive": 0.9,
+                  "mean_probability": 0.994306,
+                  "observed_positive_rate": 0.992553,
+                  "upper_inclusive_only_for_last_bin": 1.0
+                }
+              ],
+              "value": 0.006335
+            },
+            "f2": 0.982539,
+            "false_negative_rate": 0.00196,
+            "false_positive_rate": 0.046154,
+            "precision": 0.925068,
+            "recall": 0.99804,
+            "roc_auc": 0.998362,
+            "threshold": 0.155
+          },
+          "rows": 5616,
+          "scenario_groups": 117
+        }
+      },
+      "missing__barrier_and_shift_stream": {
+        "data_classification": "SIMULATED",
+        "description": "Ventilation-impairment and handover fields unavailable and imputed to zero.",
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 52,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 13,
+              "device_eventually_alarm_groups": 13,
+              "device_never_alarm_groups": 52,
+              "model_detected_before_eventual_device_alarm_groups": 13,
+              "model_detected_before_eventual_device_alarm_rate": 1.0,
+              "model_detected_when_device_never_alarms_groups": 39,
+              "model_detected_when_device_never_alarms_rate": 0.75
+            },
+            "event_false_negative_rate": 0.2,
+            "event_groups": 65,
+            "event_recall": 0.8,
+            "false_alarm_episodes_per_24h": 1.153846,
+            "median_warning_lead_minutes": 7.0,
+            "non_event_groups_with_alarm": 1,
+            "p10_warning_lead_minutes": 4.0
+          },
+          "row": {
+            "average_precision": 0.961541,
+            "brier_score": 0.10503,
+            "confusion_matrix": {
+              "fn": 484,
+              "fp": 16,
+              "tn": 3559,
+              "tp": 1557
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.117612,
+                  "bin_index": 0,
+                  "count": 4043,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.002101,
+                  "observed_positive_rate": 0.119713,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                },
+                {
+                  "absolute_gap": 0.006667,
+                  "bin_index": 2,
+                  "count": 4,
+                  "lower_inclusive": 0.2,
+                  "mean_probability": 0.243333,
+                  "observed_positive_rate": 0.25,
+                  "upper_inclusive_only_for_last_bin": 0.3
+                },
+                {
+                  "absolute_gap": 0.357979,
+                  "bin_index": 3,
+                  "count": 2,
+                  "lower_inclusive": 0.3,
+                  "mean_probability": 0.357979,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.4
+                },
+                {
+                  "absolute_gap": 0.47284,
+                  "bin_index": 4,
+                  "count": 1,
+                  "lower_inclusive": 0.4,
+                  "mean_probability": 0.47284,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.5
+                },
+                {
+                  "absolute_gap": 0.407269,
+                  "bin_index": 5,
+                  "count": 81,
+                  "lower_inclusive": 0.5,
+                  "mean_probability": 0.580385,
+                  "observed_positive_rate": 0.987654,
+                  "upper_inclusive_only_for_last_bin": 0.6
+                },
+                {
+                  "absolute_gap": 0.356285,
+                  "bin_index": 6,
+                  "count": 621,
+                  "lower_inclusive": 0.6,
+                  "mean_probability": 0.640495,
+                  "observed_positive_rate": 0.996779,
+                  "upper_inclusive_only_for_last_bin": 0.7
+                },
+                {
+                  "absolute_gap": 0.265384,
+                  "bin_index": 7,
+                  "count": 110,
+                  "lower_inclusive": 0.7,
+                  "mean_probability": 0.725525,
+                  "observed_positive_rate": 0.990909,
+                  "upper_inclusive_only_for_last_bin": 0.8
+                },
+                {
+                  "absolute_gap": 0.237662,
+                  "bin_index": 8,
+                  "count": 5,
+                  "lower_inclusive": 0.8,
+                  "mean_probability": 0.837662,
+                  "observed_positive_rate": 0.6,
+                  "upper_inclusive_only_for_last_bin": 0.9
+                },
+                {
+                  "absolute_gap": 0.003345,
+                  "bin_index": 9,
+                  "count": 749,
+                  "lower_inclusive": 0.9,
+                  "mean_probability": 0.998005,
+                  "observed_positive_rate": 0.99466,
+                  "upper_inclusive_only_for_last_bin": 1.0
+                }
+              ],
+              "value": 0.136013
+            },
+            "f2": 0.799528,
+            "false_negative_rate": 0.237139,
+            "false_positive_rate": 0.004476,
+            "precision": 0.989828,
+            "recall": 0.762861,
+            "roc_auc": 0.974985,
+            "threshold": 0.155
+          },
+          "rows": 5616,
+          "scenario_groups": 117
+        }
+      },
+      "missing__permit_stream": {
+        "data_classification": "SIMULATED",
+        "description": "Hot-work, confined-space, overlap, and isolation fields unavailable and imputed to a neutral zero for diagnosis only.",
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 65,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 13,
+              "device_eventually_alarm_groups": 13,
+              "device_never_alarm_groups": 52,
+              "model_detected_before_eventual_device_alarm_groups": 13,
+              "model_detected_before_eventual_device_alarm_rate": 1.0,
+              "model_detected_when_device_never_alarms_groups": 52,
+              "model_detected_when_device_never_alarms_rate": 1.0
+            },
+            "event_false_negative_rate": 0.0,
+            "event_groups": 65,
+            "event_recall": 1.0,
+            "false_alarm_episodes_per_24h": 1.153846,
+            "median_warning_lead_minutes": 12.0,
+            "non_event_groups_with_alarm": 1,
+            "p10_warning_lead_minutes": 12.0
+          },
+          "row": {
+            "average_precision": 0.990998,
+            "brier_score": 0.028749,
+            "confusion_matrix": {
+              "fn": 2,
+              "fp": 277,
+              "tn": 3298,
+              "tp": 2039
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.002046,
+                  "bin_index": 0,
+                  "count": 3283,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.002046,
+                  "observed_positive_rate": 0.0,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                },
+                {
+                  "absolute_gap": 0.081743,
+                  "bin_index": 1,
+                  "count": 31,
+                  "lower_inclusive": 0.1,
+                  "mean_probability": 0.146259,
+                  "observed_positive_rate": 0.064516,
+                  "upper_inclusive_only_for_last_bin": 0.2
+                },
+                {
+                  "absolute_gap": 0.055818,
+                  "bin_index": 2,
+                  "count": 19,
+                  "lower_inclusive": 0.2,
+                  "mean_probability": 0.266345,
+                  "observed_positive_rate": 0.210526,
+                  "upper_inclusive_only_for_last_bin": 0.3
+                },
+                {
+                  "absolute_gap": 0.112103,
+                  "bin_index": 3,
+                  "count": 17,
+                  "lower_inclusive": 0.3,
+                  "mean_probability": 0.347397,
+                  "observed_positive_rate": 0.235294,
+                  "upper_inclusive_only_for_last_bin": 0.4
+                },
+                {
+                  "absolute_gap": 0.307812,
+                  "bin_index": 4,
+                  "count": 27,
+                  "lower_inclusive": 0.4,
+                  "mean_probability": 0.45596,
+                  "observed_positive_rate": 0.148148,
+                  "upper_inclusive_only_for_last_bin": 0.5
+                },
+                {
+                  "absolute_gap": 0.1707,
+                  "bin_index": 5,
+                  "count": 41,
+                  "lower_inclusive": 0.5,
+                  "mean_probability": 0.536554,
+                  "observed_positive_rate": 0.365854,
+                  "upper_inclusive_only_for_last_bin": 0.6
+                },
+                {
+                  "absolute_gap": 0.372125,
+                  "bin_index": 6,
+                  "count": 51,
+                  "lower_inclusive": 0.6,
+                  "mean_probability": 0.646635,
+                  "observed_positive_rate": 0.27451,
+                  "upper_inclusive_only_for_last_bin": 0.7
+                },
+                {
+                  "absolute_gap": 0.323054,
+                  "bin_index": 7,
+                  "count": 66,
+                  "lower_inclusive": 0.7,
+                  "mean_probability": 0.747297,
+                  "observed_positive_rate": 0.424242,
+                  "upper_inclusive_only_for_last_bin": 0.8
+                },
+                {
+                  "absolute_gap": 0.364703,
+                  "bin_index": 8,
+                  "count": 88,
+                  "lower_inclusive": 0.8,
+                  "mean_probability": 0.864703,
+                  "observed_positive_rate": 0.5,
+                  "upper_inclusive_only_for_last_bin": 0.9
+                },
+                {
+                  "absolute_gap": 0.019238,
+                  "bin_index": 9,
+                  "count": 1993,
+                  "lower_inclusive": 0.9,
+                  "mean_probability": 0.98562,
+                  "observed_positive_rate": 0.966382,
+                  "upper_inclusive_only_for_last_bin": 1.0
+                }
+              ],
+              "value": 0.024619
+            },
+            "f2": 0.972805,
+            "false_negative_rate": 0.00098,
+            "false_positive_rate": 0.077483,
+            "precision": 0.880397,
+            "recall": 0.99902,
+            "roc_auc": 0.995532,
+            "threshold": 0.155
+          },
+          "rows": 5616,
+          "scenario_groups": 117
+        }
+      },
+      "missing__process_sensor_packet_dropout_20pct": {
+        "data_classification": "SIMULATED",
+        "description": "A fixed-seed 20% Bernoulli mask replaces affected sensor packets with development-training medians.",
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 65,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 13,
+              "device_eventually_alarm_groups": 13,
+              "device_never_alarm_groups": 52,
+              "model_detected_before_eventual_device_alarm_groups": 13,
+              "model_detected_before_eventual_device_alarm_rate": 1.0,
+              "model_detected_when_device_never_alarms_groups": 52,
+              "model_detected_when_device_never_alarms_rate": 1.0
+            },
+            "event_false_negative_rate": 0.0,
+            "event_groups": 65,
+            "event_recall": 1.0,
+            "false_alarm_episodes_per_24h": 39.230769,
+            "median_warning_lead_minutes": 12.0,
+            "non_event_groups_with_alarm": 14,
+            "p10_warning_lead_minutes": 11.0
+          },
+          "row": {
+            "average_precision": 0.979553,
+            "brier_score": 0.035904,
+            "confusion_matrix": {
+              "fn": 83,
+              "fp": 288,
+              "tn": 3287,
+              "tp": 1958
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.020773,
+                  "bin_index": 0,
+                  "count": 3350,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.003705,
+                  "observed_positive_rate": 0.024478,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                },
+                {
+                  "absolute_gap": 0.080393,
+                  "bin_index": 1,
+                  "count": 40,
+                  "lower_inclusive": 0.1,
+                  "mean_probability": 0.144607,
+                  "observed_positive_rate": 0.225,
+                  "upper_inclusive_only_for_last_bin": 0.2
+                },
+                {
+                  "absolute_gap": 0.041342,
+                  "bin_index": 2,
+                  "count": 163,
+                  "lower_inclusive": 0.2,
+                  "mean_probability": 0.262201,
+                  "observed_positive_rate": 0.220859,
+                  "upper_inclusive_only_for_last_bin": 0.3
+                },
+                {
+                  "absolute_gap": 0.001151,
+                  "bin_index": 3,
+                  "count": 25,
+                  "lower_inclusive": 0.3,
+                  "mean_probability": 0.358849,
+                  "observed_positive_rate": 0.36,
+                  "upper_inclusive_only_for_last_bin": 0.4
+                },
+                {
+                  "absolute_gap": 0.005536,
+                  "bin_index": 4,
+                  "count": 25,
+                  "lower_inclusive": 0.4,
+                  "mean_probability": 0.445536,
+                  "observed_positive_rate": 0.44,
+                  "upper_inclusive_only_for_last_bin": 0.5
+                },
+                {
+                  "absolute_gap": 0.151723,
+                  "bin_index": 5,
+                  "count": 32,
+                  "lower_inclusive": 0.5,
+                  "mean_probability": 0.557973,
+                  "observed_positive_rate": 0.40625,
+                  "upper_inclusive_only_for_last_bin": 0.6
+                },
+                {
+                  "absolute_gap": 0.226749,
+                  "bin_index": 6,
+                  "count": 106,
+                  "lower_inclusive": 0.6,
+                  "mean_probability": 0.660711,
+                  "observed_positive_rate": 0.433962,
+                  "upper_inclusive_only_for_last_bin": 0.7
+                },
+                {
+                  "absolute_gap": 0.200839,
+                  "bin_index": 7,
+                  "count": 47,
+                  "lower_inclusive": 0.7,
+                  "mean_probability": 0.75403,
+                  "observed_positive_rate": 0.553191,
+                  "upper_inclusive_only_for_last_bin": 0.8
+                },
+                {
+                  "absolute_gap": 0.062169,
+                  "bin_index": 8,
+                  "count": 58,
+                  "lower_inclusive": 0.8,
+                  "mean_probability": 0.851624,
+                  "observed_positive_rate": 0.913793,
+                  "upper_inclusive_only_for_last_bin": 0.9
+                },
+                {
+                  "absolute_gap": 6.8e-05,
+                  "bin_index": 9,
+                  "count": 1770,
+                  "lower_inclusive": 0.9,
+                  "mean_probability": 0.992158,
+                  "observed_positive_rate": 0.99209,
+                  "upper_inclusive_only_for_last_bin": 1.0
+                }
+              ],
+              "value": 0.021682
+            },
+            "f2": 0.940442,
+            "false_negative_rate": 0.040666,
+            "false_positive_rate": 0.080559,
+            "precision": 0.871772,
+            "recall": 0.959334,
+            "roc_auc": 0.987081,
+            "threshold": 0.155
+          },
+          "rows": 5616,
+          "scenario_groups": 117
+        }
+      },
+      "missing__process_sensor_stream": {
+        "data_classification": "SIMULATED",
+        "description": "All sensor levels and trends replaced by development-training medians; stream quality set to zero.",
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 52,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 13,
+              "device_eventually_alarm_groups": 13,
+              "device_never_alarm_groups": 52,
+              "model_detected_before_eventual_device_alarm_groups": 0,
+              "model_detected_before_eventual_device_alarm_rate": 0.0,
+              "model_detected_when_device_never_alarms_groups": 52,
+              "model_detected_when_device_never_alarms_rate": 1.0
+            },
+            "event_false_negative_rate": 0.2,
+            "event_groups": 65,
+            "event_recall": 0.8,
+            "false_alarm_episodes_per_24h": 7.5,
+            "median_warning_lead_minutes": 12.0,
+            "non_event_groups_with_alarm": 13,
+            "p10_warning_lead_minutes": 12.0
+          },
+          "row": {
+            "average_precision": 0.830425,
+            "brier_score": 0.126602,
+            "confusion_matrix": {
+              "fn": 399,
+              "fp": 790,
+              "tn": 2785,
+              "tp": 1642
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.117562,
+                  "bin_index": 0,
+                  "count": 3170,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.005151,
+                  "observed_positive_rate": 0.122713,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                },
+                {
+                  "absolute_gap": 0.690541,
+                  "bin_index": 1,
+                  "count": 50,
+                  "lower_inclusive": 0.1,
+                  "mean_probability": 0.149459,
+                  "observed_positive_rate": 0.84,
+                  "upper_inclusive_only_for_last_bin": 0.2
+                },
+                {
+                  "absolute_gap": 0.017393,
+                  "bin_index": 2,
+                  "count": 758,
+                  "lower_inclusive": 0.2,
+                  "mean_probability": 0.26361,
+                  "observed_positive_rate": 0.281003,
+                  "upper_inclusive_only_for_last_bin": 0.3
+                },
+                {
+                  "absolute_gap": 0.284018,
+                  "bin_index": 6,
+                  "count": 340,
+                  "lower_inclusive": 0.6,
+                  "mean_probability": 0.660489,
+                  "observed_positive_rate": 0.376471,
+                  "upper_inclusive_only_for_last_bin": 0.7
+                },
+                {
+                  "absolute_gap": 0.000476,
+                  "bin_index": 9,
+                  "count": 1298,
+                  "lower_inclusive": 0.9,
+                  "mean_probability": 0.978134,
+                  "observed_positive_rate": 0.977658,
+                  "upper_inclusive_only_for_last_bin": 1.0
+                }
+              ],
+              "value": 0.092159
+            },
+            "f2": 0.774821,
+            "false_negative_rate": 0.195492,
+            "false_positive_rate": 0.220979,
+            "precision": 0.675164,
+            "recall": 0.804508,
+            "roc_auc": 0.857178,
+            "threshold": 0.155
+          },
+          "rows": 5616,
+          "scenario_groups": 117
+        }
+      },
+      "missing__worker_location_stream": {
+        "data_classification": "SIMULATED",
+        "description": "Worker count and proximity unavailable and imputed to zero workers / 120 m.",
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 65,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 13,
+              "device_eventually_alarm_groups": 13,
+              "device_never_alarm_groups": 52,
+              "model_detected_before_eventual_device_alarm_groups": 13,
+              "model_detected_before_eventual_device_alarm_rate": 1.0,
+              "model_detected_when_device_never_alarms_groups": 52,
+              "model_detected_when_device_never_alarms_rate": 1.0
+            },
+            "event_false_negative_rate": 0.0,
+            "event_groups": 65,
+            "event_recall": 1.0,
+            "false_alarm_episodes_per_24h": 1.153846,
+            "median_warning_lead_minutes": 12.0,
+            "non_event_groups_with_alarm": 1,
+            "p10_warning_lead_minutes": 12.0
+          },
+          "row": {
+            "average_precision": 0.996361,
+            "brier_score": 0.015285,
+            "confusion_matrix": {
+              "fn": 4,
+              "fp": 148,
+              "tn": 3427,
+              "tp": 2037
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.002904,
+                  "bin_index": 0,
+                  "count": 3405,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.003785,
+                  "observed_positive_rate": 0.000881,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                },
+                {
+                  "absolute_gap": 0.01671,
+                  "bin_index": 1,
+                  "count": 52,
+                  "lower_inclusive": 0.1,
+                  "mean_probability": 0.151326,
+                  "observed_positive_rate": 0.134615,
+                  "upper_inclusive_only_for_last_bin": 0.2
+                },
+                {
+                  "absolute_gap": 0.093474,
+                  "bin_index": 2,
+                  "count": 55,
+                  "lower_inclusive": 0.2,
+                  "mean_probability": 0.25198,
+                  "observed_positive_rate": 0.345455,
+                  "upper_inclusive_only_for_last_bin": 0.3
+                },
+                {
+                  "absolute_gap": 0.080079,
+                  "bin_index": 3,
+                  "count": 44,
+                  "lower_inclusive": 0.3,
+                  "mean_probability": 0.351739,
+                  "observed_positive_rate": 0.431818,
+                  "upper_inclusive_only_for_last_bin": 0.4
+                },
+                {
+                  "absolute_gap": 0.09093,
+                  "bin_index": 4,
+                  "count": 37,
+                  "lower_inclusive": 0.4,
+                  "mean_probability": 0.44961,
+                  "observed_positive_rate": 0.540541,
+                  "upper_inclusive_only_for_last_bin": 0.5
+                },
+                {
+                  "absolute_gap": 0.112037,
+                  "bin_index": 5,
+                  "count": 36,
+                  "lower_inclusive": 0.5,
+                  "mean_probability": 0.55463,
+                  "observed_positive_rate": 0.666667,
+                  "upper_inclusive_only_for_last_bin": 0.6
+                },
+                {
+                  "absolute_gap": 0.123449,
+                  "bin_index": 6,
+                  "count": 40,
+                  "lower_inclusive": 0.6,
+                  "mean_probability": 0.651551,
+                  "observed_positive_rate": 0.775,
+                  "upper_inclusive_only_for_last_bin": 0.7
+                },
+                {
+                  "absolute_gap": 0.093594,
+                  "bin_index": 7,
+                  "count": 45,
+                  "lower_inclusive": 0.7,
+                  "mean_probability": 0.750851,
+                  "observed_positive_rate": 0.844444,
+                  "upper_inclusive_only_for_last_bin": 0.8
+                },
+                {
+                  "absolute_gap": 0.006515,
+                  "bin_index": 8,
+                  "count": 50,
+                  "lower_inclusive": 0.8,
+                  "mean_probability": 0.846515,
+                  "observed_positive_rate": 0.84,
+                  "upper_inclusive_only_for_last_bin": 0.9
+                },
+                {
+                  "absolute_gap": 0.002733,
+                  "bin_index": 9,
+                  "count": 1852,
+                  "lower_inclusive": 0.9,
+                  "mean_probability": 0.995173,
+                  "observed_positive_rate": 0.992441,
+                  "upper_inclusive_only_for_last_bin": 1.0
+                }
+              ],
+              "value": 0.007364
+            },
+            "f2": 0.984153,
+            "false_negative_rate": 0.00196,
+            "false_positive_rate": 0.041399,
+            "precision": 0.932265,
+            "recall": 0.99804,
+            "roc_auc": 0.998065,
+            "threshold": 0.155
+          },
+          "rows": 5616,
+          "scenario_groups": 117
+        }
+      },
+      "sensor_noise__gaussian_sigma_0_02": {
+        "data_classification": "SIMULATED",
+        "description": "Fixed-seed Gaussian noise with sigma=0.02 of a device-threshold ratio on levels and sigma=0.006667 on slopes.",
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 65,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 13,
+              "device_eventually_alarm_groups": 13,
+              "device_never_alarm_groups": 52,
+              "model_detected_before_eventual_device_alarm_groups": 13,
+              "model_detected_before_eventual_device_alarm_rate": 1.0,
+              "model_detected_when_device_never_alarms_groups": 52,
+              "model_detected_when_device_never_alarms_rate": 1.0
+            },
+            "event_false_negative_rate": 0.0,
+            "event_groups": 65,
+            "event_recall": 1.0,
+            "false_alarm_episodes_per_24h": 6.346154,
+            "median_warning_lead_minutes": 12.0,
+            "non_event_groups_with_alarm": 8,
+            "p10_warning_lead_minutes": 11.0
+          },
+          "row": {
+            "average_precision": 0.994223,
+            "brier_score": 0.019253,
+            "confusion_matrix": {
+              "fn": 15,
+              "fp": 158,
+              "tn": 3417,
+              "tp": 2026
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.000675,
+                  "bin_index": 0,
+                  "count": 3404,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.003613,
+                  "observed_positive_rate": 0.002938,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                },
+                {
+                  "absolute_gap": 0.074618,
+                  "bin_index": 1,
+                  "count": 46,
+                  "lower_inclusive": 0.1,
+                  "mean_probability": 0.142773,
+                  "observed_positive_rate": 0.217391,
+                  "upper_inclusive_only_for_last_bin": 0.2
+                },
+                {
+                  "absolute_gap": 0.122576,
+                  "bin_index": 2,
+                  "count": 43,
+                  "lower_inclusive": 0.2,
+                  "mean_probability": 0.249517,
+                  "observed_positive_rate": 0.372093,
+                  "upper_inclusive_only_for_last_bin": 0.3
+                },
+                {
+                  "absolute_gap": 0.198628,
+                  "bin_index": 3,
+                  "count": 33,
+                  "lower_inclusive": 0.3,
+                  "mean_probability": 0.346826,
+                  "observed_positive_rate": 0.545455,
+                  "upper_inclusive_only_for_last_bin": 0.4
+                },
+                {
+                  "absolute_gap": 0.004803,
+                  "bin_index": 4,
+                  "count": 33,
+                  "lower_inclusive": 0.4,
+                  "mean_probability": 0.459348,
+                  "observed_positive_rate": 0.454545,
+                  "upper_inclusive_only_for_last_bin": 0.5
+                },
+                {
+                  "absolute_gap": 0.000851,
+                  "bin_index": 5,
+                  "count": 46,
+                  "lower_inclusive": 0.5,
+                  "mean_probability": 0.544329,
+                  "observed_positive_rate": 0.543478,
+                  "upper_inclusive_only_for_last_bin": 0.6
+                },
+                {
+                  "absolute_gap": 0.01246,
+                  "bin_index": 6,
+                  "count": 53,
+                  "lower_inclusive": 0.6,
+                  "mean_probability": 0.653969,
+                  "observed_positive_rate": 0.641509,
+                  "upper_inclusive_only_for_last_bin": 0.7
+                },
+                {
+                  "absolute_gap": 0.033078,
+                  "bin_index": 7,
+                  "count": 43,
+                  "lower_inclusive": 0.7,
+                  "mean_probability": 0.75762,
+                  "observed_positive_rate": 0.790698,
+                  "upper_inclusive_only_for_last_bin": 0.8
+                },
+                {
+                  "absolute_gap": 0.077176,
+                  "bin_index": 8,
+                  "count": 66,
+                  "lower_inclusive": 0.8,
+                  "mean_probability": 0.849903,
+                  "observed_positive_rate": 0.772727,
+                  "upper_inclusive_only_for_last_bin": 0.9
+                },
+                {
+                  "absolute_gap": 0.005579,
+                  "bin_index": 9,
+                  "count": 1849,
+                  "lower_inclusive": 0.9,
+                  "mean_probability": 0.994222,
+                  "observed_positive_rate": 0.988643,
+                  "upper_inclusive_only_for_last_bin": 1.0
+                }
+              ],
+              "value": 0.006276
+            },
+            "f2": 0.978933,
+            "false_negative_rate": 0.007349,
+            "false_positive_rate": 0.044196,
+            "precision": 0.927656,
+            "recall": 0.992651,
+            "roc_auc": 0.996934,
+            "threshold": 0.155
+          },
+          "rows": 5616,
+          "scenario_groups": 117
+        }
+      },
+      "sensor_noise__gaussian_sigma_0_05": {
+        "data_classification": "SIMULATED",
+        "description": "Fixed-seed Gaussian noise with sigma=0.05 of a device-threshold ratio on levels and sigma=0.016667 on slopes.",
+        "evaluation": {
+          "event": {
+            "detected_event_groups": 65,
+            "device_strata": {
+              "comparison_rule": "The before-device rate denominator contains only event replays where a device alarms at some point; never-alarm replays are reported in a separate stratum.",
+              "device_alarm_by_event_groups": 13,
+              "device_eventually_alarm_groups": 13,
+              "device_never_alarm_groups": 52,
+              "model_detected_before_eventual_device_alarm_groups": 13,
+              "model_detected_before_eventual_device_alarm_rate": 1.0,
+              "model_detected_when_device_never_alarms_groups": 52,
+              "model_detected_when_device_never_alarms_rate": 1.0
+            },
+            "event_false_negative_rate": 0.0,
+            "event_groups": 65,
+            "event_recall": 1.0,
+            "false_alarm_episodes_per_24h": 47.884615,
+            "median_warning_lead_minutes": 12.0,
+            "non_event_groups_with_alarm": 24,
+            "p10_warning_lead_minutes": 11.0
+          },
+          "row": {
+            "average_precision": 0.981158,
+            "brier_score": 0.033807,
+            "confusion_matrix": {
+              "fn": 38,
+              "fp": 273,
+              "tn": 3302,
+              "tp": 2003
+            },
+            "expected_calibration_error": {
+              "binning": "equal-width over [0, 1]; right edge included only in final bin",
+              "bins": 10,
+              "non_empty_bin_summaries": [
+                {
+                  "absolute_gap": 0.003958,
+                  "bin_index": 0,
+                  "count": 3291,
+                  "lower_inclusive": 0.0,
+                  "mean_probability": 0.004246,
+                  "observed_positive_rate": 0.008204,
+                  "upper_inclusive_only_for_last_bin": 0.1
+                },
+                {
+                  "absolute_gap": 0.078581,
+                  "bin_index": 1,
+                  "count": 95,
+                  "lower_inclusive": 0.1,
+                  "mean_probability": 0.152998,
+                  "observed_positive_rate": 0.231579,
+                  "upper_inclusive_only_for_last_bin": 0.2
+                },
+                {
+                  "absolute_gap": 0.072083,
+                  "bin_index": 2,
+                  "count": 59,
+                  "lower_inclusive": 0.2,
+                  "mean_probability": 0.249951,
+                  "observed_positive_rate": 0.322034,
+                  "upper_inclusive_only_for_last_bin": 0.3
+                },
+                {
+                  "absolute_gap": 0.06052,
+                  "bin_index": 3,
+                  "count": 55,
+                  "lower_inclusive": 0.3,
+                  "mean_probability": 0.35143,
+                  "observed_positive_rate": 0.290909,
+                  "upper_inclusive_only_for_last_bin": 0.4
+                },
+                {
+                  "absolute_gap": 0.029269,
+                  "bin_index": 4,
+                  "count": 49,
+                  "lower_inclusive": 0.4,
+                  "mean_probability": 0.440119,
+                  "observed_positive_rate": 0.469388,
+                  "upper_inclusive_only_for_last_bin": 0.5
+                },
+                {
+                  "absolute_gap": 0.040268,
+                  "bin_index": 5,
+                  "count": 48,
+                  "lower_inclusive": 0.5,
+                  "mean_probability": 0.543066,
+                  "observed_positive_rate": 0.583333,
+                  "upper_inclusive_only_for_last_bin": 0.6
+                },
+                {
+                  "absolute_gap": 0.031687,
+                  "bin_index": 6,
+                  "count": 66,
+                  "lower_inclusive": 0.6,
+                  "mean_probability": 0.650131,
+                  "observed_positive_rate": 0.681818,
+                  "upper_inclusive_only_for_last_bin": 0.7
+                },
+                {
+                  "absolute_gap": 0.084082,
+                  "bin_index": 7,
+                  "count": 51,
+                  "lower_inclusive": 0.7,
+                  "mean_probability": 0.750748,
+                  "observed_positive_rate": 0.666667,
+                  "upper_inclusive_only_for_last_bin": 0.8
+                },
+                {
+                  "absolute_gap": 0.030652,
+                  "bin_index": 8,
+                  "count": 65,
+                  "lower_inclusive": 0.8,
+                  "mean_probability": 0.846037,
+                  "observed_positive_rate": 0.815385,
+                  "upper_inclusive_only_for_last_bin": 0.9
+                },
+                {
+                  "absolute_gap": 0.029326,
+                  "bin_index": 9,
+                  "count": 1837,
+                  "lower_inclusive": 0.9,
+                  "mean_probability": 0.995031,
+                  "observed_positive_rate": 0.965705,
+                  "upper_inclusive_only_for_last_bin": 1.0
+                }
+              ],
+              "value": 0.016682
+            },
+            "f2": 0.959291,
+            "false_negative_rate": 0.018618,
+            "false_positive_rate": 0.076364,
+            "precision": 0.880053,
+            "recall": 0.981382,
+            "roc_auc": 0.98989,
+            "threshold": 0.155
+          },
+          "rows": 5616,
+          "scenario_groups": 117
+        }
+      }
+    },
+    "frozen_model": true,
+    "imputation_boundary": "These deterministic imputations diagnose sensitivity; they are not a production missing-data or fail-safe policy.",
+    "threshold_reselected_after_stress": false
+  },
+  "version": "1.0.0"
+}

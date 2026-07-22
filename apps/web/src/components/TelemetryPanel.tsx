@@ -13,10 +13,10 @@ export function TelemetryPanel({ sensors }: { sensors: SensorReading[] }) {
     <section className="panel telemetry-panel">
       <header className="panel-header">
         <div>
-          <span className="eyebrow">SCADA / 1 HZ</span>
+          <span className="eyebrow">SIMULATED PROCESS REPLAY / 1 MIN</span>
           <h2>Signals remain below alarm</h2>
         </div>
-        <span className="live-label"><Radio size={13} /> LIVE</span>
+        <span className="live-label"><Radio size={13} /> REPLAY</span>
       </header>
       <div className="telemetry-list">
         {sensors.slice(0, 4).map((sensor) => {
@@ -54,9 +54,8 @@ export function TelemetryPanel({ sensors }: { sensors: SensorReading[] }) {
       </div>
       <footer className="telemetry-panel__footer">
         <span><i className="status-led is-online" /> Quality checks passed</span>
-        <span>Last packet 0.8s ago</span>
+        <span>Replay packet 0.8s ago</span>
       </footer>
     </section>
   );
 }
-

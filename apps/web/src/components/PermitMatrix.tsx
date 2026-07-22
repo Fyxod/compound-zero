@@ -2,8 +2,10 @@ import { AlertTriangle, ArrowRight, CalendarClock, MapPinned } from "lucide-reac
 import { clsx } from "clsx";
 import type { Permit, Severity } from "../types/domain";
 import { PLANT_ZONES } from "../data/plant";
+import { useState } from "react";
 
 export function PermitMatrix({ permits, severity }: { permits: Permit[]; severity: Severity }) {
+  const [matrixOpen, setMatrixOpen] = useState(false);
   return (
     <section className="panel permit-panel">
       <header className="panel-header">
@@ -11,7 +13,7 @@ export function PermitMatrix({ permits, severity }: { permits: Permit[]; severit
           <span className="eyebrow">SIMULTANEOUS OPERATIONS</span>
           <h2>Permit / barrier conflicts</h2>
         </div>
-        <button type="button" className="text-button">Open SIMOPS matrix <ArrowRight size={14} /></button>
+        <button type="button" className="text-button" aria-expanded={matrixOpen} onClick={() => setMatrixOpen((value) => !value)}>{matrixOpen ? "Close" : "Open"} SIMOPS matrix <ArrowRight size={14} /></button>
       </header>
       <div className="permit-grid">
         {permits.map((permit) => {
@@ -32,7 +34,7 @@ export function PermitMatrix({ permits, severity }: { permits: Permit[]; severit
               {conflict && (
                 <div className="permit-card__conflict">
                   <AlertTriangle size={15} />
-                  Overlaps rising flammable-gas confidence contour
+                  Overlaps the illustrative flammable-gas exposure field
                 </div>
               )}
               {permit.status === "held" && (
@@ -54,7 +56,14 @@ export function PermitMatrix({ permits, severity }: { permits: Permit[]; severit
           </div>
         </article>
       </div>
+      {matrixOpen && (
+        <div className="simops-matrix" aria-label="Simulated simultaneous-operations matrix">
+          <div><span>WORK PAIR</span><strong>PTW-2841 × PTW-2837</strong></div>
+          <div><span>RELATION</span><strong>Adjacent zones · shared extraction barrier</strong></div>
+          <div><span>REVIEW STATE</span><strong>{severity === "nominal" ? "Monitor" : "Conflict surfaced"}</strong></div>
+          <small>Deterministic demo correlation; not a permit authorization decision.</small>
+        </div>
+      )}
     </section>
   );
 }
-

@@ -39,6 +39,9 @@
     "Context schedules and harmful-state equations are authored for controlled ablation testing.",
     "A site pilot requires local threshold calibration, shadow-mode validation, and safety review."
   ],
+  "model_artifact_bytes": 238184,
+  "model_artifact_filename": "compound_zero_model.joblib",
+  "model_artifact_sha256": "ad8499f7afc5d6344d1f9a1b6e4fee200f44dc8cf8e77e652d5b204b1f047e84",
   "model_version": "compound-zero-scenariobench-v1",
   "prohibited_claims": [
     "Field-validated safety performance",

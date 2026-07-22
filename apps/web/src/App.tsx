@@ -22,7 +22,9 @@ export default function App() {
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return;
+      if (event.repeat) return;
+      const target = event.target instanceof Element ? event.target : null;
+      if (target?.closest("button, a, input, textarea, select, [role='button'], [contenteditable='true']")) return;
       if (event.key === " ") {
         event.preventDefault();
         simulation.toggle();

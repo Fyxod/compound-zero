@@ -128,8 +128,12 @@ export interface PermitAuditResponse {
   data_classification: "SIMULATED";
   audit_id: string;
   result: "NO_FINDINGS" | "HUMAN_REVIEW_REQUIRED" | "CRITICAL_HUMAN_REVIEW";
+  evaluated_at: string;
+  permit_id: string;
   evidence_manifest_sha256: string;
   evidence_complete: boolean;
+  resolved_evidence_refs: Record<string, string | null>;
+  derived_gas_test_age_minutes: number | null;
   findings: PermitAuditFinding[];
   proposed_response_actions: string[];
   compliance_boundary: string;
@@ -141,6 +145,8 @@ export type ApprovalRole = "AREA_AUTHORITY" | "SAFETY_OFFICER" | "INCIDENT_COMMA
 export interface ResponsePlan {
   data_classification: "SIMULATED";
   plan_id: string;
+  idempotency_key: string | null;
+  retention_ttl_seconds: number;
   risk_case_id: string;
   severity: string;
   actions: string[];
