@@ -1,0 +1,252 @@
+{
+  "ablation": {
+    "full_vs_process_average_precision_gain": 0.050276,
+    "full_vs_process_event_fnr_absolute_reduction": 0.0,
+    "full_vs_process_false_alarm_episodes_per_24h_reduction": 7.5,
+    "full_vs_process_row_fpr_absolute_reduction": 0.175944,
+    "full_vs_single_event_fnr_absolute_reduction": 0.8,
+    "full_vs_single_median_warning_lead_minutes_gain": 7.0
+  },
+  "data_classification": "SIMULATED",
+  "dataset": {
+    "classification": "SIMULATED",
+    "config": {
+      "duration_minutes": 48,
+      "first_seed": 1000,
+      "forecast_horizon_minutes": 12,
+      "seed_count": 64
+    },
+    "description": "Deterministic simulated scenarios for evaluating compound-risk detection; not field validation and not evidence of production safety performance.",
+    "event_groups": 320,
+    "features": [
+      "lel_ratio",
+      "h2s_ratio",
+      "co_ratio",
+      "oxygen_deficit_ratio",
+      "pressure_ratio",
+      "lel_slope",
+      "h2s_slope",
+      "co_slope",
+      "oxygen_slope",
+      "pressure_slope",
+      "gas_burden",
+      "max_sensor_ratio",
+      "mean_positive_slope",
+      "correlated_rise",
+      "ventilation_impaired",
+      "hot_work_active",
+      "confined_space_active",
+      "workers_in_zone",
+      "min_worker_distance_m",
+      "shift_handover",
+      "permit_overlap_count",
+      "isolation_active",
+      "stream_quality",
+      "hotwork_gas_interaction",
+      "worker_gas_interaction",
+      "confined_oxygen_interaction",
+      "barrier_gas_interaction",
+      "handover_permit_interaction"
+    ],
+    "forecast_horizon_minutes": 12,
+    "name": "ScenarioBench",
+    "positive_rows": 10203,
+    "rows": 27648,
+    "scenario_groups": 576,
+    "scenario_types": [
+      "normal_shift",
+      "isolated_sensor_spike",
+      "process_drift",
+      "subthreshold_process_drift",
+      "permit_only",
+      "compound_hot_work",
+      "compound_confined_space",
+      "compound_handover",
+      "barrier_loss_workers"
+    ],
+    "seeds": 64,
+    "sha256": "96166a2762577a2fa8440e2a6f0f819c342aef9e9cf790e3ed2bef3eb6f4e314",
+    "target": "risk_within_horizon",
+    "version": "1.0.0"
+  },
+  "decision_engine": "scikit-learn calibrated gradient boosting; no LLM in risk decisions",
+  "limitations": [
+    "All benchmark scenarios are simulated and are not field validation.",
+    "Context schedules and harmful-state equations are authored for controlled ablation testing.",
+    "A site pilot requires local threshold calibration, shadow-mode validation, and safety review."
+  ],
+  "methods": {
+    "full_fusion": {
+      "event": {
+        "detected_before_device_alarm_rate": 1.0,
+        "detected_event_groups": 65,
+        "event_false_negative_rate": 0.0,
+        "event_groups": 65,
+        "event_recall": 1.0,
+        "false_alarm_episodes_per_24h": 1.153846,
+        "median_warning_lead_minutes": 12.0,
+        "non_event_groups_with_alarm": 1,
+        "p10_warning_lead_minutes": 12.0
+      },
+      "row": {
+        "average_precision": 0.99701,
+        "brier_score": 0.014616,
+        "confusion_matrix": {
+          "fn": 4,
+          "fp": 165,
+          "tn": 3410,
+          "tp": 2037
+        },
+        "f1": 0.96017,
+        "f2": 0.982539,
+        "false_negative_rate": 0.00196,
+        "false_positive_rate": 0.046154,
+        "precision": 0.925068,
+        "recall": 0.99804,
+        "roc_auc": 0.998362,
+        "threshold": 0.155
+      }
+    },
+    "process_only": {
+      "event": {
+        "detected_before_device_alarm_rate": 1.0,
+        "detected_event_groups": 65,
+        "event_false_negative_rate": 0.0,
+        "event_groups": 65,
+        "event_recall": 1.0,
+        "false_alarm_episodes_per_24h": 8.653846,
+        "median_warning_lead_minutes": 12.0,
+        "non_event_groups_with_alarm": 13,
+        "p10_warning_lead_minutes": 11.0
+      },
+      "row": {
+        "average_precision": 0.946734,
+        "brier_score": 0.070132,
+        "confusion_matrix": {
+          "fn": 10,
+          "fp": 794,
+          "tn": 2781,
+          "tp": 2031
+        },
+        "f1": 0.834772,
+        "f2": 0.924106,
+        "false_negative_rate": 0.0049,
+        "false_positive_rate": 0.222098,
+        "precision": 0.718938,
+        "recall": 0.9951,
+        "roc_auc": 0.96669,
+        "threshold": 0.2
+      }
+    },
+    "single_sensor": {
+      "event": {
+        "detected_before_device_alarm_rate": 0.0,
+        "detected_event_groups": 13,
+        "event_false_negative_rate": 0.8,
+        "event_groups": 65,
+        "event_recall": 0.2,
+        "false_alarm_episodes_per_24h": 7.5,
+        "median_warning_lead_minutes": 5.0,
+        "non_event_groups_with_alarm": 13,
+        "p10_warning_lead_minutes": 4.0
+      },
+      "row": {
+        "average_precision": 0.813065,
+        "brier_score": 0.24212,
+        "confusion_matrix": {
+          "fn": 1742,
+          "fp": 13,
+          "tn": 3562,
+          "tp": 299
+        },
+        "f1": 0.254144,
+        "f2": 0.17638,
+        "false_negative_rate": 0.853503,
+        "false_positive_rate": 0.003636,
+        "precision": 0.958333,
+        "recall": 0.146497,
+        "roc_auc": 0.911152,
+        "threshold": 1.0
+      }
+    }
+  },
+  "model_version": "compound-zero-scenariobench-v1",
+  "split": {
+    "calibration_rows": 5616,
+    "calibration_seeds": [
+      1001,
+      1006,
+      1011,
+      1016,
+      1021,
+      1026,
+      1031,
+      1036,
+      1041,
+      1046,
+      1051,
+      1056,
+      1061
+    ],
+    "overlap_count": 0,
+    "test_rows": 5616,
+    "test_seeds": [
+      1000,
+      1005,
+      1010,
+      1015,
+      1020,
+      1025,
+      1030,
+      1035,
+      1040,
+      1045,
+      1050,
+      1055,
+      1060
+    ],
+    "train_rows": 16416,
+    "train_seeds": [
+      1002,
+      1003,
+      1004,
+      1007,
+      1008,
+      1009,
+      1012,
+      1013,
+      1014,
+      1017,
+      1018,
+      1019,
+      1022,
+      1023,
+      1024,
+      1027,
+      1028,
+      1029,
+      1032,
+      1033,
+      1034,
+      1037,
+      1038,
+      1039,
+      1042,
+      1043,
+      1044,
+      1047,
+      1048,
+      1049,
+      1052,
+      1053,
+      1054,
+      1057,
+      1058,
+      1059,
+      1062,
+      1063
+    ]
+  },
+  "split_policy": "Whole-seed holdout: seed mod 5 = 0 test, 1 calibration, 2/3/4 train.",
+  "target": "risk_within_horizon"
+}

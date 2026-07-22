@@ -1,0 +1,183 @@
+{
+  "corpus_name": "Compound Zero Incident Pattern Reference Corpus",
+  "corpus_version": "1.0.0",
+  "data_classification": "REFERENCE",
+  "created_on": "2026-07-22",
+  "scope_note": "Small, source-attributed prototype corpus. Pattern summaries and review prompts are project-authored; they are not quotations, legal advice, site procedures, or a substitute for licensed standards.",
+  "licensing_note": "Only public reference metadata and project-authored summaries are stored. The paid normative text of OISD standards is not bundled.",
+  "patterns": [
+    {
+      "pattern_id": "compound-hot-work-barrier-loss",
+      "title": "Ignition-source work overlapping loss of extraction",
+      "classification": "REFERENCE",
+      "pattern_summary": "A permit authorises ignition-source work while ventilation or extraction is impaired and flammable-gas indicators are rising. Individually sub-threshold readings can become material when an ignition source, barrier loss, and people exposure overlap.",
+      "signals": [
+        "hot work permit active",
+        "ventilation impaired",
+        "flammable gas trend",
+        "workers in zone",
+        "permit overlap"
+      ],
+      "review_prompts": [
+        "Pause and route the permit for competent human review.",
+        "Verify the site-approved gas-test evidence and extraction status.",
+        "Keep shutdown, isolation, and evacuation decisions with authorised site roles."
+      ],
+      "sources": [
+        {
+          "source_id": "OISD-STD-105-METADATA",
+          "publisher": "Oil Industry Safety Directorate",
+          "title": "OISD-STD-105 - Work Permit System (catalogue metadata; current-edition list)",
+          "url": "https://www.oisd.gov.in/en-in/oisd-standards-list",
+          "locator": "OISD-STD-105; Work Permit System; Aug 2023 edition listed",
+          "access_scope": "PUBLIC_METADATA_ONLY",
+          "note": "Full normative standard text is not included; OISD distributes current standards through authorised paid access."
+        },
+        {
+          "source_id": "FACTORIES-ACT-1948-S37",
+          "publisher": "India Code, Government of India",
+          "title": "The Factories Act, 1948 - Section 37: Explosive or inflammable dust, gas, etc.",
+          "url": "https://www.indiacode.nic.in/handle/123456789/13657",
+          "locator": "Section 37",
+          "access_scope": "PUBLIC_LEGISLATION",
+          "note": "Reference pointer only; applicability and current legal obligations require qualified review."
+        }
+      ]
+    },
+    {
+      "pattern_id": "confined-space-atmosphere-exposure",
+      "title": "Confined-space occupancy with deteriorating atmosphere",
+      "classification": "REFERENCE",
+      "pattern_summary": "People are observed in or near a confined-space work zone while oxygen or hazardous-atmosphere indicators deteriorate, gas-test evidence is stale or absent, or egress/attendant evidence is incomplete.",
+      "signals": [
+        "confined space permit active",
+        "oxygen deficit trend",
+        "hazardous gas trend",
+        "people occupancy metadata",
+        "gas test evidence missing",
+        "attendant evidence missing"
+      ],
+      "review_prompts": [
+        "Escalate to the competent person and area authority for manual review.",
+        "Verify atmosphere-test, ingress-prevention, egress, and attendant evidence against the approved site procedure.",
+        "Do not infer a safe entry condition from this prototype."
+      ],
+      "sources": [
+        {
+          "source_id": "FACTORIES-ACT-1948-S36",
+          "publisher": "India Code, Government of India",
+          "title": "The Factories Act, 1948 - Section 36: Precautions against dangerous fumes, gases, etc.",
+          "url": "https://www.indiacode.nic.in/show-data?actid=AC_CEN_6_6_000010_194863_1517807319577&orderno=38",
+          "locator": "Section 36",
+          "access_scope": "PUBLIC_LEGISLATION",
+          "note": "Reference pointer only; applicability and current legal obligations require qualified review."
+        },
+        {
+          "source_id": "OISD-STD-105-METADATA",
+          "publisher": "Oil Industry Safety Directorate",
+          "title": "OISD-STD-105 - Work Permit System (catalogue metadata; current-edition list)",
+          "url": "https://www.oisd.gov.in/en-in/oisd-standards-list",
+          "locator": "OISD-STD-105; Work Permit System; Aug 2023 edition listed",
+          "access_scope": "PUBLIC_METADATA_ONLY",
+          "note": "Full normative standard text is not included; OISD distributes current standards through authorised paid access."
+        }
+      ]
+    },
+    {
+      "pattern_id": "permit-overlap-handover-drift",
+      "title": "Simultaneous permits crossing a shift handover",
+      "classification": "REFERENCE",
+      "pattern_summary": "Two or more active permits affect the same zone or energy boundary during a shift handover. Status assumptions can diverge when permit, isolation, maintenance, and operating records are transferred separately.",
+      "signals": [
+        "permit overlap",
+        "shift handover",
+        "isolation status conflict",
+        "maintenance activity",
+        "same zone"
+      ],
+      "review_prompts": [
+        "Require the incoming and outgoing authorised roles to reconcile active work and isolations.",
+        "Surface conflicting timestamps and evidence without inventing a compliance conclusion.",
+        "Route any permit suspension or plant action through site authority."
+      ],
+      "sources": [
+        {
+          "source_id": "OISD-STD-105-METADATA",
+          "publisher": "Oil Industry Safety Directorate",
+          "title": "OISD-STD-105 - Work Permit System (catalogue metadata; current-edition list)",
+          "url": "https://www.oisd.gov.in/en-in/oisd-standards-list",
+          "locator": "OISD-STD-105; Work Permit System; Aug 2023 edition listed",
+          "access_scope": "PUBLIC_METADATA_ONLY",
+          "note": "This corpus stores catalogue metadata, not the purchased normative text. The overlap pattern is a project-authored analytic heuristic."
+        },
+        {
+          "source_id": "OISD-PURCHASE-TERMS",
+          "publisher": "Oil Industry Safety Directorate",
+          "title": "Purchase of Standards",
+          "url": "https://www.oisd.gov.in/en-in/purchase-of-standards",
+          "locator": "Authorised access information",
+          "access_scope": "PUBLIC_ACCESS_TERMS",
+          "note": "Supports the explicit boundary that licensed full standards are not bundled."
+        }
+      ]
+    },
+    {
+      "pattern_id": "blocked-egress-fire-readiness",
+      "title": "Blocked egress or emergency access during elevated risk",
+      "classification": "REFERENCE",
+      "pattern_summary": "Privacy-preserving vision metadata indicates a blocked egress or emergency-access route while process risk is elevated. The observation is a prompt for immediate human verification, not proof that a statutory requirement is breached.",
+      "signals": [
+        "blocked egress observation",
+        "elevated process risk",
+        "emergency access obstruction",
+        "fire response readiness"
+      ],
+      "review_prompts": [
+        "Dispatch an authorised person to verify the route and preserve observation metadata.",
+        "Use the approved emergency plan for any operational response.",
+        "Record the human finding and closure evidence."
+      ],
+      "sources": [
+        {
+          "source_id": "FACTORIES-ACT-1948-S38",
+          "publisher": "India Code, Government of India",
+          "title": "The Factories Act, 1948 - Section 38: Precautions in case of fire",
+          "url": "https://www.indiacode.nic.in/handle/123456789/13657",
+          "locator": "Section 38",
+          "access_scope": "PUBLIC_LEGISLATION",
+          "note": "Reference pointer only; the prototype does not determine legal compliance."
+        }
+      ]
+    },
+    {
+      "pattern_id": "high-energy-steelmaking-event",
+      "title": "High-energy steelmaking task followed by explosion and fire",
+      "classification": "REFERENCE",
+      "pattern_summary": "A severe explosion and fire during a steel-melting-shop casting operation caused multiple deaths and injuries. Treat it as a reminder to connect process state, work activity, people exposure, evidence preservation, and independent investigation; the public release does not establish a reusable root-cause model.",
+      "signals": [
+        "steel melting shop",
+        "casting operation",
+        "sudden explosion",
+        "fire",
+        "multiple casualties",
+        "investigation pending"
+      ],
+      "review_prompts": [
+        "Preserve time-aligned process, permit, maintenance, and occupancy evidence.",
+        "Distinguish confirmed public facts from preliminary or inferred causes.",
+        "Do not transfer this event's causal assumptions to another site without investigation."
+      ],
+      "sources": [
+        {
+          "source_id": "PIB-VSP-2026-06-08",
+          "publisher": "Press Information Bureau, Ministry of Steel, Government of India",
+          "title": "Fire accident at Vishakhapatnam Steel Plant under RINL",
+          "url": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2270473&lang=1&reg=48",
+          "locator": "Release ID 2270473; posted 8 June 2026",
+          "access_scope": "PUBLIC_GOVERNMENT_RELEASE",
+          "note": "The release reports the event and investigation; this corpus does not assert a cause beyond the release."
+        }
+      ]
+    }
+  ]
+}

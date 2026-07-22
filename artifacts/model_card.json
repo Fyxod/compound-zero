@@ -1,0 +1,48 @@
+{
+  "data_classification": "SIMULATED",
+  "dataset_sha256": "96166a2762577a2fa8440e2a6f0f819c342aef9e9cf790e3ed2bef3eb6f4e314",
+  "decision_engine": "scikit-learn calibrated gradient boosting; no LLM",
+  "decision_threshold": 0.155,
+  "features": [
+    "lel_ratio",
+    "h2s_ratio",
+    "co_ratio",
+    "oxygen_deficit_ratio",
+    "pressure_ratio",
+    "lel_slope",
+    "h2s_slope",
+    "co_slope",
+    "oxygen_slope",
+    "pressure_slope",
+    "gas_burden",
+    "max_sensor_ratio",
+    "mean_positive_slope",
+    "correlated_rise",
+    "ventilation_impaired",
+    "hot_work_active",
+    "confined_space_active",
+    "workers_in_zone",
+    "min_worker_distance_m",
+    "shift_handover",
+    "permit_overlap_count",
+    "isolation_active",
+    "stream_quality",
+    "hotwork_gas_interaction",
+    "worker_gas_interaction",
+    "confined_oxygen_interaction",
+    "barrier_gas_interaction",
+    "handover_permit_interaction"
+  ],
+  "intended_use": "Prototype early-warning evaluation and deterministic demo replay.",
+  "limitations": [
+    "All benchmark scenarios are simulated and are not field validation.",
+    "Context schedules and harmful-state equations are authored for controlled ablation testing.",
+    "A site pilot requires local threshold calibration, shadow-mode validation, and safety review."
+  ],
+  "model_version": "compound-zero-scenariobench-v1",
+  "prohibited_claims": [
+    "Field-validated safety performance",
+    "Autonomous shutdown authorization",
+    "Regulatory certification or compliance completeness"
+  ]
+}
