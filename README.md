@@ -6,6 +6,23 @@ Compound Zero is an industrial-safety intelligence prototype for **PS1 — AI-Po
 
 The product is deliberately not a safety chatbot. Its risk path is a deterministic feature pipeline plus a calibrated scikit-learn model. The interface explains the evidence, lets an operator compare counterfactual controls, and records the dry-run decision. No language model authorizes a safety action.
 
+<p align="center">
+  <a href="submission/assets/command-t18.png">
+    <img src="submission/assets/command-t18.png" alt="Compound Zero command centre showing a critical compound-risk case while all legacy alarms remain clear" width="100%">
+  </a>
+</p>
+<p align="center"><sub><strong>Critical replay state:</strong> fused risk 100, four people exposed, four minutes of simulated lead, and zero legacy device alarms.</sub></p>
+
+## Product walkthrough
+
+The five operator workspaces move from detection to explanation, bounded human response, reproducible evidence and an auditable decision record.
+
+| Causal evidence — weak signals become one reviewable case | Human-gated response — compare controls without actuating equipment |
+|:---:|:---:|
+| <a href="submission/assets/evidence-t18.png"><img src="submission/assets/evidence-t18.png" alt="Why Now evidence graph connecting process trends, work permits, barrier loss and worker exposure" width="100%"></a> | <a href="submission/assets/response-studio.png"><img src="submission/assets/response-studio.png" alt="Response Studio comparing reversible dry-run interventions with human approval enforced" width="100%"></a> |
+| **Robustness evidence — the diagnostic failure is published, not hidden** | **Auditable safety case — model, inputs, policy gate and receipts travel together** |
+| <a href="submission/assets/validation.png"><img src="submission/assets/validation.png" alt="Model evidence dashboard showing holdout metrics, scenario-type robustness and a known process-drift miss" width="100%"></a> | <a href="submission/assets/safety-case-top.png"><img src="submission/assets/safety-case-top.png" alt="Safety case timeline, human authorization policy and exportable evidence bundle" width="100%"></a> |
+
 ## What is in this repository
 
 | Layer | Implemented now | Evidence |
