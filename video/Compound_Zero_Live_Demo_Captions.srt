@@ -1,83 +1,191 @@
 1
-00:00:00,800 --> 00:00:04,828
-Every individual alarm is clear. But the system is not safe.
+00:00:00,800 --> 00:00:02,843
+Every individual alarm is clear.
 
 2
-00:00:05,138 --> 00:00:10,984
-Extraction is down. Hot work is planned. Four people are moving toward the gas corridor.
+00:00:03,063 --> 00:00:04,828
+But the system is not safe.
 
 3
+00:00:05,138 --> 00:00:06,509
+Extraction is down.
+
+4
+00:00:06,689 --> 00:00:07,943
+Hot work is planned.
+
+5
+00:00:08,233 --> 00:00:10,984
+Four people are moving toward the gas corridor.
+
+6
 00:00:11,394 --> 00:00:16,893
 Compound Zero connects these weak signals before any one device crosses its threshold.
 
-4
-00:00:17,423 --> 00:00:30,683
-The replay is deterministic and simulated. Every state is served by the calibrated model API. A fixed seed makes every event, score, timestamp, and receipt reproducible from end to end.
-
-5
-00:00:31,153 --> 00:00:37,813
-At T plus nine, fusion raises the first warning. The authored harmful state is still thirteen minutes away.
-
-6
-00:00:38,173 --> 00:00:51,720
-By T plus eighteen, the score is one hundred, four people are exposed, and every device alarm still reads clear. That eight-minute lead is the window for controlled intervention before the simulated harmful state.
-
 7
-00:00:52,340 --> 00:01:02,274
-The evidence graph shows why. A rising gas pattern overlaps an impaired extraction barrier, an active ignition source, and worker exposure.
+00:00:17,423 --> 00:00:20,155
+The replay is deterministic and simulated.
 
 8
-00:01:02,654 --> 00:01:17,439
-No language model writes this risk score. The path is structured, timestamped, and traceable to source receipts. Each edge records its source, time, relationship, and confidence so an operator can challenge the result.
+00:00:20,495 --> 00:00:23,832
+Every state is served by the calibrated model API.
 
 9
-00:01:18,019 --> 00:01:25,966
-The safety officer opens the response studio. Holding the hot-work permit projects the replay score from one hundred to seventy-one.
+00:00:24,102 --> 00:00:30,683
+A fixed seed makes every event, score, timestamp, and receipt reproducible from end to end.
 
 10
-00:01:26,296 --> 00:01:32,617
-This is a non-causal dry run. It records a human decision; it does not actuate plant equipment.
+00:00:31,153 --> 00:00:34,509
+At T plus nine, fusion raises the first warning.
 
 11
+00:00:34,779 --> 00:00:37,813
+The authored harmful state is still thirteen minutes away.
+
+12
+00:00:38,173 --> 00:00:45,751
+By T plus eighteen, the score is one hundred, four people are exposed, and every device alarm still reads clear.
+
+13
+00:00:46,081 --> 00:00:51,720
+That eight-minute lead is the window for controlled intervention before the simulated harmful state.
+
+14
+00:00:52,340 --> 00:00:54,259
+The evidence graph shows why.
+
+15
+00:00:54,569 --> 00:01:02,274
+A rising gas pattern overlaps an impaired extraction barrier, an active ignition source, and worker exposure.
+
+16
+00:01:02,654 --> 00:01:05,265
+No language model writes this risk score.
+
+17
+00:01:05,505 --> 00:01:10,152
+The path is structured, timestamped, and traceable to source receipts.
+
+18
+00:01:10,452 --> 00:01:17,439
+Each edge records its source, time, relationship, and confidence so an operator can challenge the result.
+
+19
+00:01:18,019 --> 00:01:20,826
+The safety officer opens the response studio.
+
+20
+00:01:21,086 --> 00:01:25,966
+Holding the hot-work permit projects the replay score from one hundred to seventy-one.
+
+21
+00:01:26,296 --> 00:01:28,184
+This is a non-causal dry run.
+
+22
+00:01:28,484 --> 00:01:32,617
+It records a human decision; it does not actuate plant equipment.
+
+23
 00:01:33,127 --> 00:01:43,809
 The same case now enters four bounded services: privacy-preserving event metadata, numeric fusion, cited local retrieval, and deterministic permit checks.
 
-12
-00:01:44,159 --> 00:01:51,324
-No raw camera frame is accepted. No biometric identity is needed. Missing evidence remains visible.
+24
+00:01:44,159 --> 00:01:46,344
+No raw camera frame is accepted.
 
-13
-00:01:51,754 --> 00:02:06,165
-The response plan requires three human roles. Watch the approvals advance in sequence while actuation stays none and execution stays manual. The recommendation remains advisory until the named approvers record their decisions.
+25
+00:01:46,544 --> 00:01:48,930
+No biometric identity is needed.
 
-14
-00:02:06,775 --> 00:02:15,352
-Now the evidence. On the base whole-seed holdout, fusion detects all sixty-five simulated events, with a twelve-minute median lead.
+26
+00:01:49,210 --> 00:01:51,324
+Missing evidence remains visible.
 
-15
-00:02:15,722 --> 00:02:21,809
-But the harder test changes the story. Leave-one-scenario-type-out recall falls to eighty percent.
+27
+00:01:51,754 --> 00:01:54,796
+The response plan requires three human roles.
 
-16
-00:02:22,269 --> 00:02:37,402
-The model misses the unseen process-drift family completely. That failure is why deployment remains behind local calibration and prospective shadow validation. The interface exposes that miss instead of hiding it behind aggregate accuracy.
+28
+00:01:55,116 --> 00:02:01,145
+Watch the approvals advance in sequence while actuation stays none and execution stays manual.
 
-17
+29
+00:02:01,405 --> 00:02:06,165
+The recommendation remains advisory until the named approvers record their decisions.
+
+30
+00:02:06,775 --> 00:02:08,049
+Now the evidence.
+
+31
+00:02:08,279 --> 00:02:15,352
+On the base whole-seed holdout, fusion detects all sixty-five simulated events, with a twelve-minute median lead.
+
+32
+00:02:15,722 --> 00:02:18,034
+But the harder test changes the story.
+
+33
+00:02:18,314 --> 00:02:21,809
+Leave-one-scenario-type-out recall falls to eighty percent.
+
+34
+00:02:22,269 --> 00:02:25,732
+The model misses the unseen process-drift family completely.
+
+35
+00:02:26,092 --> 00:02:32,292
+That failure is why deployment remains behind local calibration and prospective shadow validation.
+
+36
+00:02:32,582 --> 00:02:37,402
+The interface exposes that miss instead of hiding it behind aggregate accuracy.
+
+37
 00:02:38,042 --> 00:02:45,445
 The safety case keeps the decision, model version, input receipts, operator action, and limitations together.
 
-18
-00:02:45,785 --> 00:02:54,952
-The policy gate is explicit. Advisory notifications may be automatic. Permit holds need a person. Process isolation needs two.
+38
+00:02:45,785 --> 00:02:47,577
+The policy gate is explicit.
 
-19
-00:02:55,392 --> 00:03:10,126
-Legal and standards references are navigation aids, not certification. The prototype also keeps physical alarms and safety-instrumented systems independent. Every exported evidence bundle preserves those boundaries for review.
+39
+00:02:47,767 --> 00:02:50,557
+Advisory notifications may be automatic.
 
-20
-00:03:11,000 --> 00:03:21,012
-What did we build? Five working operator workspaces, a calibrated risk API, honest robustness evidence, and a human-gated response path.
+40
+00:02:50,807 --> 00:02:52,533
+Permit holds need a person.
 
-21
-00:03:21,502 --> 00:03:30,894
-Compound Zero does not replace the plant's safety systems or its people. It gives them the missing context, and the time, to act before the alarm.
+41
+00:02:52,923 --> 00:02:54,952
+Process isolation needs two.
+
+42
+00:02:55,392 --> 00:03:00,159
+Legal and standards references are navigation aids, not certification.
+
+43
+00:03:00,489 --> 00:03:05,726
+The prototype also keeps physical alarms and safety-instrumented systems independent.
+
+44
+00:03:06,006 --> 00:03:10,126
+Every exported evidence bundle preserves those boundaries for review.
+
+45
+00:03:11,000 --> 00:03:12,050
+What did we build?
+
+46
+00:03:12,260 --> 00:03:21,012
+Five working operator workspaces, a calibrated risk API, honest robustness evidence, and a human-gated response path.
+
+47
+00:03:21,502 --> 00:03:26,026
+Compound Zero does not replace the plant's safety systems or its people.
+
+48
+00:03:26,376 --> 00:03:30,894
+It gives them the missing context, and the time, to act before the alarm.

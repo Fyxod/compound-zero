@@ -254,12 +254,12 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--force", action="store_true")
     parser.add_argument(
-        "--burn-captions",
+        "--no-burn-captions",
         action="store_true",
-        help="Burn the optional SRT into the picture; disabled for the submission master.",
+        help="Create an uncaptioned derivative; the submission master burns captions.",
     )
     args = parser.parse_args()
-    assemble(args.force, args.burn_captions)
+    assemble(args.force, not args.no_burn_captions)
 
 
 if __name__ == "__main__":

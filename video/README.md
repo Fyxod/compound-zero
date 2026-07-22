@@ -18,14 +18,14 @@ video/
 
 ## Generated live master
 
-The primary Drive deliverable is `exports/compound-zero-live-demo-drive-1440p.mp4`. It is assembled from real browser-driven screen recordings: replay controls, the causal-evidence view, response studio, bounded-intelligence approvals, model evidence and the safety case. The persistent top strip discloses simulated data, prototype status and the lack of field validation. The submission master has no burned-in captions; matching SRT and WebVTT files remain available as optional accessibility tracks.
+The primary Drive deliverable is `exports/compound-zero-live-demo-drive-1440p.mp4`. It is assembled from real browser-driven screen recordings: replay controls, the causal-evidence view, response studio, bounded-intelligence approvals, model evidence and the safety case. The persistent top strip discloses simulated data, prototype status and the lack of field validation. The submission master burns in concise sentence-level subtitles, with matching SRT and WebVTT files available as accessibility tracks.
 
 ```powershell
 python .\video\scripts\generate_live_audio.py --force
 python .\video\scripts\assemble_live_video.py --force
 ```
 
-Narration is generated as one audio asset per complete sentence. Leading and trailing TTS padding is removed, then editorially chosen pauses vary from 180 to 874 ms according to meaning and scene rhythm. Automated silence detection must report no one-second-or-longer gap during the narrated programme. The result also writes matching SRT and WebVTT files. Add `--burn-captions` to the assembly command only when a specifically captioned derivative is required.
+Narration is generated as one audio asset per complete sentence. Leading and trailing TTS padding is removed, then editorially chosen pauses vary from 180 to 874 ms according to meaning and scene rhythm. Automated silence detection must report no one-second-or-longer gap during the narrated programme. The result writes sentence-aligned SRT and WebVTT files and burns them into the submission master. Use `--no-burn-captions` only for a separately labelled uncaptioned derivative.
 
 ## Capture specification
 
@@ -42,7 +42,7 @@ Narration is generated as one audio asset per complete sentence. Leading and tra
 - Working master: ProRes 422, DNxHR HQ, or visually lossless H.264/H.265.
 - Color: Rec.709 / gamma 2.4. Do not crush the app's dark gray detail.
 - Narration: target −16 LUFS integrated and −1 dBTP. Duck music 8–12 dB under speech; verify on laptop speakers and inexpensive earbuds.
-- Keep the primary picture clean and provide WebVTT/SRT accessibility tracks alongside it. Burn captions only for a separately labelled captioned derivative.
+- Burn concise, sentence-level captions into the primary master and provide matching WebVTT/SRT accessibility tracks alongside it.
 
 ## Submission export under 50 MB
 

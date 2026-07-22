@@ -68,6 +68,7 @@ async def build(force: bool) -> None:
         duration=round(duration * 1000), frame_rate=SAMPLE_RATE
     ).set_channels(2)
     cues: list[tuple[float, float, str]] = []
+    caption_cues: list[tuple[float, float, str]] = []
     entries = list(manifest["narration"])
 
     previous_end = -1.0
@@ -121,6 +122,16 @@ async def build(force: bool) -> None:
             )
         narration = narration.overlay(clip, position=round(start * 1000))
         cues.append((start, end, text))
+        sentence_offset = 0.0
+        for sentence_index, (sentence, sentence_clip) in enumerate(
+            zip(sentences, parts, strict=True)
+        ):
+            sentence_start = start + sentence_offset
+            sentence_end = sentence_start + len(sentence_clip) / 1000.0
+            caption_cues.append((sentence_start, sentence_end, sentence))
+            sentence_offset += len(sentence_clip) / 1000.0
+            if sentence_index < len(sentence_pauses):
+                sentence_offset += sentence_pauses[sentence_index]
         if previous_end >= 0:
             realised_pauses.append(start - previous_end)
         realised_pauses.extend(sentence_pauses)
@@ -164,7 +175,7 @@ async def build(force: bool) -> None:
 
     srt_lines: list[str] = []
     vtt_lines = ["WEBVTT", ""]
-    for number, (start, end, text) in enumerate(cues, start=1):
+    for number, (start, end, text) in enumerate(caption_cues, start=1):
         srt_lines.extend(
             [str(number), f"{stamp(start)} --> {stamp(end)}", text, ""]
         )
@@ -178,7 +189,8 @@ async def build(force: bool) -> None:
     report = {
         "voice": voice,
         "rate": rate,
-        "cue_count": len(cues),
+        "narration_group_count": len(cues),
+        "caption_cue_count": len(caption_cues),
         "duration_seconds": duration,
         "mix": str(final_mix),
         "explicit_sentence_level_timing": True,
