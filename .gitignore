@@ -1,0 +1,17 @@
+node_modules/
+*.tsbuildinfo
+.pnpm-store/
+dist/
+.vite/
+coverage/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+artifacts/models/*.joblib
+artifacts/models/*.onnx
+tmp/
+.env
+.DS_Store
+Thumbs.db

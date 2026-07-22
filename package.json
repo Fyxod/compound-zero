@@ -1,0 +1,14 @@
+{
+  "name": "compound-zero",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "scripts": {
+    "dev": "pnpm --filter @compound-zero/web dev",
+    "build": "pnpm --filter @compound-zero/web build",
+    "preview": "pnpm --filter @compound-zero/web preview",
+    "test": "pnpm --filter @compound-zero/web test",
+    "typecheck": "pnpm --filter @compound-zero/web typecheck"
+  }
+}
+
