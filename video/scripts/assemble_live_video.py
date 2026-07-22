@@ -188,9 +188,9 @@ def assemble(force: bool) -> None:
             ),
             (
                 f"subtitles='{ffmpeg_path(CAPTIONS)}':"
-                "force_style='FontName=Arial,FontSize=34,PrimaryColour=&H00FFFFFF,"
+                "force_style='FontName=Arial,FontSize=10,PrimaryColour=&H00FFFFFF,"
                 "OutlineColour=&H70000000,BorderStyle=3,BackColour=&H88000000,"
-                "Outline=1,Shadow=0,Alignment=2,MarginL=150,MarginR=150,MarginV=38'"
+                "Outline=1,Shadow=0,Alignment=2,MarginL=20,MarginR=20,MarginV=8'"
             ),
         ]
     )
