@@ -1,0 +1,131 @@
+1
+00:00:00,520 --> 00:00:02,332
+Every device says safe.
+
+2
+00:00:02,282 --> 00:00:07,015
+Extraction is down, hot work is active, and four people enter the gas corridor.
+
+3
+00:00:07,015 --> 00:00:10,153
+Compound Zero connects the weak signals before disaster.
+
+4
+00:00:12,400 --> 00:00:17,574
+Industrial sites already have sensors, permits, maintenance systems, and worker-location data.
+
+5
+00:00:17,524 --> 00:00:19,447
+The blind spot is between them.
+
+6
+00:00:19,447 --> 00:00:25,559
+Compound Zero is a predictive safety layer that turns fragmented evidence into an explainable, human-gated safety case.
+
+7
+00:00:32,400 --> 00:00:36,721
+This is a deterministic, model-backed simulated replay at Coke Battery Four.
+
+8
+00:00:36,671 --> 00:00:40,326
+Extraction fan E-F zero four is isolated for maintenance.
+
+9
+00:00:40,326 --> 00:00:42,533
+Gas channels begin rising together.
+
+10
+00:00:42,533 --> 00:00:47,903
+Then a hot-work permit becomes active nearby, and four contractor badges enter the exposure contour.
+
+11
+00:01:05,400 --> 00:01:12,333
+Fusion first crosses its intervention threshold at T-plus nine—thirteen minutes before the authored harmful state at T-plus twenty-two.
+
+12
+00:01:12,283 --> 00:01:14,378
+Every device alarm is clear.
+
+13
+00:01:14,378 --> 00:01:21,274
+By T-plus eighteen, hot work and four workers expand the evidence; the model score reaches one hundred with four minutes remaining.
+
+14
+00:01:21,274 --> 00:01:26,162
+Combustible gas is still about eight-point-six percent L-E-L against a twenty-percent threshold.
+
+15
+00:01:32,400 --> 00:01:34,678
+The alert is not a generated story.
+
+16
+00:01:34,628 --> 00:01:41,076
+Its evidence graph links the correlated gas trend to the impaired extraction barrier, the ignition-source permit, and exposed people.
+
+17
+00:01:41,076 --> 00:01:44,145
+Every input carries a timestamp and source receipt.
+
+18
+00:01:44,145 --> 00:01:49,076
+The risk path is a calibrated gradient-boosting model with structured evidence—not an LLM.
+
+19
+00:02:03,400 --> 00:02:07,747
+Compound Zero proposes controls and previews a non-causal simulated estimate.
+
+20
+00:02:07,697 --> 00:02:13,972
+The safety officer selects Hold Hot-Work Permit, sees risk project from one hundred to seventy-one, and records a dry run.
+
+21
+00:02:13,972 --> 00:02:15,834
+Residual risk stays visible.
+
+22
+00:02:15,834 --> 00:02:21,447
+No field action is executed, and existing alarms and safety-instrumented systems remain independent.
+
+23
+00:02:25,400 --> 00:02:35,997
+The same simulated case then passes through four bounded services: anonymous CCTV event metadata, numeric fusion, a locally searched and cited incident-pattern corpus, and deterministic permit-evidence checks.
+
+24
+00:02:35,947 --> 00:02:37,972
+Missing evidence remains visible.
+
+25
+00:02:37,972 --> 00:02:46,016
+A response plan can be approved by three simulated roles, but the API records authorization only—actuation stays none and execution stays manual.
+
+26
+00:02:48,400 --> 00:02:53,703
+On a whole-seed holdout, fusion detects all sixty-five simulated events with twelve-minute median lead.
+
+27
+00:02:53,653 --> 00:02:59,007
+A harder scenario-type holdout falls to eighty-percent pooled recall and misses unseen process drift.
+
+28
+00:02:59,007 --> 00:03:04,895
+Missing critical streams also falls to eighty percent; sensor noise preserves recall but multiplies false alarms.
+
+29
+00:03:04,895 --> 00:03:08,688
+That failure keeps deployment behind site-calibrated shadow validation.
+
+30
+00:03:14,400 --> 00:03:20,384
+The decision, model version, input receipts and dry-run outcome travel together in one unsigned JSON evidence pack.
+
+31
+00:03:20,334 --> 00:03:26,016
+Deployment starts read-only in shadow mode, calibrates locally, and advances only after safety review.
+
+32
+00:03:28,400 --> 00:03:32,281
+Compound Zero does not replace a plant’s safety systems or its people.
+
+33
+00:03:32,231 --> 00:03:36,110
+It gives them the missing context—and the time—to act before the alarm.

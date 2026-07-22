@@ -1,0 +1,104 @@
+{
+  "project": "Compound Zero — See the Accident Before the Alarm",
+  "duration_seconds": 220,
+  "fps": 30,
+  "canvas": [2560, 1440],
+  "disclosure": "SIMULATED DATA · PROTOTYPE · NOT FIELD VALIDATION",
+  "narration": [
+    {
+      "id": "cold-open",
+      "start": 0,
+      "end": 12,
+      "text": "Every device says safe. Extraction is down, hot work is active, and four people enter the gas corridor. Compound Zero connects the weak signals before disaster."
+    },
+    {
+      "id": "thesis",
+      "start": 12,
+      "end": 32,
+      "text": "Industrial sites already have sensors, permits, maintenance systems, and worker-location data. The blind spot is between them. Compound Zero is a predictive safety layer that turns fragmented evidence into an explainable, human-gated safety case."
+    },
+    {
+      "id": "replay",
+      "start": 32,
+      "end": 65,
+      "text": "This is a deterministic, model-backed simulated replay at Coke Battery Four. Extraction fan E-F zero four is isolated for maintenance. Gas channels begin rising together. Then a hot-work permit becomes active nearby, and four contractor badges enter the exposure contour."
+    },
+    {
+      "id": "warning",
+      "start": 65,
+      "end": 92,
+      "text": "Fusion first crosses its intervention threshold at T-plus nine—thirteen minutes before the authored harmful state at T-plus twenty-two. Every device alarm is clear. By T-plus eighteen, hot work and four workers expand the evidence; the model score reaches one hundred with four minutes remaining. Combustible gas is still about eight-point-six percent L-E-L against a twenty-percent threshold."
+    },
+    {
+      "id": "explainability",
+      "start": 92,
+      "end": 123,
+      "text": "The alert is not a generated story. Its evidence graph links the correlated gas trend to the impaired extraction barrier, the ignition-source permit, and exposed people. Every input carries a timestamp and source receipt. The risk path is a calibrated gradient-boosting model with structured evidence—not an L-L-M."
+    },
+    {
+      "id": "counterfactual",
+      "start": 123,
+      "end": 145,
+      "text": "Compound Zero proposes controls and previews a non-causal simulated estimate. The safety officer selects Hold Hot-Work Permit, sees risk project from one hundred to seventy-one, and records a dry run. Residual risk stays visible. No field action is executed, and existing alarms and safety-instrumented systems remain independent."
+    },
+    {
+      "id": "intelligence",
+      "start": 145,
+      "end": 168,
+      "text": "The same simulated case then passes through four bounded services: anonymous C-C-T-V event metadata, numeric fusion, a locally searched and cited incident-pattern corpus, and deterministic permit-evidence checks. Missing evidence remains visible. A response plan can be approved by three simulated roles, but the A-P-I records authorization only—actuation stays none and execution stays manual."
+    },
+    {
+      "id": "validation",
+      "start": 168,
+      "end": 194,
+      "text": "On a whole-seed holdout, fusion detects all sixty-five simulated events with twelve-minute median lead. A harder scenario-type holdout falls to eighty-percent pooled recall and misses unseen process drift. Missing critical streams also falls to eighty percent; sensor noise preserves recall but multiplies false alarms. That failure keeps deployment behind site-calibrated shadow validation."
+    },
+    {
+      "id": "audit",
+      "start": 194,
+      "end": 208,
+      "text": "The decision, model version, input receipts and dry-run outcome travel together in one unsigned JSON evidence pack. Deployment starts read-only in shadow mode, calibrates locally, and advances only after safety review."
+    },
+    {
+      "id": "close",
+      "start": 208,
+      "end": 220,
+      "text": "Compound Zero does not replace a plant’s safety systems or its people. It gives them the missing context—and the time—to act before the alarm."
+    }
+  ],
+  "shots": [
+    {"start": 0, "end": 4, "image": "command-t18.png", "focus": [0.56, 0.43], "zoom": [1.86, 1.98], "title": "EVERY ALARM: CLEAR", "tone": "safe", "layout": "hero"},
+    {"start": 4, "end": 8, "image": "command-t18.png", "focus": [0.43, 0.76], "zoom": [1.54, 1.68], "title": "THE SYSTEM IS NOT SAFE.", "tone": "critical", "layout": "hero"},
+    {"start": 8, "end": 12, "image": "command-t18.png", "focus": [0.60, 0.56], "zoom": [1.05, 1.10], "title": "COMPOUND ZERO", "subtitle": "See the accident before the alarm.", "tone": "brand", "layout": "brand"},
+    {"start": 12, "end": 20, "images": ["command-t18.png", "command-t18.png", "command-t08.png", "command-t18.png"], "layout": "quad", "labels": ["SCADA", "PERMITS", "CMMS", "WORKER LOCATION"], "title": "FOUR SYSTEMS. ONE SAFETY CASE.", "tone": "brand"},
+    {"start": 20, "end": 32, "image": "command-t08.png", "focus": [0.55, 0.52], "zoom": [1.03, 1.13], "title": "ONE TEMPORAL SAFETY GRAPH", "subtitle": "Fragmented evidence becomes one operating picture.", "tone": "safe"},
+    {"start": 32, "end": 39, "image": "command-t08.png", "focus": [0.58, 0.32], "zoom": [1.10, 1.20], "title": "DETERMINISTIC MODEL REPLAY · SEED 24001", "subtitle": "CALIBRATED MODEL API", "tone": "brand", "cursor": {"from": [0.66, 0.30], "to": [0.57, 0.30], "click": 36.2}},
+    {"start": 39, "end": 48, "image": "command-t09.png", "focus": [0.58, 0.42], "zoom": [1.08, 1.20], "title": "INITIAL ALERT · T+09 · 13 MIN LEAD", "subtitle": "0 individual device alarms", "tone": "watch"},
+    {"start": 48, "end": 57, "image": "command-t18.png", "focus": [0.45, 0.72], "zoom": [1.12, 1.25], "title": "PTW-2841 ACTIVE  +  4 PSEUDONYMIZED BADGES", "subtitle": "No real worker or plant data is shown.", "tone": "watch"},
+    {"start": 57, "end": 65, "image": "command-t18.png", "focus": [0.64, 0.57], "zoom": [1.05, 1.14], "title": "WEAK ALONE. DANGEROUS TOGETHER.", "subtitle": "Risk 100 · Four people exposed · Zero device alarms", "tone": "critical"},
+    {"start": 65, "end": 74, "image": "command-t09.png", "focus": [0.61, 0.40], "zoom": [1.15, 1.30], "title": "13 MIN TO SIMULATED HARMFUL STATE", "subtitle": "Replay-specific warning at T+09", "tone": "watch"},
+    {"start": 74, "end": 82, "image": "command-t18.png", "focus": [0.42, 0.78], "zoom": [1.42, 1.54], "title": "~8.6% LEL  ·  DEVICE ALARM AT 20%", "subtitle": "Individually below threshold", "tone": "watch"},
+    {"start": 82, "end": 92, "image": "command-t18.png", "focus": [0.73, 0.59], "zoom": [1.12, 1.23], "title": "RISK 100 · 4 MIN REMAIN · 0 DEVICE ALARMS", "subtitle": "Replay-specific result · not a field-performance claim", "tone": "critical"},
+    {"start": 92, "end": 96, "image": "command-t18.png", "focus": [0.88, 0.33], "zoom": [1.38, 1.48], "title": "WHY NOW?", "tone": "watch", "cursor": {"from": [0.74, 0.45], "to": [0.95, 0.34], "click": 94.6}},
+    {"start": 96, "end": 108, "image": "evidence-t18.png", "focus": [0.58, 0.55], "zoom": [1.02, 1.13], "title": "SIGNAL + BARRIER + IGNITION + EXPOSURE", "subtitle": "One timestamped evidence graph", "tone": "brand"},
+    {"start": 108, "end": 116, "image": "evidence-t18.png", "focus": [0.76, 0.48], "zoom": [1.34, 1.48], "title": "INDIVIDUALLY SAFE. JOINTLY ABNORMAL.", "subtitle": "Evidence strengths are not causal score points", "tone": "watch"},
+    {"start": 116, "end": 123, "image": "evidence-t18.png", "focus": [0.59, 0.63], "zoom": [1.22, 1.34], "title": "NO LLM IN THE RISK PATH", "subtitle": "Timestamped · source-traceable · reviewable", "tone": "safe"},
+    {"start": 123, "end": 127, "image": "command-t18.png", "focus": [0.83, 0.35], "zoom": [1.28, 1.38], "title": "HUMAN-GATED CONTROL", "tone": "brand", "cursor": {"from": [0.70, 0.42], "to": [0.92, 0.38], "click": 125.4}},
+    {"start": 127, "end": 135, "image": "response-studio.png", "focus": [0.80, 0.58], "zoom": [1.12, 1.24], "title": "100 → 71 PROJECTED", "subtitle": "Hold PTW-2841 · non-causal simulated dry run", "tone": "safe", "cursor": {"from": [0.78, 0.71], "to": [0.86, 0.64], "click": 130.4}},
+    {"start": 135, "end": 145, "image": "command-after-control.png", "focus": [0.73, 0.57], "zoom": [1.06, 1.17], "title": "MACHINE PROPOSES. PEOPLE AUTHORIZE.", "subtitle": "No field action executed · Physical alarms / SIS remain independent", "tone": "safe", "cursor": {"from": [0.80, 0.70], "to": [0.88, 0.73], "click": 137.0}},
+    {"start": 145, "end": 149, "image": "intelligence.png", "focus": [0.58, 0.24], "zoom": [1.03, 1.10], "title": "ONE CASE · FOUR BOUNDED SERVICES", "tone": "brand"},
+    {"start": 149, "end": 157, "image": "intelligence.png", "focus": [0.61, 0.53], "zoom": [1.20, 1.33], "title": "NO RAW FRAMES · LOCAL CITED RETRIEVAL", "subtitle": "Metadata only · No biometrics · Local BM25", "tone": "safe"},
+    {"start": 157, "end": 168, "image": "intelligence-authorized.png", "focus": [0.70, 0.52], "zoom": [1.12, 1.24], "title": "3 HUMANS · ACTUATION NONE · MANUAL ONLY", "subtitle": "The API records authorization; it has no actuator path", "tone": "safe", "cursor": {"from": [0.82, 0.48], "to": [0.84, 0.55], "click": 160.0}},
+    {"start": 168, "end": 172, "image": "validation.png", "focus": [0.50, 0.22], "zoom": [1.01, 1.08], "title": "PROVE IT", "tone": "brand"},
+    {"start": 172, "end": 182, "image": "validation.png", "focus": [0.52, 0.40], "zoom": [1.10, 1.23], "title": "BASE HOLDOUT · 65/65 · MEDIAN LEAD 12 MIN", "subtitle": "AUPRC 0.997 · simulated whole-seed holdout", "tone": "safe"},
+    {"start": 182, "end": 194, "image": "validation.png", "focus": [0.52, 0.53], "zoom": [1.17, 1.32], "title": "LOSO 80% · PROCESS_DRIFT 0/64", "subtitle": "Known failure → local calibration + prospective shadow validation", "tone": "critical"},
+    {"start": 194, "end": 198, "image": "safety-case-top.png", "focus": [0.50, 0.24], "zoom": [1.01, 1.08], "title": "ONE DECISION. EVERY RECEIPT.", "tone": "brand"},
+    {"start": 198, "end": 204, "image": "safety-case-top.png", "focus": [0.56, 0.48], "zoom": [1.11, 1.23], "title": "INPUT · MODEL · APPROVAL · OUTCOME", "subtitle": "Reviewable demo receipt sequence · not a tamper-proof ledger", "tone": "safe"},
+    {"start": 204, "end": 208, "image": "safety-case-top.png", "focus": [0.86, 0.16], "zoom": [1.46, 1.58], "title": "UNSIGNED JSON EVIDENCE PACK", "subtitle": "Reference mapping ≠ certification", "tone": "watch", "cursor": {"from": [0.70, 0.28], "to": [0.91, 0.16], "click": 206.0}},
+    {"start": 208, "end": 210, "image": "command-t18.png", "focus": [0.45, 0.72], "zoom": [1.16, 1.22], "title": "THE CONTEXT TO SEE RISK.", "tone": "brand"},
+    {"start": 210, "end": 212, "image": "evidence-t18.png", "focus": [0.58, 0.54], "zoom": [1.08, 1.15], "title": "THE CONTEXT TO SEE RISK.", "tone": "brand"},
+    {"start": 212, "end": 214, "image": "intelligence-authorized.png", "focus": [0.70, 0.52], "zoom": [1.12, 1.20], "title": "THE TIME TO STOP IT.", "tone": "safe"},
+    {"start": 214, "end": 216, "image": "validation.png", "focus": [0.52, 0.50], "zoom": [1.10, 1.20], "title": "THE TIME TO STOP IT.", "tone": "safe"},
+    {"start": 216, "end": 220, "image": "command-t18.png", "focus": [0.58, 0.54], "zoom": [1.02, 1.07], "title": "COMPOUND ZERO", "subtitle": "THE CONTEXT TO SEE RISK. THE TIME TO STOP IT.", "tone": "brand", "layout": "end"}
+  ]
+}

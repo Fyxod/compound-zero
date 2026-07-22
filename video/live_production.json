@@ -1,0 +1,45 @@
+{
+  "project": "Compound Zero — Live Prototype Walkthrough",
+  "duration_seconds": 220,
+  "voice": "en-IN-NeerjaExpressiveNeural",
+  "voice_rate": "+0%",
+  "capture": {
+    "desktop": [1920, 1080],
+    "app_crop": [0, 214, 1920, 866],
+    "output": [2560, 1440],
+    "fps": 30
+  },
+  "scenes": [
+    {"id": "01-operating-picture", "source": "video/live_capture/raw-live-repaired.mp4", "source_start": 0.0, "source_duration": 22.0, "speed": 1.0, "duration": 22.0, "label": "01 / OPERATING PICTURE"},
+    {"id": "02-live-replay", "source": "video/live_capture/raw-live-repaired.mp4", "source_start": 30.0, "source_duration": 30.0, "speed": 1.0, "duration": 30.0, "label": "02 / LIVE CALIBRATED REPLAY"},
+    {"id": "03-causal-evidence", "source": "video/live_capture/clip-02-evidence-v4.mkv", "source_start": 0.0, "source_duration": 24.0, "speed": 1.0, "duration": 24.0, "label": "03 / CAUSAL EVIDENCE"},
+    {"id": "04-response-studio", "source": "video/live_capture/raw-live-repaired.mp4", "source_start": 132.0, "source_duration": 8.0, "speed": 1.5, "duration": 14.0, "label": "04 / RESPONSE STUDIO"},
+    {"id": "05-bounded-intelligence", "source": "video/live_capture/raw-live-repaired.mp4", "source_start": 140.0, "source_duration": 16.6, "speed": 2.0, "duration": 34.0, "label": "05 / BOUNDED INTELLIGENCE"},
+    {"id": "06-robustness-evidence", "source": "video/live_capture/clip-04-validation.mkv", "source_start": 0.0, "source_duration": 26.0, "speed": 1.0, "duration": 33.0, "label": "06 / ROBUSTNESS EVIDENCE"},
+    {"id": "07-auditable-safety-case", "source": "video/live_capture/clip-05-safety-case.mkv", "source_start": 0.0, "source_duration": 26.0, "speed": 1.0, "duration": 34.0, "label": "07 / AUDITABLE SAFETY CASE"},
+    {"id": "08-zero-harm-operations", "source": "video/live_capture/clip-01-replay-v2.mkv", "source_start": 0.0, "source_duration": 26.0, "speed": 1.0, "duration": 29.0, "label": "08 / ZERO-HARM OPERATIONS"}
+  ],
+  "narration": [
+    {"start": 0.8, "text": "Every individual alarm is clear. But the system is not safe."},
+    {"start": 6.0, "text": "Extraction is down. Hot work is planned. Four people are moving toward the gas corridor."},
+    {"start": 13.0, "text": "Compound Zero connects these weak signals before any one device crosses its threshold."},
+    {"start": 20.0, "text": "This is the working prototype, not a slide. The replay is deterministic, simulated, and served by the calibrated model API."},
+    {"start": 30.0, "text": "At T plus nine, fusion raises the first warning. The authored harmful state is still thirteen minutes away."},
+    {"start": 39.0, "text": "By T plus eighteen, the score is one hundred, four people are exposed, and every device alarm still reads clear."},
+    {"start": 48.0, "text": "The evidence graph shows why. A rising gas pattern overlaps an impaired extraction barrier, an active ignition source, and worker exposure."},
+    {"start": 59.0, "text": "No language model writes this risk score. The path is structured, timestamped, and traceable to source receipts."},
+    {"start": 69.0, "text": "The safety officer opens the response studio. Holding the hot-work permit projects the replay score from one hundred to seventy-one."},
+    {"start": 79.5, "text": "This is a non-causal dry run. It records a human decision; it does not actuate plant equipment."},
+    {"start": 90.0, "text": "The same case now enters four bounded services: privacy-preserving event metadata, numeric fusion, cited local retrieval, and deterministic permit checks."},
+    {"start": 101.0, "text": "No raw camera frame is accepted. No biometric identity is needed. Missing evidence remains visible."},
+    {"start": 110.0, "text": "The response plan requires three human roles. Watch the approvals advance in sequence while actuation stays none and execution stays manual."},
+    {"start": 125.0, "text": "Now the evidence. On the base whole-seed holdout, fusion detects all sixty-five simulated events, with a twelve-minute median lead."},
+    {"start": 136.0, "text": "But the harder test changes the story. Leave-one-scenario-type-out recall falls to eighty percent."},
+    {"start": 145.0, "text": "The model misses the unseen process-drift family completely. That failure is why deployment remains behind local calibration and prospective shadow validation."},
+    {"start": 157.0, "text": "The safety case keeps the decision, model version, input receipts, operator action, and limitations together."},
+    {"start": 166.0, "text": "The policy gate is explicit. Advisory notifications may be automatic. Permit holds need a person. Process isolation needs two."},
+    {"start": 177.0, "text": "Legal and standards references are navigation aids, not certification. The prototype also keeps physical alarms and safety-instrumented systems independent."},
+    {"start": 191.0, "text": "What did we build? Five working operator workspaces, a calibrated risk API, honest robustness evidence, and a human-gated response path."},
+    {"start": 205.0, "text": "Compound Zero does not replace the plant's safety systems or its people. It gives them the missing context, and the time, to act before the alarm."}
+  ]
+}

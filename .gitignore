@@ -19,6 +19,7 @@ Thumbs.db
 video/audio/
 video/captures/
 video/edit/
+video/live_capture/
 video/exports/*.mp4
 video/exports/*.mov
 video/exports/*.mkv
