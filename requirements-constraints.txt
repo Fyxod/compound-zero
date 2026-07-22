@@ -1,0 +1,13 @@
+# Core versions used to train and verify the checked-in ScenarioBench artifacts.
+# Re-run both uv compile commands in the lockfile headers after changing these.
+fastapi==0.139.2
+httpx==0.28.1
+joblib==1.5.2
+numpy==2.2.6
+pandas==2.3.1
+pydantic==2.11.7
+pytest==8.4.2
+scikit-learn==1.7.2
+scipy==1.16.1
+threadpoolctl==3.6.0
+uvicorn==0.51.0
